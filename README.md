@@ -1,73 +1,75 @@
-# React + TypeScript + Vite
+# Product Inventory Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Product Inventory Dashboard is a React + TypeScript CRUD application for managing products in an inventory system.
 
-Currently, two official plugins are available:
+The application allows users to fetch, display, add, edit, delete, search, filter, and sort products. It also includes stock status management and uses a custom application data structure instead of relying directly on the API response shape.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Fetch products from an external API
+- Transform API data into a custom application-specific product structure
+- Display products in a clean product list/table
+- Add new products
+- Edit existing products
+- Delete products
+- Search products by name
+- Filter products by category
+- Filter products by stock status
+- Sort products by selected criteria
+- Display stock status based on product stock quantity
+- Show loading and error states
+- Use TypeScript for products, props, state, and functions
+- Responsive layout for different screen sizes
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- React
+- TypeScript
+- Vite
+- CSS
+- Fetch API
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Project Purpose
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+The main purpose of this project is to practice using TypeScript in a real React application.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+This project focuses on working with typed data, typed props, typed state, event handlers, form handling, CRUD operations, and API data transformation.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Instead of using the fetched API data directly in the components, the application transforms the API response into a custom `Product` type. This makes the application easier to maintain and keeps the UI components independent from the exact structure of the external API.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Main Concepts Practiced
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- React components
+- TypeScript types
+- Props typing
+- State typing
+- Function typing
+- Form handling
+- Conditional rendering
+- List rendering
+- CRUD operations
+- Data fetching
+- API data transformation
+- Search functionality
+- Filtering
+- Sorting
+- Stock status logic
+- Component-based project structure
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## API Data Transformation
+
+The application does not use the API response directly throughout the project.
+
+Instead, the fetched product data is transformed into a custom application data structure.
+
+Example idea:
+
+```ts
+type Product = {
+  id: number | string
+  name: string
+  category: string
+  price: number
+  stock: number
+  description: string
+}
