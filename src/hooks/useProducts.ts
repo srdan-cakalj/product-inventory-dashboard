@@ -1,12 +1,17 @@
 
 
 import { useState, useEffect } from 'react'
-import type { Product } from '../types/productType.ts'
+import type { ApiProduct, Product } from '../types/productTypes.ts'
+
+
+type ApiResponse = {
+    products: ApiProduct[]
+}
 
 
 const responseError = 'Failed to fetch items.'
 const dataError = 'Invalid API response format.'
-const internetError = 'No Internet Connection.'
+const loadError = 'Could not load products.'
 const unknownError = 'An unknown system error has occurred.'
 
 
@@ -26,12 +31,23 @@ const useProducts = () => {
                     throw new Error(responseError)
                 }
 
-                const data = await response.json()
+                const data: ApiResponse = await response.json()
                 if (!data.products || !Array.isArray(data.products)) {
                     throw new Error(dataError)
                 }
 
-                setProducts(data.products)
+
+                const transformedProducts: Product[] = data.products.map(product => (
+                    {
+                        id: product.id,
+                        name: product.title,
+                        category: product.category,
+                        price: product.price,
+                        stock: product.stock
+                    }
+                ))
+  
+                setProducts(transformedProducts)
 
 
             } catch (err) {
@@ -42,7 +58,7 @@ const useProducts = () => {
                     if (errors.includes(err.message)) {
                         setError(err.message)
                     } else {
-                        setError(internetError)
+                        setError(loadError)
                     }
 
                 } else {
