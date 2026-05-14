@@ -1,5 +1,6 @@
 
 import { useProducts } from './hooks/useProducts.ts'
+import { ProductsTable } from './components/features/ProductsTable.tsx'
 
 
 const App = () => {
@@ -19,9 +20,12 @@ const App = () => {
 
 
   return (
-    <ul>
-      {products.map(product => <li key={product.id}>{product.title}</li>)}
-    </ul>
+    <>
+      <ProductsTable products={products} />
+
+      {/* <pre> {JSON.stringify(products, null, 2)}</pre> */}
+    </>
+
   )
 }
 
