@@ -1,26 +1,17 @@
 
 
 import type { Product } from '../../types/productTypes.ts'
+import type { StockInfo } from '../../types/stockTypes.ts'
+
 
 type ProductsTableProps = {
     products: Product[]
+    getStock: (value: number) => StockInfo
 }
 
 
-const ProductsTable = ({ products }: ProductsTableProps) => {
+const ProductsTable = ({ products, getStock }: ProductsTableProps) => {
 
-    const getStockStatus = (stock: number): string => {
-        if (stock === 0) {
-            return 'Out of stock'
-        }
-
-        if (stock > 0 && stock <= 5) {
-            return 'Low stock'
-        }
-
-        return 'In stock'
-
-    }
 
 
     return (
@@ -45,7 +36,7 @@ const ProductsTable = ({ products }: ProductsTableProps) => {
                             <td>{product.category}</td>
                             <td>{product.price} €</td>
                             <td>{product.stock}</td>
-                            <td>{getStockStatus(product.stock)}</td>
+                            <td>{getStock(product.stock).status}</td>
                             <td>
                                 <button>Edit</button>
                                 <button>Delete</button>
