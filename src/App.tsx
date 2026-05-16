@@ -6,7 +6,8 @@ import { SearchInput } from './components/features/SearchInput.tsx'
 import { CategoryFilter } from './components/features/CategoryFilter.tsx'
 import { StockFilter } from './components/features/StockFilter.tsx'
 import { SortFilter } from './components/features/SortFilter.tsx'
-import type { StockOption, StockInfo } from './types/stockTypes.ts'
+import { getStockInfo } from './helpers/getStockInfo.ts'
+import type { StockOption } from './types/stockTypes.ts'
 import type { SortOption } from './types/sortTypes.ts'
 import type { Product } from './types/productTypes.ts'
 
@@ -28,17 +29,7 @@ const App = () => {
   const categoryOptions = ['all', ...removedDuplicatesCategories]
 
 
-  const getStock = (stock: number): StockInfo => {
-    if (stock === 0) {
-      return { option: 'out-of-stock', status: 'Out of stock' }
-    }
 
-    if (stock > 0 && stock <= 5) {
-      return { option: 'low-stock', status: 'Low stock' }
-    }
-
-    return { option: 'in-stock', status: 'In stock' }
-  }
 
 
   const getSortedProducts = (productsToSort : Product[], sortFilterValue: SortOption): Product[] => {
@@ -73,7 +64,7 @@ const App = () => {
   const filteredProducts = products
     .filter(product => product.name.toLowerCase().includes(searchInputValue.toLowerCase()))
     .filter(product => product.category === categoryFilterValue || categoryFilterValue === 'all')
-    .filter(product => getStock(product.stock).option === stockFilterValue || stockFilterValue === 'all')
+    .filter(product => getStockInfo(product.stock).option === stockFilterValue || stockFilterValue === 'all')
 
   const productsToSort  = [...filteredProducts]
   const sortedProducts = getSortedProducts(productsToSort , sortFilterValue)
@@ -116,7 +107,7 @@ const App = () => {
         ? <p>No results.</p>
         : <ProductsTable
           products={sortedProducts}
-          getStock={getStock}
+          getStock={getStockInfo}
         />
       }
 
