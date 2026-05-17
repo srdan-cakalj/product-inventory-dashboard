@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useProducts } from './hooks/useProducts.ts'
 import { ProductsTable } from './components/features/ProductsTable.tsx'
 import { SearchInput } from './components/features/SearchInput.tsx'
@@ -11,6 +11,16 @@ import { getStockInfo } from './helpers/getStockInfo.ts'
 import { getSortedProducts } from './helpers/getSortedProducts.ts'
 import type { StockOption } from './types/stockTypes.ts'
 import type { SortOption } from './types/sortTypes.ts'
+import type { NewProduct } from './types/productTypes.ts'
+
+
+
+const newProductValuesInit: NewProduct = {
+  name: '',
+  category: '',
+  price: '',
+  stock: ''
+}
 
 
 
@@ -20,6 +30,12 @@ const App = () => {
   const [categoryFilterValue, setCategoryFilterValue] = useState('all')
   const [stockFilterValue, setStockFilterValue] = useState<StockOption>('all')
   const [sortFilterValue, setSortFilterValue] = useState<SortOption>('default')
+  const [newProductValues, setNewProductValues] = useState<NewProduct>(newProductValuesInit)
+
+
+  useEffect(()=> {
+    console.log(newProductValues);
+  },[newProductValues])
 
 
   const { products, error, isLoading } = useProducts()
@@ -36,8 +52,8 @@ const App = () => {
     .filter(product => product.category === categoryFilterValue || categoryFilterValue === 'all')
     .filter(product => getStockInfo(product.stock).option === stockFilterValue || stockFilterValue === 'all')
 
-  const productsToSort  = [...filteredProducts]
-  const sortedProducts = getSortedProducts(productsToSort , sortFilterValue)
+  const productsToSort = [...filteredProducts]
+  const sortedProducts = getSortedProducts(productsToSort, sortFilterValue)
 
 
 
@@ -77,8 +93,10 @@ const App = () => {
 
       <hr />
 
-      <ProductForm 
+      <ProductForm
         categoryOptions={categoryOptions}
+        newProductValues={newProductValues}
+        setNewProductValues={setNewProductValues}
       />
 
       <hr />

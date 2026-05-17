@@ -17,4 +17,13 @@ type Product = {
     stock: number
 }
 
-export type { ApiProduct, Product }
+
+type NewProduct = {
+    name: string
+    category: string
+    price: string
+    stock: string
+}
+
+
+export type { ApiProduct, Product, NewProduct }
