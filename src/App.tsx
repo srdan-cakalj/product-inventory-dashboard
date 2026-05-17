@@ -6,6 +6,7 @@ import { SearchInput } from './components/features/SearchInput.tsx'
 import { CategoryFilter } from './components/features/CategoryFilter.tsx'
 import { StockFilter } from './components/features/StockFilter.tsx'
 import { SortFilter } from './components/features/SortFilter.tsx'
+import { ProductForm } from './components/features/ProductForm.tsx'
 import { getStockInfo } from './helpers/getStockInfo.ts'
 import { getSortedProducts } from './helpers/getSortedProducts.ts'
 import type { StockOption } from './types/stockTypes.ts'
@@ -26,7 +27,7 @@ const App = () => {
 
   const allCategories = products.map(product => product.category)
   const removedDuplicatesCategories = new Set(allCategories)
-  const categoryOptions = ['all', ...removedDuplicatesCategories]
+  const categoryOptions = [...removedDuplicatesCategories]
 
 
 
@@ -56,8 +57,10 @@ const App = () => {
         setSearchInputValue={setSearchInputValue}
       />
 
+      <hr />
+
       <CategoryFilter
-        options={categoryOptions}
+        categoryOptions={categoryOptions}
         categoryFilterValue={categoryFilterValue}
         setCategoryFilterValue={setCategoryFilterValue}
       />
@@ -71,6 +74,14 @@ const App = () => {
         sortFilterValue={sortFilterValue}
         setSortFilterValue={setSortFilterValue}
       />
+
+      <hr />
+
+      <ProductForm 
+        categoryOptions={categoryOptions}
+      />
+
+      <hr />
 
       {sortedProducts.length === 0
         ? <p>No results.</p>

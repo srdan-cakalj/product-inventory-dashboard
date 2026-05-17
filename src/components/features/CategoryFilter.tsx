@@ -1,27 +1,30 @@
 
 
-import { formatOptionLabel } from "../../helpers/formatOptionLabel"
+import { formatCategoryLabel } from "../../helpers/formatCategoryLabel"
 
 type CategoryFilterProps = {
-    options: string[]
+    categoryOptions: string[]
     categoryFilterValue: string
     setCategoryFilterValue: (value: string) => void
 }
 
 
-const CategoryFilter = ({ options, categoryFilterValue, setCategoryFilterValue }: CategoryFilterProps) => {
+const CategoryFilter = ({ categoryOptions, categoryFilterValue, setCategoryFilterValue }: CategoryFilterProps) => {
+
+    const categoryFilterOptions: string[] = ['all', ...categoryOptions]
+
 
     return (
         <select
             value={categoryFilterValue}
             onChange={e => setCategoryFilterValue(e.target.value)}
         >
-            {options.map(option => (
+            {categoryFilterOptions.map(option => (
                 <option
                     key={option}
                     value={option}
                 >
-                    {formatOptionLabel(option)}
+                    {formatCategoryLabel(option)}
                 </option>
             )
             )}

@@ -1,7 +1,7 @@
 
 
 
-const formatOptionLabel = (option: string): string => {
+const formatCategoryLabel = (option: string): string => {
     if (option === 'all') {
         return 'All categories'
     }
@@ -14,4 +14,4 @@ const formatOptionLabel = (option: string): string => {
 }
 
 
-export { formatOptionLabel }
+export { formatCategoryLabel }
