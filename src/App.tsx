@@ -7,9 +7,9 @@ import { CategoryFilter } from './components/features/CategoryFilter.tsx'
 import { StockFilter } from './components/features/StockFilter.tsx'
 import { SortFilter } from './components/features/SortFilter.tsx'
 import { getStockInfo } from './helpers/getStockInfo.ts'
+import { getSortedProducts } from './helpers/getSortedProducts.ts'
 import type { StockOption } from './types/stockTypes.ts'
 import type { SortOption } from './types/sortTypes.ts'
-import type { Product } from './types/productTypes.ts'
 
 
 
@@ -28,37 +28,6 @@ const App = () => {
   const removedDuplicatesCategories = new Set(allCategories)
   const categoryOptions = ['all', ...removedDuplicatesCategories]
 
-
-
-
-
-  const getSortedProducts = (productsToSort : Product[], sortFilterValue: SortOption): Product[] => {
-    if (sortFilterValue === 'name-a-z') {
-      return productsToSort .sort((a: Product, b: Product) => a.name.localeCompare(b.name))
-    }
-
-    if (sortFilterValue === 'name-z-a') {
-      return productsToSort .sort((a: Product, b: Product) => b.name.localeCompare(a.name))
-    }
-
-    if (sortFilterValue === 'price-low-high') {
-      return productsToSort .sort((a: Product, b: Product) => a.price - b.price)
-    }
-
-    if (sortFilterValue === 'price-high-low') {
-      return productsToSort .sort((a: Product, b: Product) => b.price - a.price)
-    }
-
-    if (sortFilterValue === 'stock-low-high') {
-      return productsToSort .sort((a: Product, b: Product) => a.stock - b.stock)
-    }
-
-    if (sortFilterValue === 'stock-high-low') {
-      return productsToSort .sort((a: Product, b: Product) => b.stock - a.stock)
-    }
-
-    return productsToSort 
-  }
 
 
   const filteredProducts = products
