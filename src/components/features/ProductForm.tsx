@@ -19,7 +19,7 @@ type ProductFormProps = {
 
 const ProductForm = ({ categoryOptions, newProductValues, setNewProductValues, newProductValuesInit, setProducts }: ProductFormProps) => {
 
-    const [validationMessage, setValidationMessage] = useState<string| null>(null)
+    const [validationMessage, setValidationMessage] = useState<string | null>(null)
 
     const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -55,38 +55,47 @@ const ProductForm = ({ categoryOptions, newProductValues, setNewProductValues, n
             <form
                 onSubmit={handleSubmit}
             >
+
+                <label htmlFor='category'>Category</label>
                 <ProductFormSelect
                     categoryOptions={categoryOptions}
                     newProductValues={newProductValues}
                     setNewProductValues={setNewProductValues}
                     setValidationMessage={setValidationMessage}
+                    id='category'
                 />
 
                 <br />
 
+                <label htmlFor='product-name'>Product name</label>
                 <ProductFormInput
                     inputName='name'
                     newProductValues={newProductValues}
                     setNewProductValues={setNewProductValues}
                     setValidationMessage={setValidationMessage}
+                    id='product-name'
                 />
 
                 <br />
 
+                <label htmlFor='price'>Price (€) </label>
                 <ProductFormInput
                     inputName='price'
                     newProductValues={newProductValues}
                     setNewProductValues={setNewProductValues}
                     setValidationMessage={setValidationMessage}
+                    id='price'
                 />
 
                 <br />
 
+                <label htmlFor='stock'>Stock quantity</label>
                 <ProductFormInput
                     inputName='stock'
                     newProductValues={newProductValues}
                     setNewProductValues={setNewProductValues}
                     setValidationMessage={setValidationMessage}
+                    id='stock'
                 />
 
                 <br />

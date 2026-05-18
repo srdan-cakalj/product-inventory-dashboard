@@ -8,10 +8,11 @@ type ProductFormInputProps = {
     newProductValues: NewProduct
     setNewProductValues: (value: React.SetStateAction<NewProduct>) => void
     setValidationMessage: (value: string | null) => void
+    id: string
 }
 
 
-const ProductFormInput = ({ inputName, newProductValues, setNewProductValues, setValidationMessage }: ProductFormInputProps) => {
+const ProductFormInput = ({ inputName, newProductValues, setNewProductValues, setValidationMessage, id }: ProductFormInputProps) => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewProductValues(prev => ({
@@ -24,6 +25,7 @@ const ProductFormInput = ({ inputName, newProductValues, setNewProductValues, se
 
     return (
         <input
+            id={id}
             name={inputName}
             type='text'
             value={newProductValues[inputName]}

@@ -9,10 +9,11 @@ type ProductFormSelectProps = {
     newProductValues: NewProduct
     setNewProductValues: (value: React.SetStateAction<NewProduct>) => void
     setValidationMessage: (value: string | null) => void
+    id: string
 }
 
 
-const ProductFormSelect = ({ categoryOptions, newProductValues, setNewProductValues, setValidationMessage }: ProductFormSelectProps) => {
+const ProductFormSelect = ({ categoryOptions, newProductValues, setNewProductValues, setValidationMessage, id }: ProductFormSelectProps) => {
 
     const categoryFormOptions = ['', ...categoryOptions]
 
@@ -28,6 +29,7 @@ const ProductFormSelect = ({ categoryOptions, newProductValues, setNewProductVal
 
     return (
         <select
+            id={id}
             value={newProductValues.category}
             onChange={handleChange}
         >
