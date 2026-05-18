@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useProducts } from './hooks/useProducts.ts'
 import { ProductsTable } from './components/features/ProductsTable.tsx'
 import { SearchInput } from './components/features/SearchInput.tsx'
@@ -31,11 +31,6 @@ const App = () => {
   const [stockFilterValue, setStockFilterValue] = useState<StockOption>('all')
   const [sortFilterValue, setSortFilterValue] = useState<SortOption>('default')
   const [newProductValues, setNewProductValues] = useState<NewProduct>(newProductValuesInit)
-
-
-  useEffect(()=> {
-    console.log(newProductValues);
-  },[newProductValues])
 
 
   const { products, error, isLoading } = useProducts()

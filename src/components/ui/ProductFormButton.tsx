@@ -1,8 +1,14 @@
 
 
+
 const ProductFormButton = () => {
+
     return (
-        <button>Add product</button>
+        <button
+            type='submit'
+        >
+            Add product
+        </button>
     )
 }
 
