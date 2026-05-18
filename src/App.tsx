@@ -33,7 +33,7 @@ const App = () => {
   const [newProductValues, setNewProductValues] = useState<NewProduct>(newProductValuesInit)
 
 
-  const { products, error, isLoading } = useProducts()
+  const { setProducts, products, error, isLoading } = useProducts()
 
 
   const allCategories = products.map(product => product.category)
@@ -92,6 +92,8 @@ const App = () => {
         categoryOptions={categoryOptions}
         newProductValues={newProductValues}
         setNewProductValues={setNewProductValues}
+        newProductValuesInit={newProductValuesInit}
+        setProducts={setProducts}
       />
 
       <hr />
@@ -104,7 +106,6 @@ const App = () => {
         />
       }
 
-      {/* <pre> {JSON.stringify(products, null, 2)}</pre> */}
     </>
 
   )

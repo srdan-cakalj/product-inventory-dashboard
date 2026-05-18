@@ -39,7 +39,7 @@ const useProducts = () => {
 
                 const transformedProducts: Product[] = data.products.map(product => (
                     {
-                        id: product.id,
+                        id: String(product.id),
                         name: product.title,
                         category: product.category,
                         price: product.price,
@@ -74,7 +74,7 @@ const useProducts = () => {
         load()
     }, [])
 
-    return { products, error, isLoading }
+    return { setProducts, products, error, isLoading }
 }
 
 

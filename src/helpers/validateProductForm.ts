@@ -1,9 +1,15 @@
 
 
-import type { NewProduct } from "../types/productTypes.ts"
+import type { NewProduct, Product } from "../types/productTypes.ts"
 
 
-const validateProductForm = (newProductValues: NewProduct): string | null => {
+type ValidationResult = {
+    message: string | null
+    productData: Omit<Product, 'id'> | null
+}
+
+
+const validateProductForm = (newProductValues: NewProduct): ValidationResult => {
 
 
     // is empty string
@@ -22,25 +28,37 @@ const validateProductForm = (newProductValues: NewProduct): string | null => {
         !trimmedValues.stock
 
     if (isValueEmptyString) {
-        return 'Please fill in all fields.'
+        return {
+            message: 'Please fill in all fields.',
+            productData: null
+        }
     }
 
 
     // name length
 
     if (trimmedValues.name.length < 3) {
-        return 'Name must contain at least 3 characters.'
+        return {
+            message: 'Name must contain at least 3 characters.',
+            productData: null
+        }
     }
 
     if (trimmedValues.name.length > 50) {
-        return 'Name can contain a maximum of 50 characters.'
+        return {
+            message: 'Name can contain a maximum of 50 characters.',
+            productData: null
+        }
     }
 
 
     // name forbidden characters
 
     if (/[<>]/.test(trimmedValues.name)) {
-        return 'Name contains forbidden characters.'
+        return {
+            message: 'Name contains forbidden characters.',
+            productData: null
+        }
     }
 
 
@@ -50,22 +68,34 @@ const validateProductForm = (newProductValues: NewProduct): string | null => {
     const stockFormattedToNumber = Number(trimmedValues.stock)
 
     if (Number.isNaN(priceFormattedToNumber)) {
-        return 'Price must be a number.'
+        return {
+            message: 'Price must be a number.',
+            productData: null
+        }
     }
 
     if (Number.isNaN(stockFormattedToNumber)) {
-        return 'Stock must be a number.'
+        return {
+            message: 'Stock must be a number.',
+            productData: null
+        }
     }
 
 
     // is negative
 
     if (priceFormattedToNumber < 0) {
-        return 'Price cannot be negative.'
+        return {
+            message: 'Price cannot be negative.',
+            productData: null
+        }
     }
 
     if (stockFormattedToNumber < 0) {
-        return 'Stock cannot be negative.'
+        return {
+            message: 'Stock cannot be negative.',
+            productData: null
+        }
     }
 
 
@@ -74,12 +104,23 @@ const validateProductForm = (newProductValues: NewProduct): string | null => {
     const isStockInteger = Number.isInteger(stockFormattedToNumber)
 
     if (!isStockInteger) {
-        return 'Stock cannot have decimals. Please enter a whole number.'
+        return {
+            message: 'Stock cannot have decimals. Please enter a whole number.',
+            productData: null
+        }
     }
 
 
 
-    return null
+    return {
+        message: null,
+        productData: {
+            name: trimmedValues.name,
+            category: trimmedValues.category,
+            price: priceFormattedToNumber,
+            stock: stockFormattedToNumber
+        }
+    }
 
 }
 
