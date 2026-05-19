@@ -11,11 +11,11 @@ import { getStockInfo } from './helpers/getStockInfo.ts'
 import { getSortedProducts } from './helpers/getSortedProducts.ts'
 import type { StockOption } from './types/stockTypes.ts'
 import type { SortOption } from './types/sortTypes.ts'
-import type { NewProduct } from './types/productTypes.ts'
+import type { FormProduct } from './types/productTypes.ts'
 
 
 
-const emptyFormValues: NewProduct = {
+const emptyFormValues: FormProduct = {
   name: '',
   category: '',
   price: '',
@@ -30,7 +30,9 @@ const App = () => {
   const [categoryFilterValue, setCategoryFilterValue] = useState('all')
   const [stockFilterValue, setStockFilterValue] = useState<StockOption>('all')
   const [sortFilterValue, setSortFilterValue] = useState<SortOption>('default')
-  const [formValues, setFormValues] = useState<NewProduct>(emptyFormValues)
+  const [formValues, setFormValues] = useState<FormProduct>(emptyFormValues)
+  const [editingProductId, setEditingProductId] = useState<string | null>(null)
+  const [validationMessage, setValidationMessage] = useState<string | null>(null)
 
 
   const { setProducts, products, error, isLoading } = useProducts()
@@ -94,6 +96,10 @@ const App = () => {
         setFormValues={setFormValues}
         emptyFormValues={emptyFormValues}
         setProducts={setProducts}
+        editingProductId={editingProductId}
+        setEditingProductId={setEditingProductId}
+        validationMessage={validationMessage}
+        setValidationMessage={setValidationMessage}
       />
 
       <hr />
@@ -103,6 +109,9 @@ const App = () => {
         : <ProductsTable
           products={sortedProducts}
           getStock={getStockInfo}
+          setFormValues={setFormValues}
+          setEditingProductId={setEditingProductId}
+          setValidationMessage={setValidationMessage}
         />
       }
 

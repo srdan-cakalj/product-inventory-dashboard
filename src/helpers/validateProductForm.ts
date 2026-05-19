@@ -1,6 +1,6 @@
 
 
-import type { NewProduct, Product } from "../types/productTypes.ts"
+import type { FormProduct, Product } from "../types/productTypes.ts"
 
 
 type ValidationResult = {
@@ -9,7 +9,7 @@ type ValidationResult = {
 }
 
 
-const validateProductForm = (newProductValues: NewProduct): ValidationResult => {
+const validateProductForm = (newProductValues: FormProduct): ValidationResult => {
 
 
     // is empty string

@@ -1,13 +1,13 @@
 
 
-import type { NewProduct } from '../../types/productTypes.ts'
+import type { FormProduct } from '../../types/productTypes.ts'
 import { formatCategoryLabel } from '../../helpers/formatCategoryLabel.ts'
 
 
 type ProductFormSelectProps = {
     categoryOptions: string[]
-    formValues: NewProduct
-    setFormValues: (value: React.SetStateAction<NewProduct>) => void
+    formValues: FormProduct
+    setFormValues: (value: React.SetStateAction<FormProduct>) => void
     setValidationMessage: (value: string | null) => void
     id: string
 }

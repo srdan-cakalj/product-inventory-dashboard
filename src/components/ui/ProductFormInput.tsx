@@ -1,12 +1,12 @@
 
 
-import type { NewProduct } from '../../types/productTypes.ts'
+import type { FormProduct } from '../../types/productTypes.ts'
 
 
 type ProductFormInputProps = {
     inputName: 'name' | 'price' | 'stock'
-    formValues: NewProduct
-    setFormValues: (value: React.SetStateAction<NewProduct>) => void
+    formValues: FormProduct
+    setFormValues: (value: React.SetStateAction<FormProduct>) => void
     setValidationMessage: (value: string | null) => void
     id: string
 }

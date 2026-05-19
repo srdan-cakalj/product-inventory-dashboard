@@ -1,17 +1,39 @@
 
 
-import type { Product } from '../../types/productTypes.ts'
+import type { Product, FormProduct } from '../../types/productTypes.ts'
 import type { StockInfo } from '../../types/stockTypes.ts'
 
 
 type ProductsTableProps = {
     products: Product[]
     getStock: (value: number) => StockInfo
+    setFormValues: (value: FormProduct) => void
+    setEditingProductId: (value: string | null) => void
+    setValidationMessage: (value: string | null) => void
 }
 
 
-const ProductsTable = ({ products, getStock }: ProductsTableProps) => {
+const ProductsTable = ({
+    products,
+    getStock,
+    setFormValues,
+    setEditingProductId,
+    setValidationMessage
+}: ProductsTableProps) => {
 
+
+    const handleEdit = (product: Product) => {
+
+        setFormValues({
+            name: product.name,
+            category: product.category,
+            price: String(product.price),
+            stock: String(product.stock)
+        })
+
+        setEditingProductId(product.id)
+        setValidationMessage(null)
+    }
 
 
     return (
@@ -38,7 +60,7 @@ const ProductsTable = ({ products, getStock }: ProductsTableProps) => {
                             <td>{product.stock}</td>
                             <td>{getStock(product.stock).status}</td>
                             <td>
-                                <button>Edit</button>
+                                <button onClick={() => handleEdit(product)}>Edit</button>
                                 <button>Delete</button>
                             </td>
                         </tr>

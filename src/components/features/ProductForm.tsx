@@ -1,27 +1,40 @@
 
 
-import { useState } from 'react'
 import { ProductFormInput } from "../ui/ProductFormInput.tsx"
 import { ProductFormButton } from "../ui/ProductFormButton.tsx"
 import { ProductFormSelect } from "../ui/ProductFormSelect.tsx"
 import { validateProductForm } from '../../helpers/validateProductForm.ts'
-import type { NewProduct, Product } from '../../types/productTypes.ts'
+import type { FormProduct, Product } from '../../types/productTypes.ts'
 
 
 type ProductFormProps = {
     categoryOptions: string[]
-    formValues: NewProduct
-    setFormValues: (value: React.SetStateAction<NewProduct>) => void
-    emptyFormValues: NewProduct
+    formValues: FormProduct
+    setFormValues: (value: React.SetStateAction<FormProduct>) => void
+    emptyFormValues: FormProduct
     setProducts: (value: React.SetStateAction<Product[]>) => void
+    editingProductId: string | null
+    setEditingProductId: (value: string | null) => void
+    validationMessage: string | null
+    setValidationMessage: (value: string | null) => void
 }
 
 
-const ProductForm = ({ categoryOptions, formValues, setFormValues, emptyFormValues, setProducts }: ProductFormProps) => {
+const ProductForm = ({
+    categoryOptions,
+    formValues,
+    setFormValues,
+    emptyFormValues,
+    setProducts,
+    editingProductId,
+    setEditingProductId,
+    validationMessage,
+    setValidationMessage
+}: ProductFormProps) => {
 
-    const [validationMessage, setValidationMessage] = useState<string | null>(null)
 
     const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+
         e.preventDefault()
 
         const validationResult = validateProductForm(formValues)
@@ -30,25 +43,49 @@ const ProductForm = ({ categoryOptions, formValues, setFormValues, emptyFormValu
             return
         }
 
-        if (validationResult.productData) {
-            const newProduct: Product = {
-                id: crypto.randomUUID(),
-                name: validationResult.productData.name,
-                category: validationResult.productData.category,
-                price: validationResult.productData.price,
-                stock: validationResult.productData.stock
-            }
 
-            setProducts(prev => {
-                return ([
-                    ...prev,
-                    newProduct
-                ])
-            })
+        if (validationResult.productData) {
+
+            const data = validationResult.productData
+
+            setProducts(prev => (
+                editingProductId === null
+                    ? [
+                        ...prev,
+                        {
+                            id: crypto.randomUUID(),
+                            name: data.name,
+                            category: data.category,
+                            price: data.price,
+                            stock: data.stock
+                        }
+                    ]
+                    : prev.map(product => (
+                        product.id !== editingProductId
+                            ? product
+                            : {
+                                id: editingProductId,
+                                name: data.name,
+                                category: data.category,
+                                price: data.price,
+                                stock: data.stock
+                            }
+                    ))
+            ))
+
         }
 
         setFormValues(emptyFormValues)
+        setEditingProductId(null)
     }
+
+
+    const handleCancel = () => {
+        setFormValues(emptyFormValues)
+        setEditingProductId(null)
+        setValidationMessage(null)
+    }
+
 
     return (
         <>
@@ -100,7 +137,24 @@ const ProductForm = ({ categoryOptions, formValues, setFormValues, emptyFormValu
 
                 <br />
 
-                <ProductFormButton />
+
+                {editingProductId === null
+                    ? <ProductFormButton
+                        label='Add product'
+                        type='submit'
+                    />
+                    : <>
+                        <ProductFormButton
+                            label='Save changes'
+                            type='submit'
+                        />
+                        <ProductFormButton
+                            label='Cancel'
+                            type='button'
+                            handleClick={handleCancel}
+                        />
+                    </>
+                }
 
             </form>
 

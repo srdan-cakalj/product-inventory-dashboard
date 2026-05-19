@@ -18,7 +18,7 @@ type Product = {
 }
 
 
-type NewProduct = {
+type FormProduct = {
     name: string
     category: string
     price: string
@@ -26,4 +26,4 @@ type NewProduct = {
 }
 
 
-export type { ApiProduct, Product, NewProduct }
+export type { ApiProduct, Product, FormProduct }

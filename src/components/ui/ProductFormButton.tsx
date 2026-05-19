@@ -1,13 +1,20 @@
 
 
+type ProductFormButtonProps = {
+    label: string
+    type: 'submit' | 'reset' | 'button'
+    handleClick?: () => void
+}
 
-const ProductFormButton = () => {
+
+const ProductFormButton = ({ label, type, handleClick }: ProductFormButtonProps) => {
 
     return (
         <button
-            type='submit'
+            type={type}
+            onClick={handleClick}
         >
-            Add product
+            {label}
         </button>
     )
 }
