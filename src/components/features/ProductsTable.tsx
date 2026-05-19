@@ -4,19 +4,27 @@ import type { Product, FormProduct } from '../../types/productTypes.ts'
 import type { StockInfo } from '../../types/stockTypes.ts'
 
 
+
 type ProductsTableProps = {
     products: Product[]
+    setProducts: (value: React.SetStateAction<Product[]>) => void
     getStock: (value: number) => StockInfo
     setFormValues: (value: FormProduct) => void
+    emptyFormValues: FormProduct
+    editingProductId: string | null
     setEditingProductId: (value: string | null) => void
     setValidationMessage: (value: string | null) => void
 }
 
 
+
 const ProductsTable = ({
     products,
+    setProducts,
     getStock,
     setFormValues,
+    emptyFormValues,
+    editingProductId,
     setEditingProductId,
     setValidationMessage
 }: ProductsTableProps) => {
@@ -34,6 +42,26 @@ const ProductsTable = ({
         setEditingProductId(product.id)
         setValidationMessage(null)
     }
+
+
+
+    const handleDelete = (deletedProductId: string) => {
+
+        setProducts(prev => (
+            prev.filter(product => (
+                product.id !== deletedProductId
+            ))
+        ))
+
+        if (deletedProductId === editingProductId) {
+            setEditingProductId(null)
+            setValidationMessage(null)
+            setFormValues(emptyFormValues)
+        }
+
+
+    }
+
 
 
     return (
@@ -61,7 +89,7 @@ const ProductsTable = ({
                             <td>{getStock(product.stock).status}</td>
                             <td>
                                 <button onClick={() => handleEdit(product)}>Edit</button>
-                                <button>Delete</button>
+                                <button onClick={() => handleDelete(product.id)}>Delete</button>
                             </td>
                         </tr>
                     )
@@ -71,5 +99,7 @@ const ProductsTable = ({
         </table>
     )
 }
+
+
 
 export { ProductsTable }

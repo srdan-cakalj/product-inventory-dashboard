@@ -108,8 +108,11 @@ const App = () => {
         ? <p>No results.</p>
         : <ProductsTable
           products={sortedProducts}
+          setProducts={setProducts}
           getStock={getStockInfo}
           setFormValues={setFormValues}
+          emptyFormValues={emptyFormValues}
+          editingProductId={editingProductId}
           setEditingProductId={setEditingProductId}
           setValidationMessage={setValidationMessage}
         />
