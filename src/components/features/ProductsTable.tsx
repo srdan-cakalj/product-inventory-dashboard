@@ -47,6 +47,12 @@ const ProductsTable = ({
 
     const handleDelete = (deletedProductId: string) => {
 
+        const shouldDelete = confirm('Are you sure you want to delete this product?')
+
+        if (!shouldDelete) {
+            return
+        }
+
         setProducts(prev => (
             prev.filter(product => (
                 product.id !== deletedProductId
@@ -58,11 +64,9 @@ const ProductsTable = ({
             setValidationMessage(null)
             setFormValues(emptyFormValues)
         }
-
-
     }
 
-
+    
 
     return (
         <table>
