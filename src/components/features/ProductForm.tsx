@@ -10,21 +10,21 @@ import type { NewProduct, Product } from '../../types/productTypes.ts'
 
 type ProductFormProps = {
     categoryOptions: string[]
-    newProductValues: NewProduct
-    setNewProductValues: (value: React.SetStateAction<NewProduct>) => void
-    newProductValuesInit: NewProduct
+    formValues: NewProduct
+    setFormValues: (value: React.SetStateAction<NewProduct>) => void
+    emptyFormValues: NewProduct
     setProducts: (value: React.SetStateAction<Product[]>) => void
 }
 
 
-const ProductForm = ({ categoryOptions, newProductValues, setNewProductValues, newProductValuesInit, setProducts }: ProductFormProps) => {
+const ProductForm = ({ categoryOptions, formValues, setFormValues, emptyFormValues, setProducts }: ProductFormProps) => {
 
     const [validationMessage, setValidationMessage] = useState<string | null>(null)
 
     const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        const validationResult = validateProductForm(newProductValues)
+        const validationResult = validateProductForm(formValues)
         setValidationMessage(validationResult.message)
         if (validationResult.message) {
             return
@@ -47,7 +47,7 @@ const ProductForm = ({ categoryOptions, newProductValues, setNewProductValues, n
             })
         }
 
-        setNewProductValues(newProductValuesInit)
+        setFormValues(emptyFormValues)
     }
 
     return (
@@ -59,8 +59,8 @@ const ProductForm = ({ categoryOptions, newProductValues, setNewProductValues, n
                 <label htmlFor='category'>Category</label>
                 <ProductFormSelect
                     categoryOptions={categoryOptions}
-                    newProductValues={newProductValues}
-                    setNewProductValues={setNewProductValues}
+                    formValues={formValues}
+                    setFormValues={setFormValues}
                     setValidationMessage={setValidationMessage}
                     id='category'
                 />
@@ -70,8 +70,8 @@ const ProductForm = ({ categoryOptions, newProductValues, setNewProductValues, n
                 <label htmlFor='product-name'>Product name</label>
                 <ProductFormInput
                     inputName='name'
-                    newProductValues={newProductValues}
-                    setNewProductValues={setNewProductValues}
+                    formValues={formValues}
+                    setFormValues={setFormValues}
                     setValidationMessage={setValidationMessage}
                     id='product-name'
                 />
@@ -81,8 +81,8 @@ const ProductForm = ({ categoryOptions, newProductValues, setNewProductValues, n
                 <label htmlFor='price'>Price (€) </label>
                 <ProductFormInput
                     inputName='price'
-                    newProductValues={newProductValues}
-                    setNewProductValues={setNewProductValues}
+                    formValues={formValues}
+                    setFormValues={setFormValues}
                     setValidationMessage={setValidationMessage}
                     id='price'
                 />
@@ -92,8 +92,8 @@ const ProductForm = ({ categoryOptions, newProductValues, setNewProductValues, n
                 <label htmlFor='stock'>Stock quantity</label>
                 <ProductFormInput
                     inputName='stock'
-                    newProductValues={newProductValues}
-                    setNewProductValues={setNewProductValues}
+                    formValues={formValues}
+                    setFormValues={setFormValues}
                     setValidationMessage={setValidationMessage}
                     id='stock'
                 />

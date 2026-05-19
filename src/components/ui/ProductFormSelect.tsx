@@ -6,20 +6,20 @@ import { formatCategoryLabel } from '../../helpers/formatCategoryLabel.ts'
 
 type ProductFormSelectProps = {
     categoryOptions: string[]
-    newProductValues: NewProduct
-    setNewProductValues: (value: React.SetStateAction<NewProduct>) => void
+    formValues: NewProduct
+    setFormValues: (value: React.SetStateAction<NewProduct>) => void
     setValidationMessage: (value: string | null) => void
     id: string
 }
 
 
-const ProductFormSelect = ({ categoryOptions, newProductValues, setNewProductValues, setValidationMessage, id }: ProductFormSelectProps) => {
+const ProductFormSelect = ({ categoryOptions, formValues, setFormValues, setValidationMessage, id }: ProductFormSelectProps) => {
 
     const categoryFormOptions = ['', ...categoryOptions]
 
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setNewProductValues(prev => ({
+        setFormValues(prev => ({
             ...prev,
             category: e.target.value
         }))
@@ -30,7 +30,7 @@ const ProductFormSelect = ({ categoryOptions, newProductValues, setNewProductVal
     return (
         <select
             id={id}
-            value={newProductValues.category}
+            value={formValues.category}
             onChange={handleChange}
         >
             {categoryFormOptions.map(option => (

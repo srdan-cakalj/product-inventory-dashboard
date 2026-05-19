@@ -15,7 +15,7 @@ import type { NewProduct } from './types/productTypes.ts'
 
 
 
-const newProductValuesInit: NewProduct = {
+const emptyFormValues: NewProduct = {
   name: '',
   category: '',
   price: '',
@@ -30,7 +30,7 @@ const App = () => {
   const [categoryFilterValue, setCategoryFilterValue] = useState('all')
   const [stockFilterValue, setStockFilterValue] = useState<StockOption>('all')
   const [sortFilterValue, setSortFilterValue] = useState<SortOption>('default')
-  const [newProductValues, setNewProductValues] = useState<NewProduct>(newProductValuesInit)
+  const [formValues, setFormValues] = useState<NewProduct>(emptyFormValues)
 
 
   const { setProducts, products, error, isLoading } = useProducts()
@@ -90,9 +90,9 @@ const App = () => {
 
       <ProductForm
         categoryOptions={categoryOptions}
-        newProductValues={newProductValues}
-        setNewProductValues={setNewProductValues}
-        newProductValuesInit={newProductValuesInit}
+        formValues={formValues}
+        setFormValues={setFormValues}
+        emptyFormValues={emptyFormValues}
         setProducts={setProducts}
       />
 
