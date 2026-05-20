@@ -14,6 +14,8 @@ import type { SortOption } from './types/sortTypes.ts'
 import type { FormProduct } from './types/productTypes.ts'
 
 
+import { AppSidebar } from './components/layout/AppSidebar.tsx'
+
 
 const emptyFormValues: FormProduct = {
   name: '',
@@ -64,7 +66,11 @@ const App = () => {
 
 
   return (
-    <>
+    <div className='app'>
+
+      <AppSidebar />
+
+
       <SearchInput
         searchInputValue={searchInputValue}
         setSearchInputValue={setSearchInputValue}
@@ -118,7 +124,7 @@ const App = () => {
         />
       }
 
-    </>
+    </div>
 
   )
 }

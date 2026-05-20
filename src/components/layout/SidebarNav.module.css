@@ -1,0 +1,24 @@
+
+
+.list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.listItem {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 25px;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+.listItem:hover {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+}
+

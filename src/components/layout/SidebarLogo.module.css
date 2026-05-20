@@ -1,0 +1,44 @@
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+    margin-top: 10px;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background-color: var(--color-primary);
+    padding: 4px;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--border-radius);
+}
+
+
+.titleSubtitleContainer {
+    display: flex;
+    padding-bottom: 3px;
+    flex-direction: column;
+    color: var(--color-text-main);
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 14.5px;
+    text-transform: uppercase;
+}
+
+.pro {
+    color: var(--color-primary);
+}
