@@ -15,6 +15,7 @@ import type { FormProduct } from './types/productTypes.ts'
 
 
 import { AppSidebar } from './components/layout/AppSidebar.tsx'
+import { AppMain } from './components/layout/AppMain.tsx'
 
 
 const emptyFormValues: FormProduct = {
@@ -66,9 +67,13 @@ const App = () => {
 
 
   return (
-    <div className='app'>
+    <>
+      <div className='app'>
+        <AppSidebar />
+        <AppMain />
+      </div>
 
-      <AppSidebar />
+
 
 
       <SearchInput
@@ -124,7 +129,7 @@ const App = () => {
         />
       }
 
-    </div>
+    </>
 
   )
 }

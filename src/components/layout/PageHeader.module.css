@@ -1,0 +1,13 @@
+
+
+
+
+.header h1 {
+    color: var(--color-text-main);
+    margin: 0;
+}
+
+.header p {
+    color: var(--color-text-muted);
+    margin: 0;
+}

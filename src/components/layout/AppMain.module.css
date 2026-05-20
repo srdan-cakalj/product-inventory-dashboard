@@ -1,0 +1,8 @@
+
+
+.main {
+    height: 100vh;
+    flex-grow: 1;
+    padding: 25px;
+    background-color: var(--color-page-bg);
+}
