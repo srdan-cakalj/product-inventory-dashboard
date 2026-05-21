@@ -1,6 +1,6 @@
 
 
-import type { StockOption } from '../../types/stockTypes.ts'
+import type { StockOption } from '../../../types/stockTypes.ts'
 
 
 type StockFilterProps = {

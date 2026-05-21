@@ -1,10 +1,10 @@
 
 
-import { ProductFormInput } from "../ui/ProductFormInput.tsx"
-import { ProductFormButton } from "../ui/ProductFormButton.tsx"
-import { ProductFormSelect } from "../ui/ProductFormSelect.tsx"
-import { validateProductForm } from '../../helpers/validateProductForm.ts'
-import type { FormProduct, Product } from '../../types/productTypes.ts'
+import { ProductFormInput } from '../../ui/ProductFormInput.tsx'
+import { ProductFormButton } from "../../ui/ProductFormButton.tsx"
+import { ProductFormSelect } from "../../ui/ProductFormSelect.tsx"
+import { validateProductForm } from '../../../helpers/validateProductForm.ts'
+import type { FormProduct, Product } from '../../../types/productTypes.ts'
 
 
 type ProductFormProps = {

@@ -1,6 +1,6 @@
 
 
-import type { SortOption } from '../../types/sortTypes.ts'
+import type { SortOption } from '../../../types/sortTypes.ts'
 
 
 type SortFilterProps = {

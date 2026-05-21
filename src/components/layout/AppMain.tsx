@@ -6,11 +6,10 @@ import { ProductsPage } from '../../pages/ProductsPage.tsx'
 // import { ReportsPage } from '../../pages/ReportsPage.tsx'
 // import { SettingsPage } from '../../pages/SettingsPage.tsx'
 import type { Page, PageHeaderContent } from '../../types/pageTypes.ts'
-
+import type { Product } from '../../types/productTypes.ts'
 
 
 type PageHeaderContentMap = Record<Page, PageHeaderContent>
-
 
 
 const pageHeaderContentMap: PageHeaderContentMap = {
@@ -33,13 +32,24 @@ const pageHeaderContentMap: PageHeaderContentMap = {
 }
 
 
+type AppMainProps = {
+    products: Product[]
+    setProducts: (value: React.SetStateAction<Product[]>) => void
+    categoryOptions: string[]
+}
 
-const AppMain = () => {
+
+const AppMain = ({ products, setProducts, categoryOptions }: AppMainProps) => {
+
     return (
         <main className={styles.main}>
+
             <ProductsPage
                 title={pageHeaderContentMap.products.title}
                 subtitle={pageHeaderContentMap.products.subtitle}
+                products={products}
+                setProducts={setProducts}
+                categoryOptions={categoryOptions}
             />
 
             {/* <CategoriesPage
@@ -56,6 +66,7 @@ const AppMain = () => {
                 title={pageHeaderContentMap.settings.title}
                 subtitle={pageHeaderContentMap.settings.subtitle}
             /> */}
+
         </main>
     )
 }

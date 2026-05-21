@@ -1,6 +1,6 @@
 
 
-import { formatCategoryLabel } from "../../helpers/formatCategoryLabel"
+import { formatCategoryLabel } from "../../../helpers/formatCategoryLabel"
 
 type CategoryFilterProps = {
     categoryOptions: string[]

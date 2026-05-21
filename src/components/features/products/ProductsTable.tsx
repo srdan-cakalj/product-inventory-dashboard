@@ -1,14 +1,14 @@
 
 
-import type { Product, FormProduct } from '../../types/productTypes.ts'
-import type { StockInfo } from '../../types/stockTypes.ts'
+import styles from './ProductsTable.module.css'
+import type { Product, FormProduct } from '../../../types/productTypes.ts'
+import { getStockInfo } from '../../../helpers/getStockInfo.ts'
 
 
 
 type ProductsTableProps = {
     products: Product[]
     setProducts: (value: React.SetStateAction<Product[]>) => void
-    getStock: (value: number) => StockInfo
     setFormValues: (value: FormProduct) => void
     emptyFormValues: FormProduct
     editingProductId: string | null
@@ -21,7 +21,6 @@ type ProductsTableProps = {
 const ProductsTable = ({
     products,
     setProducts,
-    getStock,
     setFormValues,
     emptyFormValues,
     editingProductId,
@@ -69,7 +68,7 @@ const ProductsTable = ({
     
 
     return (
-        <table>
+        <table className={styles.table}>
             <thead>
                 <tr>
                     <th>Name</th>
@@ -90,7 +89,7 @@ const ProductsTable = ({
                             <td>{product.category}</td>
                             <td>{product.price} €</td>
                             <td>{product.stock}</td>
-                            <td>{getStock(product.stock).status}</td>
+                            <td>{getStockInfo(product.stock).status}</td>
                             <td>
                                 <button onClick={() => handleEdit(product)}>Edit</button>
                                 <button onClick={() => handleDelete(product.id)}>Delete</button>

@@ -1,0 +1,32 @@
+
+
+.table {
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-card);
+}
+
+.table th {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    padding: 10px 0;
+}
+
+.table th:first-child {
+    text-align: start;
+    padding-left: 20px;
+}
+
+.table tbody tr td {
+    border-top: 1px solid var(--color-border);
+    background-color: var(--color-card-bg);
+    padding: 10px 20px;
+    color: var(--color-text-muted);
+    font-weight: 500;
+    text-align: center;
+}
+
+.table tbody tr td:first-child {
+    text-align: start;
+}
