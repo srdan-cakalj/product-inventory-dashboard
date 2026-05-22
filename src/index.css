@@ -40,6 +40,10 @@
 
   /* Border-radius */
   --border-radius: 7px;
+
+  /* Modal */
+  --color-overlay-bg: rgba(0, 0, 0, 0.5);
+
 }
 
 

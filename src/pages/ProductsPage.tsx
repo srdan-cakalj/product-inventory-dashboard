@@ -2,10 +2,14 @@
 
 import { useState } from 'react'
 import styles from './ProductsPage.module.css'
+import { X } from 'lucide-react'
 import { ProductsToolbar } from '../components/features/products/ProductsToolbar.tsx'
 import { ProductsTable } from '../components/features/products/ProductsTable.tsx'
 import { ProductForm } from '../components/features/products/ProductForm.tsx'
 import { PageHeader } from '../components/layout/PageHeader.tsx'
+import { Button } from '../components/ui/Button.tsx'
+import { IconButton } from '../components/ui/IconButton.tsx'
+import { Modal } from '../components/ui/Modal.tsx'
 import type { StockOption } from '../types/stockTypes.ts'
 import type { SortOption } from '../types/sortTypes.ts'
 import type { Product, FormProduct } from '../types/productTypes.ts'
@@ -39,6 +43,7 @@ const ProductsPage = ({ title, subtitle, products, categoryOptions, setProducts 
     const [formValues, setFormValues] = useState<FormProduct>(emptyFormValues)
     const [editingProductId, setEditingProductId] = useState<string | null>(null)
     const [validationMessage, setValidationMessage] = useState<string | null>(null)
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
 
     const filteredProducts = products
@@ -50,13 +55,30 @@ const ProductsPage = ({ title, subtitle, products, categoryOptions, setProducts 
     const sortedProducts = getSortedProducts(productsToSort, sortFilterValue)
 
 
+    const handleCloseIconButton = () => {
+        setFormValues(emptyFormValues)
+        setEditingProductId(null)
+        setValidationMessage(null)
+        setIsModalOpen(false)
+    }
+
+
     return (
         <div className={styles.productsPage}>
 
-            <PageHeader
-                title={title}
-                subtitle={subtitle}
-            />
+            <header className={styles.productsPageHeader}>
+                <PageHeader
+                    title={title}
+                    subtitle={subtitle}
+                />
+
+                <Button
+                    type='button'
+                    label='+ Add Product'
+                    handleClick={() => setIsModalOpen(true)}
+                />
+            </header>
+
 
             <ProductsToolbar
                 searchInputValue={searchInputValue}
@@ -80,20 +102,39 @@ const ProductsPage = ({ title, subtitle, products, categoryOptions, setProducts 
                     editingProductId={editingProductId}
                     setEditingProductId={setEditingProductId}
                     setValidationMessage={setValidationMessage}
+                    setIsModalOpen={setIsModalOpen}
                 />
             }
 
-            <ProductForm
-                categoryOptions={categoryOptions}
-                formValues={formValues}
-                setFormValues={setFormValues}
-                emptyFormValues={emptyFormValues}
-                setProducts={setProducts}
-                editingProductId={editingProductId}
-                setEditingProductId={setEditingProductId}
-                validationMessage={validationMessage}
-                setValidationMessage={setValidationMessage}
-            />
+            {isModalOpen &&
+                <Modal>
+
+                    <header className={styles.modalHeader}>
+                        {editingProductId
+                            ? <h3>Edit product</h3>
+                            : <h3>Add product</h3>
+                        }
+                        <IconButton
+                            Icon={X}
+                            handleClick={handleCloseIconButton}
+                        />
+                    </header>
+
+                    <ProductForm
+                        categoryOptions={categoryOptions}
+                        formValues={formValues}
+                        setFormValues={setFormValues}
+                        emptyFormValues={emptyFormValues}
+                        setProducts={setProducts}
+                        editingProductId={editingProductId}
+                        setEditingProductId={setEditingProductId}
+                        validationMessage={validationMessage}
+                        setValidationMessage={setValidationMessage}
+                        setIsModalOpen={setIsModalOpen}
+                    />
+
+                </Modal>
+            }
 
         </div>
     )

@@ -1,13 +1,13 @@
 
 
-type ProductFormButtonProps = {
+type ButtonProps = {
     label: string
     type: 'submit' | 'reset' | 'button'
     handleClick?: () => void
 }
 
 
-const ProductFormButton = ({ label, type, handleClick }: ProductFormButtonProps) => {
+const Button = ({ label, type, handleClick }: ButtonProps) => {
 
     return (
         <button
@@ -20,4 +20,4 @@ const ProductFormButton = ({ label, type, handleClick }: ProductFormButtonProps)
 }
 
 
-export { ProductFormButton }
+export { Button }

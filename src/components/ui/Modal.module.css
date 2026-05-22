@@ -1,0 +1,19 @@
+
+
+.overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    inset: 0;
+    background-color: var(--color-overlay-bg);
+}
+
+.modal {
+    width: 500px;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-card);
+    background-color: var(--color-page-bg);
+}
+

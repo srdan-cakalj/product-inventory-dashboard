@@ -14,6 +14,7 @@ type ProductsTableProps = {
     editingProductId: string | null
     setEditingProductId: (value: string | null) => void
     setValidationMessage: (value: string | null) => void
+    setIsModalOpen: (value: boolean) => void
 }
 
 
@@ -25,7 +26,8 @@ const ProductsTable = ({
     emptyFormValues,
     editingProductId,
     setEditingProductId,
-    setValidationMessage
+    setValidationMessage,
+    setIsModalOpen
 }: ProductsTableProps) => {
 
 
@@ -40,6 +42,7 @@ const ProductsTable = ({
 
         setEditingProductId(product.id)
         setValidationMessage(null)
+        setIsModalOpen(true)
     }
 
 
@@ -65,7 +68,7 @@ const ProductsTable = ({
         }
     }
 
-    
+
 
     return (
         <table className={styles.table}>

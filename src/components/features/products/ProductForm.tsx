@@ -1,7 +1,7 @@
 
 
 import { ProductFormInput } from '../../ui/ProductFormInput.tsx'
-import { ProductFormButton } from "../../ui/ProductFormButton.tsx"
+import { Button } from "../../ui/Button.tsx"
 import { ProductFormSelect } from "../../ui/ProductFormSelect.tsx"
 import { validateProductForm } from '../../../helpers/validateProductForm.ts'
 import type { FormProduct, Product } from '../../../types/productTypes.ts'
@@ -17,6 +17,7 @@ type ProductFormProps = {
     setEditingProductId: (value: string | null) => void
     validationMessage: string | null
     setValidationMessage: (value: string | null) => void
+    setIsModalOpen: (value: boolean) => void
 }
 
 
@@ -29,7 +30,8 @@ const ProductForm = ({
     editingProductId,
     setEditingProductId,
     validationMessage,
-    setValidationMessage
+    setValidationMessage,
+    setIsModalOpen
 }: ProductFormProps) => {
 
 
@@ -77,6 +79,7 @@ const ProductForm = ({
 
         setFormValues(emptyFormValues)
         setEditingProductId(null)
+        setIsModalOpen(false)
     }
 
 
@@ -84,6 +87,7 @@ const ProductForm = ({
         setFormValues(emptyFormValues)
         setEditingProductId(null)
         setValidationMessage(null)
+        setIsModalOpen(false)
     }
 
 
@@ -139,16 +143,16 @@ const ProductForm = ({
 
 
                 {editingProductId === null
-                    ? <ProductFormButton
+                    ? <Button
                         label='Add product'
                         type='submit'
                     />
                     : <>
-                        <ProductFormButton
+                        <Button
                             label='Save changes'
                             type='submit'
                         />
-                        <ProductFormButton
+                        <Button
                             label='Cancel'
                             type='button'
                             handleClick={handleCancel}

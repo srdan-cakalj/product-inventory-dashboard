@@ -5,3 +5,15 @@
     flex-direction: column;
     gap: 20px;
 }
+
+
+.productsPageHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+}
