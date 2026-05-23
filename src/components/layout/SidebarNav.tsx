@@ -3,16 +3,19 @@
 import type { SidebarOption } from '../../types/sidebarTypes.ts'
 import { Package, Tag, SquareKanban, Settings } from 'lucide-react'
 import styles from './SidebarNav.module.css'
+import type { Page } from '../../types/pageTypes.ts'
 
 
 const sidebarOptions: SidebarOption[] = [
     {
+        name: 'products',
         title: 'Products',
         icon: Package,
         size: 26,
         strokeWidth: 1.6
     },
     {
+        name: 'categories',
         title: 'Categories',
         icon: Tag,
         size: 24,
@@ -20,6 +23,7 @@ const sidebarOptions: SidebarOption[] = [
         transform: 'scaleX(-1)'
     },
     {
+        name: 'reports',
         title: 'Reports',
         icon: SquareKanban,
         size: 24,
@@ -27,6 +31,7 @@ const sidebarOptions: SidebarOption[] = [
         transform: 'rotate(180deg)'
     },
     {
+        name: 'settings',
         title: 'Settings',
         icon: Settings,
         size: 26,
@@ -35,7 +40,13 @@ const sidebarOptions: SidebarOption[] = [
 ]
 
 
-const SidebarNav = () => {
+type SidebarNavProps = {
+    setActivePage: (value: Page) => void
+}
+
+
+const SidebarNav = ({ setActivePage }: SidebarNavProps) => {
+
     return (
         <ul className={styles.list}>
             {sidebarOptions.map(option => {
@@ -44,8 +55,9 @@ const SidebarNav = () => {
 
                 return (
                     <li
-                        key={option.title}
+                        key={option.name}
                         className={styles.listItem}
+                        onClick={() => setActivePage(option.name)}
                     >
 
                         <Icon
