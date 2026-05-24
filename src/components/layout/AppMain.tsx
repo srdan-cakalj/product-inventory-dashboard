@@ -7,6 +7,7 @@ import { ReportsPage } from '../../pages/ReportsPage.tsx'
 import { SettingsPage } from '../../pages/SettingsPage.tsx'
 import type { Page, PageHeaderContent } from '../../types/pageTypes.ts'
 import type { Product } from '../../types/productTypes.ts'
+import { getCategoriesFromProducts } from '../../helpers/getCategoriesFromProducts.ts'
 
 
 type PageHeaderContentMap = Record<Page, PageHeaderContent>
@@ -35,14 +36,17 @@ const pageHeaderContentMap: PageHeaderContentMap = {
 type AppMainProps = {
     products: Product[]
     setProducts: (value: React.SetStateAction<Product[]>) => void
-    categoryOptions: string[]
     activePage: Page
 }
 
 type PagesMap = Record<Page, React.JSX.Element>
 
 
-const AppMain = ({ products, setProducts, categoryOptions, activePage }: AppMainProps) => {
+const AppMain = ({ products, setProducts, activePage }: AppMainProps) => {
+
+
+    
+    const categories = getCategoriesFromProducts(products)
 
 
     const pagesMap: PagesMap = {
@@ -52,7 +56,7 @@ const AppMain = ({ products, setProducts, categoryOptions, activePage }: AppMain
                 subtitle={pageHeaderContentMap.products.subtitle}
                 products={products}
                 setProducts={setProducts}
-                categoryOptions={categoryOptions}
+                categories={categories}
             />
         ),
         categories: (

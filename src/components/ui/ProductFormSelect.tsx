@@ -2,10 +2,11 @@
 
 import type { FormProduct } from '../../types/productTypes.ts'
 import { formatCategoryLabel } from '../../helpers/formatCategoryLabel.ts'
+import type { Categories } from '../../types/categoriesTypes.ts'
 
 
 type ProductFormSelectProps = {
-    categoryOptions: string[]
+    categories: Categories
     formValues: FormProduct
     setFormValues: (value: React.SetStateAction<FormProduct>) => void
     setValidationMessage: (value: string | null) => void
@@ -13,9 +14,10 @@ type ProductFormSelectProps = {
 }
 
 
-const ProductFormSelect = ({ categoryOptions, formValues, setFormValues, setValidationMessage, id }: ProductFormSelectProps) => {
+const ProductFormSelect = ({ categories, formValues, setFormValues, setValidationMessage, id }: ProductFormSelectProps) => {
 
-    const categoryFormOptions = ['', ...categoryOptions]
+    const categoriesKeys = Object.keys(categories)
+    const categoryFormOptions = ['', ...categoriesKeys]
 
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

@@ -1,17 +1,19 @@
 
 
-import { formatCategoryLabel } from "../../../helpers/formatCategoryLabel"
+import { formatCategoryLabel } from '../../../helpers/formatCategoryLabel.ts'
+import type { Categories } from '../../../types/categoriesTypes.ts'
 
 type CategoryFilterProps = {
-    categoryOptions: string[]
+    categories: Categories
     categoryFilterValue: string
     setCategoryFilterValue: (value: string) => void
 }
 
 
-const CategoryFilter = ({ categoryOptions, categoryFilterValue, setCategoryFilterValue }: CategoryFilterProps) => {
+const CategoryFilter = ({ categories, categoryFilterValue, setCategoryFilterValue }: CategoryFilterProps) => {
 
-    const categoryFilterOptions: string[] = ['all', ...categoryOptions]
+    const categoriesKeys = Object.keys(categories)
+    const categoryFilterOptions: string[] = ['all', ...categoriesKeys]
 
 
     return (

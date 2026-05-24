@@ -13,6 +13,7 @@ import { Modal } from '../components/ui/Modal.tsx'
 import type { StockOption } from '../types/stockTypes.ts'
 import type { SortOption } from '../types/sortTypes.ts'
 import type { Product, FormProduct } from '../types/productTypes.ts'
+import type { Categories } from '../types/categoriesTypes.ts'
 import { getStockInfo } from '../helpers/getStockInfo.ts'
 import { getSortedProducts } from '../helpers/getSortedProducts.ts'
 
@@ -21,7 +22,7 @@ type ProductsPageProps = {
     title: string
     subtitle: string
     products: Product[]
-    categoryOptions: string[]
+    categories: Categories
     setProducts: (value: React.SetStateAction<Product[]>) => void
 }
 
@@ -34,7 +35,7 @@ const emptyFormValues: FormProduct = {
 }
 
 
-const ProductsPage = ({ title, subtitle, products, categoryOptions, setProducts }: ProductsPageProps) => {
+const ProductsPage = ({ title, subtitle, products, categories, setProducts }: ProductsPageProps) => {
 
     const [searchInputValue, setSearchInputValue] = useState('')
     const [categoryFilterValue, setCategoryFilterValue] = useState('all')
@@ -83,7 +84,7 @@ const ProductsPage = ({ title, subtitle, products, categoryOptions, setProducts 
             <ProductsToolbar
                 searchInputValue={searchInputValue}
                 setSearchInputValue={setSearchInputValue}
-                categoryOptions={categoryOptions}
+                categories={categories}
                 categoryFilterValue={categoryFilterValue}
                 setCategoryFilterValue={setCategoryFilterValue}
                 stockFilterValue={stockFilterValue}
@@ -121,7 +122,7 @@ const ProductsPage = ({ title, subtitle, products, categoryOptions, setProducts 
                     </header>
 
                     <ProductForm
-                        categoryOptions={categoryOptions}
+                        categories={categories}
                         formValues={formValues}
                         setFormValues={setFormValues}
                         emptyFormValues={emptyFormValues}

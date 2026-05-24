@@ -15,11 +15,6 @@ const App = () => {
   const { setProducts, products, error, isLoading } = useProducts()
 
 
-  const allCategories = products.map(product => product.category)
-  const removedDuplicatesCategories = new Set(allCategories)
-  const categoryOptions = [...removedDuplicatesCategories]
-
-
   if (isLoading) {
     return <p>Loading...</p>
   }
@@ -39,7 +34,6 @@ const App = () => {
       <AppMain
         products={products}
         setProducts={setProducts}
-        categoryOptions={categoryOptions}
         activePage={activePage}
       />
 

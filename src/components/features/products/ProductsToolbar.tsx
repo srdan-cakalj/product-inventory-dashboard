@@ -2,6 +2,7 @@
 
 import type { StockOption } from '../../../types/stockTypes.ts'
 import type { SortOption } from '../../../types/sortTypes.ts'
+import type { Categories } from '../../../types/categoriesTypes.ts'
 import { SearchInput } from './SearchInput.tsx'
 import { CategoryFilter } from './CategoryFilter.tsx'
 import { StockFilter } from './StockFilter.tsx'
@@ -12,7 +13,7 @@ import styles from './ProductsToolbar.module.css'
 type ProductsToolbarProps = {
     searchInputValue: string
     setSearchInputValue: (value: string) => void
-    categoryOptions: string[]
+    categories: Categories
     categoryFilterValue: string
     setCategoryFilterValue: (value: string) => void
     stockFilterValue: StockOption
@@ -25,7 +26,7 @@ type ProductsToolbarProps = {
 const ProductsToolbar = ({
     searchInputValue,
     setSearchInputValue,
-    categoryOptions,
+    categories,
     categoryFilterValue,
     setCategoryFilterValue,
     stockFilterValue,
@@ -43,7 +44,7 @@ const ProductsToolbar = ({
             />
 
             <CategoryFilter
-                categoryOptions={categoryOptions}
+                categories={categories}
                 categoryFilterValue={categoryFilterValue}
                 setCategoryFilterValue={setCategoryFilterValue}
             />

@@ -5,10 +5,11 @@ import { Button } from "../../ui/Button.tsx"
 import { ProductFormSelect } from "../../ui/ProductFormSelect.tsx"
 import { validateProductForm } from '../../../helpers/validateProductForm.ts'
 import type { FormProduct, Product } from '../../../types/productTypes.ts'
+import type { Categories } from '../../../types/categoriesTypes.ts'
 
 
 type ProductFormProps = {
-    categoryOptions: string[]
+    categories: Categories
     formValues: FormProduct
     setFormValues: (value: React.SetStateAction<FormProduct>) => void
     emptyFormValues: FormProduct
@@ -22,7 +23,7 @@ type ProductFormProps = {
 
 
 const ProductForm = ({
-    categoryOptions,
+    categories,
     formValues,
     setFormValues,
     emptyFormValues,
@@ -99,7 +100,7 @@ const ProductForm = ({
 
                 <label htmlFor='category'>Category</label>
                 <ProductFormSelect
-                    categoryOptions={categoryOptions}
+                    categories={categories}
                     formValues={formValues}
                     setFormValues={setFormValues}
                     setValidationMessage={setValidationMessage}
