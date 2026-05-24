@@ -45,7 +45,7 @@ type PagesMap = Record<Page, React.JSX.Element>
 const AppMain = ({ products, setProducts, activePage }: AppMainProps) => {
 
 
-    
+
     const categories = getCategoriesFromProducts(products)
 
 
@@ -63,6 +63,8 @@ const AppMain = ({ products, setProducts, activePage }: AppMainProps) => {
             <CategoriesPage
                 title={pageHeaderContentMap.categories.title}
                 subtitle={pageHeaderContentMap.categories.subtitle}
+                products={products}
+                categories={categories}
             />
         ),
         reports: (

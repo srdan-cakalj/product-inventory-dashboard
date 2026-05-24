@@ -25,5 +25,7 @@ type FormProduct = {
     stock: string
 }
 
+type Products = Product[]
 
-export type { ApiProduct, Product, FormProduct }
+
+export type { ApiProduct, Product, FormProduct, Products }

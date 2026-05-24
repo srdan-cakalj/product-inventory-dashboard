@@ -3,6 +3,7 @@
 import styles from './ProductsTable.module.css'
 import type { Product, FormProduct } from '../../../types/productTypes.ts'
 import { getStockInfo } from '../../../helpers/getStockInfo.ts'
+import { formatCategoryLabel } from '../../../helpers/formatCategoryLabel.ts'
 
 
 
@@ -86,10 +87,12 @@ const ProductsTable = ({
             <tbody>
                 {products.map(product => {
 
+                    const formatedCategory = formatCategoryLabel(product.category)
+
                     return (
                         <tr key={product.id}>
                             <td>{product.name}</td>
-                            <td>{product.category}</td>
+                            <td>{formatedCategory}</td>
                             <td>{product.price} €</td>
                             <td>{product.stock}</td>
                             <td>{getStockInfo(product.stock).status}</td>
