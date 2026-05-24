@@ -1,12 +1,13 @@
 
-import styles from './ProductsPage.module.css'
-import { PageHeader } from '../components/layout/PageHeader.tsx'
+
+import { useState } from 'react'
 import { CategoriesTable } from '../components/features/categories/CategoriesTable.tsx'
 import type { Categories } from '../types/categoriesTypes.ts'
 import type { Products } from '../types/productTypes.ts'
- 
+import { PageLayout } from '../components/layout/PageLayout.tsx'
 
-type ProductsPageProps = {
+
+type CategoriesPageProps = {
     title: string
     subtitle: string
     categories: Categories
@@ -14,24 +15,31 @@ type ProductsPageProps = {
 }
 
 
-const CategoriesPage = ({ title, subtitle, categories, products }: ProductsPageProps) => {
+const CategoriesPage = ({ title, subtitle, categories, products }: CategoriesPageProps) => {
+
+
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
+
     return (
-        <div className={styles.productsPage}>
-
-            <header className={styles.productsPageHeader}>
-                <PageHeader
-                    title={title}
-                    subtitle={subtitle}
-                />
-            </header>
-
+        <PageLayout
+            title={title}
+            subtitle={subtitle}
+            pageHeaderButton={{
+                type: 'button',
+                label: '+ Add category',
+                handleClick: () => setIsModalOpen(true)
+            }}
+        >
 
             <CategoriesTable
                 categories={categories}
                 products={products}
             />
 
-        </div>
+            {isModalOpen && 'open'}
+
+        </PageLayout>
     )
 }
 

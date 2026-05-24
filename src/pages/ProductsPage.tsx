@@ -6,10 +6,9 @@ import { X } from 'lucide-react'
 import { ProductsToolbar } from '../components/features/products/ProductsToolbar.tsx'
 import { ProductsTable } from '../components/features/products/ProductsTable.tsx'
 import { ProductForm } from '../components/features/products/ProductForm.tsx'
-import { PageHeader } from '../components/layout/PageHeader.tsx'
-import { Button } from '../components/ui/Button.tsx'
 import { IconButton } from '../components/ui/IconButton.tsx'
 import { Modal } from '../components/ui/Modal.tsx'
+import { PageLayout } from '../components/layout/PageLayout.tsx'
 import type { StockOption } from '../types/stockTypes.ts'
 import type { SortOption } from '../types/sortTypes.ts'
 import type { Product, FormProduct } from '../types/productTypes.ts'
@@ -65,21 +64,16 @@ const ProductsPage = ({ title, subtitle, products, categories, setProducts }: Pr
 
 
     return (
-        <div className={styles.productsPage}>
 
-            <header className={styles.productsPageHeader}>
-                <PageHeader
-                    title={title}
-                    subtitle={subtitle}
-                />
-
-                <Button
-                    type='button'
-                    label='+ Add Product'
-                    handleClick={() => setIsModalOpen(true)}
-                />
-            </header>
-
+        <PageLayout
+            title={title}
+            subtitle={subtitle}
+            pageHeaderButton={{
+                type: 'button',
+                label: '+ Add Product',
+                handleClick: () => setIsModalOpen(true)
+            }}
+        >
 
             <ProductsToolbar
                 searchInputValue={searchInputValue}
@@ -137,8 +131,10 @@ const ProductsPage = ({ title, subtitle, products, categories, setProducts }: Pr
                 </Modal>
             }
 
-        </div>
+        </PageLayout>
+
     )
+
 }
 
 

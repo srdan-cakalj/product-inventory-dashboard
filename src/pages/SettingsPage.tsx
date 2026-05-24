@@ -1,6 +1,6 @@
 
 
-import { PageHeader } from '../components/layout/PageHeader.tsx'
+import { PageHeaderTitle } from '../components/layout/PageHeaderTitle.tsx'
 
 
 type ProductsPageProps = {
@@ -12,7 +12,7 @@ type ProductsPageProps = {
 const SettingsPage = ({ title, subtitle }: ProductsPageProps) => {
     return (
         <>
-            <PageHeader
+            <PageHeaderTitle
                 title={title}
                 subtitle={subtitle}
             />

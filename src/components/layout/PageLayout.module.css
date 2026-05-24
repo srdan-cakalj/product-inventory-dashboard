@@ -1,0 +1,15 @@
+
+
+
+
+.page {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.pageHeader {
+    display: flex;
+    justify-content: space-between;
+}
