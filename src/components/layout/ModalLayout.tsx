@@ -1,0 +1,41 @@
+
+
+import type { ReactNode } from 'react'
+import styles from './ModalLayout.module.css'
+import { IconButton } from '../ui/IconButton.tsx'
+import { X } from 'lucide-react'
+
+
+type ModalLayoutProps = {
+    children: ReactNode
+    title: ReactNode
+    handleCloseIconButton: () => void
+}
+
+
+const ModalLayout = ({ children, title, handleCloseIconButton }: ModalLayoutProps) => {
+
+
+    return (
+        <div className={styles.overlay}>
+            <div className={styles.modal}>
+
+                <header className={styles.modalHeader}>
+                    {title}
+                    
+                    <IconButton
+                        Icon={X}
+                        handleClick={handleCloseIconButton}
+                    />
+                </header>
+
+                {children}
+
+            </div>
+        </div>
+
+    )
+}
+
+
+export { ModalLayout }

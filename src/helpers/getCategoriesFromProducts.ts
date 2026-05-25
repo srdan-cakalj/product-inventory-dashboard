@@ -25,11 +25,11 @@ const getCategoriesFromProducts = (products: Product[]) => {
 
 
     categoryOptions.forEach(category => {
-        const formatedName = formatCategoryLabel(category)
+        const formattedName = formatCategoryLabel(category)
 
         const oneCategory = {
             id: category,
-            name: formatedName,
+            name: formattedName,
             description: descriptionsMap[category] ?? ''
         }
 

@@ -1,13 +1,10 @@
 
 
 import { useState } from 'react'
-import styles from './ProductsPage.module.css'
-import { X } from 'lucide-react'
 import { ProductsToolbar } from '../components/features/products/ProductsToolbar.tsx'
 import { ProductsTable } from '../components/features/products/ProductsTable.tsx'
 import { ProductForm } from '../components/features/products/ProductForm.tsx'
-import { IconButton } from '../components/ui/IconButton.tsx'
-import { Modal } from '../components/ui/Modal.tsx'
+import { ModalLayout } from '../components/layout/ModalLayout.tsx'
 import { PageLayout } from '../components/layout/PageLayout.tsx'
 import type { StockOption } from '../types/stockTypes.ts'
 import type { SortOption } from '../types/sortTypes.ts'
@@ -102,18 +99,14 @@ const ProductsPage = ({ title, subtitle, products, categories, setProducts }: Pr
             }
 
             {isModalOpen &&
-                <Modal>
-
-                    <header className={styles.modalHeader}>
-                        {editingProductId
+                <ModalLayout
+                    title={
+                        editingProductId
                             ? <h3>Edit product</h3>
                             : <h3>Add product</h3>
-                        }
-                        <IconButton
-                            Icon={X}
-                            handleClick={handleCloseIconButton}
-                        />
-                    </header>
+                    }
+                    handleCloseIconButton={handleCloseIconButton}
+                >
 
                     <ProductForm
                         categories={categories}
@@ -128,7 +121,7 @@ const ProductsPage = ({ title, subtitle, products, categories, setProducts }: Pr
                         setIsModalOpen={setIsModalOpen}
                     />
 
-                </Modal>
+                </ModalLayout>
             }
 
         </PageLayout>

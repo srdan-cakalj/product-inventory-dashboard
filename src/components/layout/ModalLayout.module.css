@@ -1,5 +1,6 @@
 
 
+
 .overlay {
     display: flex;
     align-items: center;
@@ -17,3 +18,7 @@
     background-color: var(--color-page-bg);
 }
 
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+}
