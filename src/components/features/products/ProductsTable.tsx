@@ -1,7 +1,8 @@
 
 
 import styles from './ProductsTable.module.css'
-import type { Product, FormProduct } from '../../../types/productTypes.ts'
+import type { Product } from '../../../types/productTypes.ts'
+import type { FormProduct } from '../../../types/formTypes.ts'
 import { getStockInfo } from '../../../helpers/getStockInfo.ts'
 import { formatCategoryLabel } from '../../../helpers/formatCategoryLabel.ts'
 
@@ -10,8 +11,8 @@ import { formatCategoryLabel } from '../../../helpers/formatCategoryLabel.ts'
 type ProductsTableProps = {
     products: Product[]
     setProducts: (value: React.SetStateAction<Product[]>) => void
-    setFormValues: (value: FormProduct) => void
-    emptyFormValues: FormProduct
+    setProductFormValues: (value: React.SetStateAction<FormProduct>) => void
+    emptyProductFormValues: FormProduct
     editingProductId: string | null
     setEditingProductId: (value: string | null) => void
     setValidationMessage: (value: string | null) => void
@@ -23,8 +24,8 @@ type ProductsTableProps = {
 const ProductsTable = ({
     products,
     setProducts,
-    setFormValues,
-    emptyFormValues,
+    setProductFormValues,
+    emptyProductFormValues,
     editingProductId,
     setEditingProductId,
     setValidationMessage,
@@ -34,7 +35,7 @@ const ProductsTable = ({
 
     const handleEdit = (product: Product) => {
 
-        setFormValues({
+        setProductFormValues({
             name: product.name,
             category: product.category,
             price: String(product.price),
@@ -65,7 +66,7 @@ const ProductsTable = ({
         if (deletedProductId === editingProductId) {
             setEditingProductId(null)
             setValidationMessage(null)
-            setFormValues(emptyFormValues)
+            setProductFormValues(emptyProductFormValues)
         }
     }
 

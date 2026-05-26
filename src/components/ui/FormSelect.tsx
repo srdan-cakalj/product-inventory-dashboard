@@ -1,27 +1,27 @@
 
 
-import type { FormProduct } from '../../types/productTypes.ts'
+import type { FormProduct } from '../../types/formTypes.ts'
 import { formatCategoryLabel } from '../../helpers/formatCategoryLabel.ts'
 import type { Categories } from '../../types/categoriesTypes.ts'
 
 
-type ProductFormSelectProps = {
+type FormSelectProps = {
     categories: Categories
-    formValues: FormProduct
-    setFormValues: (value: React.SetStateAction<FormProduct>) => void
+    productFormValues: FormProduct
+    setProductFormValues: (value: React.SetStateAction<FormProduct>) => void
     setValidationMessage: (value: string | null) => void
     id: string
 }
 
 
-const ProductFormSelect = ({ categories, formValues, setFormValues, setValidationMessage, id }: ProductFormSelectProps) => {
+const FormSelect = ({ categories, productFormValues, setProductFormValues, setValidationMessage, id }: FormSelectProps) => {
 
     const categoriesKeys = Object.keys(categories)
     const categoryFormOptions = ['', ...categoriesKeys]
 
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setFormValues(prev => ({
+        setProductFormValues(prev => ({
             ...prev,
             category: e.target.value
         }))
@@ -32,7 +32,7 @@ const ProductFormSelect = ({ categories, formValues, setFormValues, setValidatio
     return (
         <select
             id={id}
-            value={formValues.category}
+            value={productFormValues.category}
             onChange={handleChange}
         >
             {categoryFormOptions.map(option => (
@@ -48,4 +48,4 @@ const ProductFormSelect = ({ categories, formValues, setFormValues, setValidatio
 }
 
 
-export { ProductFormSelect }
+export { FormSelect }

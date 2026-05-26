@@ -1,13 +1,13 @@
 
-
+import { useState } from 'react'
 import styles from './AppMain.module.css'
 import { ProductsPage } from '../../pages/ProductsPage.tsx'
 import { CategoriesPage } from '../../pages/CategoriesPage.tsx'
 import { ReportsPage } from '../../pages/ReportsPage.tsx'
 import { SettingsPage } from '../../pages/SettingsPage.tsx'
+import { getCategoriesFromProducts } from '../../helpers/getCategoriesFromProducts.ts'
 import type { Page, PageHeaderContent } from '../../types/pageTypes.ts'
 import type { Product } from '../../types/productTypes.ts'
-import { getCategoriesFromProducts } from '../../helpers/getCategoriesFromProducts.ts'
 
 
 type PageHeaderContentMap = Record<Page, PageHeaderContent>
@@ -44,11 +44,8 @@ type PagesMap = Record<Page, React.JSX.Element>
 
 const AppMain = ({ products, setProducts, activePage }: AppMainProps) => {
 
-
-
-    const categories = getCategoriesFromProducts(products)
-
-
+    const [categories, setCategories] = useState(getCategoriesFromProducts(products))
+    
     const pagesMap: PagesMap = {
         products: (
             <ProductsPage
@@ -65,6 +62,7 @@ const AppMain = ({ products, setProducts, activePage }: AppMainProps) => {
                 subtitle={pageHeaderContentMap.categories.subtitle}
                 products={products}
                 categories={categories}
+                setCategories={setCategories}
             />
         ),
         reports: (

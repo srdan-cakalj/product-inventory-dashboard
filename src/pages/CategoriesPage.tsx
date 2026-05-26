@@ -2,37 +2,40 @@
 
 import { useState } from 'react'
 import { CategoriesTable } from '../components/features/categories/CategoriesTable.tsx'
-import type { Categories, FormCategory } from '../types/categoriesTypes.ts'
+import type { Categories } from '../types/categoriesTypes.ts'
+import type { FormCategory } from '../types/formTypes.ts'
 import type { Products } from '../types/productTypes.ts'
 import { PageLayout } from '../components/layout/PageLayout.tsx'
 import { ModalLayout } from '../components/layout/ModalLayout.tsx'
+import { CategoryForm } from '../components/features/categories/CategoryForm.tsx'
 
 
 type CategoriesPageProps = {
     title: string
     subtitle: string
     categories: Categories
+    setCategories: (value: React.SetStateAction<Categories>) => void
     products: Products
 }
 
 
-const emptyFormValues: FormCategory = {
+const emptyCategoryFormValues: FormCategory = {
     name: '',
     description: ''
 }
 
 
-const CategoriesPage = ({ title, subtitle, categories, products }: CategoriesPageProps) => {
+const CategoriesPage = ({ title, subtitle, categories, setCategories, products }: CategoriesPageProps) => {
 
 
-    const [formValues, setFormValues] = useState<FormCategory>(emptyFormValues)
+    const [categoryFormValues, setCategoryFormValues] = useState<FormCategory>(emptyCategoryFormValues)
     const [editingCategoryId, setEditingCategoryId] = useState<string | null>(null)
     const [validationMessage, setValidationMessage] = useState<string | null>(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
 
 
     const handleCloseIconButton = () => {
-        setFormValues(emptyFormValues)
+        setCategoryFormValues(emptyCategoryFormValues)
         setEditingCategoryId(null)
         setValidationMessage(null)
         setIsModalOpen(false)
@@ -66,8 +69,17 @@ const CategoriesPage = ({ title, subtitle, categories, products }: CategoriesPag
                     handleCloseIconButton={handleCloseIconButton}
                 >
 
-                    <p>{formValues.name}</p>
-                    <p>{validationMessage}</p>
+                    <CategoryForm
+                        setCategories={setCategories}
+                        categoryFormValues={categoryFormValues}
+                        setCategoryFormValues={setCategoryFormValues}
+                        emptyCategoryFormValues={emptyCategoryFormValues}
+                        editingCategoryId={editingCategoryId}
+                        setEditingCategoryId={setEditingCategoryId}
+                        validationMessage={validationMessage}
+                        setValidationMessage={setValidationMessage}
+                        setIsModalOpen={setIsModalOpen}
+                    />
 
                 </ModalLayout>
             }

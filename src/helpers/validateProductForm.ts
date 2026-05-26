@@ -1,6 +1,7 @@
 
 
-import type { FormProduct, Product } from "../types/productTypes.ts"
+import type { Product } from "../types/productTypes.ts"
+import type { FormProduct } from "../types/formTypes.ts"
 
 
 type ValidationResult = {

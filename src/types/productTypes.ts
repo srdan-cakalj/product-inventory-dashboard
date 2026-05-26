@@ -18,14 +18,7 @@ type Product = {
 }
 
 
-type FormProduct = {
-    name: string
-    category: string
-    price: string
-    stock: string
-}
-
 type Products = Product[]
 
 
-export type { ApiProduct, Product, FormProduct, Products }
+export type { ApiProduct, Product, Products }

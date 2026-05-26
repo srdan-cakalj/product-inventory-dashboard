@@ -1,19 +1,20 @@
 
 
 import { ProductFormInput } from '../../ui/ProductFormInput.tsx'
-import { Button } from "../../ui/Button.tsx"
-import { ProductFormSelect } from "../../ui/ProductFormSelect.tsx"
+import { FormSelect } from "../../ui/FormSelect.tsx"
 import { validateProductForm } from '../../../helpers/validateProductForm.ts'
-import type { FormProduct, Product } from '../../../types/productTypes.ts'
+import { ModalFormLayout } from '../../layout/ModalFormLayout.tsx'
+import type { Products } from '../../../types/productTypes.ts'
+import type { FormProduct } from '../../../types/formTypes.ts'
 import type { Categories } from '../../../types/categoriesTypes.ts'
 
 
 type ProductFormProps = {
     categories: Categories
-    formValues: FormProduct
-    setFormValues: (value: React.SetStateAction<FormProduct>) => void
-    emptyFormValues: FormProduct
-    setProducts: (value: React.SetStateAction<Product[]>) => void
+    productFormValues: FormProduct
+    setProductFormValues: (value: React.SetStateAction<FormProduct>) => void
+    emptyProductFormValues: FormProduct
+    setProducts: (value: React.SetStateAction<Products>) => void
     editingProductId: string | null
     setEditingProductId: (value: string | null) => void
     validationMessage: string | null
@@ -24,9 +25,9 @@ type ProductFormProps = {
 
 const ProductForm = ({
     categories,
-    formValues,
-    setFormValues,
-    emptyFormValues,
+    productFormValues,
+    setProductFormValues,
+    emptyProductFormValues,
     setProducts,
     editingProductId,
     setEditingProductId,
@@ -40,7 +41,7 @@ const ProductForm = ({
 
         e.preventDefault()
 
-        const validationResult = validateProductForm(formValues)
+        const validationResult = validateProductForm(productFormValues)
         setValidationMessage(validationResult.message)
         if (validationResult.message) {
             return
@@ -78,44 +79,47 @@ const ProductForm = ({
 
         }
 
-        setFormValues(emptyFormValues)
+        setProductFormValues(emptyProductFormValues)
         setEditingProductId(null)
         setIsModalOpen(false)
     }
 
 
-    const handleCancel = () => {
-        setFormValues(emptyFormValues)
-        setEditingProductId(null)
-        setValidationMessage(null)
-        setIsModalOpen(false)
-    }
+
 
 
     return (
         <>
-            <form
-                onSubmit={handleSubmit}
+
+            <ModalFormLayout
+                handleSubmit={handleSubmit}
+                editingId={editingProductId}
+                validationMessage={validationMessage}
+                setValidationMessage={setValidationMessage}
+                setProductFormValues={setProductFormValues}
+                emptyProductFormValues={emptyProductFormValues}
+                setEditingId={setEditingProductId}
+                setIsModalOpen={setIsModalOpen}
             >
 
                 <label htmlFor='category'>Category</label>
-                <ProductFormSelect
+                <FormSelect
                     categories={categories}
-                    formValues={formValues}
-                    setFormValues={setFormValues}
+                    productFormValues={productFormValues}
+                    setProductFormValues={setProductFormValues}
                     setValidationMessage={setValidationMessage}
                     id='category'
                 />
 
                 <br />
 
-                <label htmlFor='product-name'>Product name</label>
+                <label htmlFor='name'>Product name</label>
                 <ProductFormInput
                     inputName='name'
-                    formValues={formValues}
-                    setFormValues={setFormValues}
+                    productFormValues={productFormValues}
+                    setProductFormValues={setProductFormValues}
                     setValidationMessage={setValidationMessage}
-                    id='product-name'
+                    id='name'
                 />
 
                 <br />
@@ -123,8 +127,8 @@ const ProductForm = ({
                 <label htmlFor='price'>Price (€) </label>
                 <ProductFormInput
                     inputName='price'
-                    formValues={formValues}
-                    setFormValues={setFormValues}
+                    productFormValues={productFormValues}
+                    setProductFormValues={setProductFormValues}
                     setValidationMessage={setValidationMessage}
                     id='price'
                 />
@@ -134,37 +138,15 @@ const ProductForm = ({
                 <label htmlFor='stock'>Stock quantity</label>
                 <ProductFormInput
                     inputName='stock'
-                    formValues={formValues}
-                    setFormValues={setFormValues}
+                    productFormValues={productFormValues}
+                    setProductFormValues={setProductFormValues}
                     setValidationMessage={setValidationMessage}
                     id='stock'
                 />
 
                 <br />
 
-
-                {editingProductId === null
-                    ? <Button
-                        label='Add product'
-                        type='submit'
-                    />
-                    : <>
-                        <Button
-                            label='Save changes'
-                            type='submit'
-                        />
-                        <Button
-                            label='Cancel'
-                            type='button'
-                            handleClick={handleCancel}
-                        />
-                    </>
-                }
-
-            </form>
-
-
-            {validationMessage && <p>{validationMessage}</p>}
+            </ModalFormLayout>
 
         </>
 

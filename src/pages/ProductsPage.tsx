@@ -8,7 +8,8 @@ import { ModalLayout } from '../components/layout/ModalLayout.tsx'
 import { PageLayout } from '../components/layout/PageLayout.tsx'
 import type { StockOption } from '../types/stockTypes.ts'
 import type { SortOption } from '../types/sortTypes.ts'
-import type { Product, FormProduct } from '../types/productTypes.ts'
+import type { Products } from '../types/productTypes.ts'
+import type { FormProduct } from '../types/formTypes.ts'
 import type { Categories } from '../types/categoriesTypes.ts'
 import { getStockInfo } from '../helpers/getStockInfo.ts'
 import { getSortedProducts } from '../helpers/getSortedProducts.ts'
@@ -17,13 +18,13 @@ import { getSortedProducts } from '../helpers/getSortedProducts.ts'
 type ProductsPageProps = {
     title: string
     subtitle: string
-    products: Product[]
+    products: Products
     categories: Categories
-    setProducts: (value: React.SetStateAction<Product[]>) => void
+    setProducts: (value: React.SetStateAction<Products>) => void
 }
 
 
-const emptyFormValues: FormProduct = {
+const emptyProductFormValues: FormProduct = {
     name: '',
     category: '',
     price: '',
@@ -37,7 +38,7 @@ const ProductsPage = ({ title, subtitle, products, categories, setProducts }: Pr
     const [categoryFilterValue, setCategoryFilterValue] = useState('all')
     const [stockFilterValue, setStockFilterValue] = useState<StockOption>('all')
     const [sortFilterValue, setSortFilterValue] = useState<SortOption>('default')
-    const [formValues, setFormValues] = useState<FormProduct>(emptyFormValues)
+    const [productFormValues, setProductFormValues] = useState<FormProduct>(emptyProductFormValues)
     const [editingProductId, setEditingProductId] = useState<string | null>(null)
     const [validationMessage, setValidationMessage] = useState<string | null>(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -53,7 +54,7 @@ const ProductsPage = ({ title, subtitle, products, categories, setProducts }: Pr
 
 
     const handleCloseIconButton = () => {
-        setFormValues(emptyFormValues)
+        setProductFormValues(emptyProductFormValues)
         setEditingProductId(null)
         setValidationMessage(null)
         setIsModalOpen(false)
@@ -89,8 +90,8 @@ const ProductsPage = ({ title, subtitle, products, categories, setProducts }: Pr
                 : <ProductsTable
                     products={sortedProducts}
                     setProducts={setProducts}
-                    setFormValues={setFormValues}
-                    emptyFormValues={emptyFormValues}
+                    setProductFormValues={setProductFormValues}
+                    emptyProductFormValues={emptyProductFormValues}
                     editingProductId={editingProductId}
                     setEditingProductId={setEditingProductId}
                     setValidationMessage={setValidationMessage}
@@ -110,9 +111,9 @@ const ProductsPage = ({ title, subtitle, products, categories, setProducts }: Pr
 
                     <ProductForm
                         categories={categories}
-                        formValues={formValues}
-                        setFormValues={setFormValues}
-                        emptyFormValues={emptyFormValues}
+                        productFormValues={productFormValues}
+                        setProductFormValues={setProductFormValues}
+                        emptyProductFormValues={emptyProductFormValues}
                         setProducts={setProducts}
                         editingProductId={editingProductId}
                         setEditingProductId={setEditingProductId}

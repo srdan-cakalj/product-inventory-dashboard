@@ -7,12 +7,7 @@ type Category = {
     description: string
 }
 
-type FormCategory = {
-    name: string
-    description: string
-}
-
 type Categories = Record<string, Category>
 
 
-export type { Category, Categories, FormCategory }
+export type { Category, Categories }
