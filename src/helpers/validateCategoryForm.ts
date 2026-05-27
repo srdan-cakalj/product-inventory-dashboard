@@ -5,7 +5,7 @@ import type { FormCategory } from "../types/formTypes.ts"
 
 type ValidationResult = {
     message: string | null
-    categoryData: Omit<FormCategory, 'id'> | null
+    categoryData: Pick<FormCategory, 'name' | 'description'> | null
 }
 
 

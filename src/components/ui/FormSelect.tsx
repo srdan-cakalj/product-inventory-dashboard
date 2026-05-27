@@ -16,8 +16,8 @@ type FormSelectProps = {
 
 const FormSelect = ({ categories, productFormValues, setProductFormValues, setValidationMessage, id }: FormSelectProps) => {
 
-    const categoriesKeys = Object.keys(categories)
-    const categoryFormOptions = ['', ...categoriesKeys]
+    const categoryOptions = categories.map(category => category.value)
+    const categoryFormOptions = ['', ...categoryOptions]
 
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

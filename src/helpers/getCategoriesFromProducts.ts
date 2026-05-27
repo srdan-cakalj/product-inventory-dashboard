@@ -1,7 +1,8 @@
 
-import { formatCategoryLabel } from './formatCategoryLabel.ts'
+
 import type { Product } from '../types/productTypes.ts'
 import type { Categories } from '../types/categoriesTypes.ts'
+import { formatCategoryLabel } from './formatCategoryLabel.ts'
 
 
 
@@ -21,19 +22,17 @@ const getCategoriesFromProducts = (products: Product[]) => {
     }
 
 
-    const categories: Categories = {}
+    const categories: Categories = categoryOptions.map(option => {
 
+        return (
+            {
+                id: crypto.randomUUID(),
+                value: option,
+                name: formatCategoryLabel(option),
+                description: descriptionsMap[option] ?? ''
+            }
+        )
 
-    categoryOptions.forEach(category => {
-        const formattedName = formatCategoryLabel(category)
-
-        const oneCategory = {
-            id: category,
-            name: formattedName,
-            description: descriptionsMap[category] ?? ''
-        }
-
-        categories[category] = oneCategory
     })
 
 

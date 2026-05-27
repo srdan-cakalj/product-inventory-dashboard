@@ -2,6 +2,7 @@
 
 import { CategoryFormInput } from '../../ui/CategoryFormInput.tsx'
 import { validateCategoryForm } from '../../../helpers/validateCategoryForm.ts'
+import { formatCategoryValue } from '../../../helpers/formatCategoryValue.ts'
 import { ModalFormLayout } from '../../layout/ModalFormLayout.tsx'
 import type { FormCategory } from '../../../types/formTypes.ts'
 import type { Categories } from '../../../types/categoriesTypes.ts'
@@ -50,22 +51,25 @@ const CategoryForm = ({
 
             setCategories(prev => (
                 editingCategoryId === null
-                    ? {
+                    ? [
                         ...prev,
-                        [data.name]: {
-                            id: data.name,
+                        {
+                            id: crypto.randomUUID(),
+                            value: formatCategoryValue(data.name),
                             name: data.name,
-                            description: data.description
+                            description: data.description,
                         }
-                    }
-                    : {
-                        ...prev,
-                        [editingCategoryId]: {
-                            id: prev[editingCategoryId].id,
-                            name: prev[editingCategoryId].name,
-                            description: data.description
-                        }
-                    }
+                    ]
+                    : prev.map(category => (
+                        category.id === editingCategoryId
+                            ? {
+                                ...category,
+                                value: formatCategoryValue(data.name),
+                                name: data.name,
+                                description: data.description
+                            }
+                            : category
+                    ))
             ))
         }
 
@@ -103,7 +107,7 @@ const CategoryForm = ({
 
                 <br />
 
-                <label htmlFor='price'>Description</label>
+                <label htmlFor='description'>Description</label>
                 <CategoryFormInput
                     inputName='description'
                     categoryFormValues={categoryFormValues}

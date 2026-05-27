@@ -12,8 +12,8 @@ type CategoryFilterProps = {
 
 const CategoryFilter = ({ categories, categoryFilterValue, setCategoryFilterValue }: CategoryFilterProps) => {
 
-    const categoriesKeys = Object.keys(categories)
-    const categoryFilterOptions: string[] = ['all', ...categoriesKeys]
+    const categoryOptions = categories.map(category => category.value)
+    const categoryFilterOptions: string[] = ['all', ...categoryOptions]
 
 
     return (

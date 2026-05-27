@@ -3,11 +3,12 @@
 
 type Category = {
     id: string
+    value: string
     name: string
     description: string
 }
 
-type Categories = Record<string, Category>
+type Categories = Category[]
 
 
 export type { Category, Categories }

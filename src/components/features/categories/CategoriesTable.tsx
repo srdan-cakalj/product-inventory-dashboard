@@ -28,9 +28,6 @@ const CategoriesTable = ({
 }: CategoriesTableProps) => {
 
 
-    const categoriesKeys = Object.keys(categories)
-
-
 
     const handleEdit = (category: Category) => {
 
@@ -62,17 +59,17 @@ const CategoriesTable = ({
             </thead>
 
             <tbody>
-                {categoriesKeys.map(key => {
+                {categories.map(category => {
 
-                    const numberOfProducts = products.filter(product => product.category === key).length
+                    const numberOfProducts = products.filter(product => product.category === category.value).length
 
                     return (
-                        <tr key={categories[key].id}>
-                            <td>{categories[key].name}</td>
-                            <td>{categories[key].description}</td>
+                        <tr key={category.id}>
+                            <td>{category.name}</td>
+                            <td>{category.description}</td>
                             <td>{numberOfProducts}</td>
                             <td>
-                                <button onClick={() => handleEdit(categories[key])}>Edit</button>
+                                <button onClick={() => handleEdit(category)}>Edit</button>
                                 <button onClick={handleDelete}>Delete</button>
                             </td>
                         </tr>
