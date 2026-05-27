@@ -3,25 +3,47 @@
 
 
 import styles from '../products/ProductsTable.module.css'
-import type { Categories } from '../../../types/categoriesTypes.ts'
+import type { Categories, Category } from '../../../types/categoriesTypes.ts'
 import type { Products } from '../../../types/productTypes.ts'
+import type { FormCategory } from '../../../types/formTypes.ts'
 
 
 type CategoriesTableProps = {
     categories: Categories
     products: Products
+    setEditingCategoryId: (value: string | null) => void
+    setCategoryFormValues: (value: FormCategory) => void
+    setValidationMessage: (value: string | null) => void
+    setIsModalOpen: (value: boolean) => void
 }
 
 
-const CategoriesTable = ({ categories, products }: CategoriesTableProps) => {
+const CategoriesTable = ({
+    categories,
+    products,
+    setEditingCategoryId,
+    setCategoryFormValues,
+    setValidationMessage,
+    setIsModalOpen,
+}: CategoriesTableProps) => {
 
 
     const categoriesKeys = Object.keys(categories)
 
 
-    const handleEdit = () => {
 
+    const handleEdit = (category: Category) => {
+
+        setCategoryFormValues({
+            name: category.name,
+            description: category.description
+        })
+
+        setEditingCategoryId(category.id)
+        setValidationMessage(null)
+        setIsModalOpen(true)
     }
+
 
     const handleDelete = () => {
 
@@ -50,14 +72,14 @@ const CategoriesTable = ({ categories, products }: CategoriesTableProps) => {
                             <td>{categories[key].description}</td>
                             <td>{numberOfProducts}</td>
                             <td>
-                                <button onClick={handleEdit}>Edit</button>
+                                <button onClick={() => handleEdit(categories[key])}>Edit</button>
                                 <button onClick={handleDelete}>Delete</button>
                             </td>
                         </tr>
                     )
                 })}
             </tbody>
-        </table>
+        </table >
     )
 }
 

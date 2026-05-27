@@ -92,7 +92,7 @@ const CategoryForm = ({
                 setIsModalOpen={setIsModalOpen}
             >
 
-                <label htmlFor='product-name'>Name</label>
+                <label htmlFor='name'>Name</label>
                 <CategoryFormInput
                     inputName='name'
                     categoryFormValues={categoryFormValues}

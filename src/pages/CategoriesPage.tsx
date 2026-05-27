@@ -57,6 +57,10 @@ const CategoriesPage = ({ title, subtitle, categories, setCategories, products }
             <CategoriesTable
                 categories={categories}
                 products={products}
+                setEditingCategoryId={setEditingCategoryId}
+                setCategoryFormValues={setCategoryFormValues}
+                setValidationMessage={setValidationMessage}
+                setIsModalOpen={setIsModalOpen}
             />
 
             {isModalOpen &&
