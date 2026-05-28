@@ -3,34 +3,37 @@
 import { Button } from '../ui/Button.tsx'
 import type { FormCategory, FormProduct } from '../../types/formTypes.ts'
 import type { ReactNode } from 'react'
+import type { ActiveModal } from '../../types/modalTypes.ts'
 
 
 type ModalFormLayoutProps = {
     handleSubmit: (e: React.SubmitEvent<HTMLFormElement>) => void
-    editingId: string | null
-    setEditingId: (value: string | null) => void
     validationMessage: string | null
     setValidationMessage: (value: string | null) => void
     setProductFormValues?: (value: FormProduct) => void
     emptyProductFormValues?: FormProduct
     setCategoryFormValues?: (value: FormCategory) => void
     emptyCategoryFormValues?: FormCategory
-    setIsModalOpen: (value: boolean) => void
     children: ReactNode
+    activeProductModal?: ActiveModal
+    setActiveProductModal?: (value: ActiveModal) => void
+    activeCategoryModal?: ActiveModal
+    setActiveCategoryModal?: (value: ActiveModal) => void
 }
 
 
 const ModalFormLayout = ({
     handleSubmit,
-    editingId,
-    setEditingId,
     validationMessage,
     setValidationMessage,
     setProductFormValues,
     setCategoryFormValues,
     emptyProductFormValues,
     emptyCategoryFormValues,
-    setIsModalOpen,
+    activeProductModal,
+    setActiveProductModal,
+    activeCategoryModal,
+    setActiveCategoryModal,
     children
 }: ModalFormLayoutProps) => {
 
@@ -44,9 +47,15 @@ const ModalFormLayout = ({
             setCategoryFormValues(emptyCategoryFormValues)
         }
 
-        setEditingId(null)
+        if (setActiveCategoryModal) {
+            setActiveCategoryModal(null)
+        }
+
+        if (setActiveProductModal) {
+            setActiveProductModal(null)
+        }
+
         setValidationMessage(null)
-        setIsModalOpen(false)
     }
 
     return (
@@ -55,12 +64,22 @@ const ModalFormLayout = ({
 
                 {children}
 
-                {editingId === null
-                    ? <Button
+                {activeProductModal?.mode === 'add' && (
+                    <Button
                         label='Add product'
                         type='submit'
                     />
-                    : <>
+                )}
+
+                {activeCategoryModal?.mode === 'add' && (
+                    <Button
+                        label='Add category'
+                        type='submit'
+                    />
+                )}
+
+                {(activeProductModal?.mode === 'edit' || activeCategoryModal?.mode === 'edit') && (
+                    <>
                         <Button
                             label='Save changes'
                             type='submit'
@@ -71,7 +90,7 @@ const ModalFormLayout = ({
                             handleClick={handleCancel}
                         />
                     </>
-                }
+                )}
             </form>
 
 

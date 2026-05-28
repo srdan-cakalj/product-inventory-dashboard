@@ -6,18 +6,18 @@ import { formatCategoryValue } from '../../../helpers/formatCategoryValue.ts'
 import { ModalFormLayout } from '../../layout/ModalFormLayout.tsx'
 import type { FormCategory } from '../../../types/formTypes.ts'
 import type { Categories } from '../../../types/categoriesTypes.ts'
+import type { ActiveModal } from '../../../types/modalTypes.ts'
 
 
 type CategoryFormProps = {
     categoryFormValues: FormCategory
     setCategoryFormValues: (value: React.SetStateAction<FormCategory>) => void
     emptyCategoryFormValues: FormCategory
-    editingCategoryId: string | null
-    setEditingCategoryId: (value: string | null) => void
     validationMessage: string | null
     setValidationMessage: (value: string | null) => void
-    setIsModalOpen: (value: boolean) => void
     setCategories: (value: React.SetStateAction<Categories>) => void
+    activeCategoryModal: ActiveModal
+    setActiveCategoryModal: (value: ActiveModal) => void
 }
 
 
@@ -26,11 +26,10 @@ const CategoryForm = ({
     categoryFormValues,
     setCategoryFormValues,
     emptyCategoryFormValues,
-    editingCategoryId,
-    setEditingCategoryId,
     validationMessage,
     setValidationMessage,
-    setIsModalOpen
+    activeCategoryModal,
+    setActiveCategoryModal
 }: CategoryFormProps) => {
 
 
@@ -49,33 +48,43 @@ const CategoryForm = ({
 
             const data = validationResult.categoryData
 
-            setCategories(prev => (
-                editingCategoryId === null
-                    ? [
-                        ...prev,
-                        {
-                            id: crypto.randomUUID(),
-                            value: formatCategoryValue(data.name),
-                            name: data.name,
-                            description: data.description,
-                        }
-                    ]
-                    : prev.map(category => (
-                        category.id === editingCategoryId
-                            ? {
-                                ...category,
+            setCategories(prev => {
+                if (activeCategoryModal?.mode === 'add') {
+                    return (
+                        [
+                            ...prev,
+                            {
+                                id: crypto.randomUUID(),
                                 value: formatCategoryValue(data.name),
                                 name: data.name,
-                                description: data.description
+                                description: data.description,
                             }
-                            : category
-                    ))
-            ))
+                        ]
+                    )
+                }
+
+                if (activeCategoryModal?.mode === 'edit') {
+                    return (
+                        prev.map(category => (
+                            category.id === activeCategoryModal.id
+                                ? {
+                                    ...category,
+                                    value: formatCategoryValue(data.name),
+                                    name: data.name,
+                                    description: data.description
+                                }
+                                : category
+                        ))
+                    )
+                }
+
+                return prev
+            })
+
         }
 
         setCategoryFormValues(emptyCategoryFormValues)
-        setEditingCategoryId(null)
-        setIsModalOpen(false)
+        setActiveCategoryModal(null)
     }
 
 
@@ -87,13 +96,12 @@ const CategoryForm = ({
 
             <ModalFormLayout
                 handleSubmit={handleSubmit}
-                editingId={editingCategoryId}
                 validationMessage={validationMessage}
                 setValidationMessage={setValidationMessage}
                 setCategoryFormValues={setCategoryFormValues}
                 emptyCategoryFormValues={emptyCategoryFormValues}
-                setEditingId={setEditingCategoryId}
-                setIsModalOpen={setIsModalOpen}
+                activeCategoryModal={activeCategoryModal}
+                setActiveCategoryModal={setActiveCategoryModal}
             >
 
                 <label htmlFor='name'>Name</label>

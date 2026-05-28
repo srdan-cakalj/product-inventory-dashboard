@@ -21,8 +21,8 @@ const ModalLayout = ({ children, title, handleCloseIconButton }: ModalLayoutProp
             <div className={styles.modal}>
 
                 <header className={styles.modalHeader}>
-                    {title}
-                    
+                    <h3>{title}</h3>
+
                     <IconButton
                         Icon={X}
                         handleClick={handleCloseIconButton}

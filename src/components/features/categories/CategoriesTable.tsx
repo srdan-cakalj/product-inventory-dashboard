@@ -6,25 +6,24 @@ import styles from '../products/ProductsTable.module.css'
 import type { Categories, Category } from '../../../types/categoriesTypes.ts'
 import type { Products } from '../../../types/productTypes.ts'
 import type { FormCategory } from '../../../types/formTypes.ts'
+import type { ActiveModal } from '../../../types/modalTypes.ts'
 
 
 type CategoriesTableProps = {
     categories: Categories
     products: Products
-    setEditingCategoryId: (value: string | null) => void
     setCategoryFormValues: (value: FormCategory) => void
     setValidationMessage: (value: string | null) => void
-    setIsModalOpen: (value: boolean) => void
+    setActiveCategoryModal: (value: ActiveModal) => void
 }
 
 
 const CategoriesTable = ({
     categories,
     products,
-    setEditingCategoryId,
     setCategoryFormValues,
     setValidationMessage,
-    setIsModalOpen,
+    setActiveCategoryModal
 }: CategoriesTableProps) => {
 
 
@@ -36,14 +35,13 @@ const CategoriesTable = ({
             description: category.description
         })
 
-        setEditingCategoryId(category.id)
+        setActiveCategoryModal({ mode: 'edit', id: category.id })
         setValidationMessage(null)
-        setIsModalOpen(true)
     }
 
 
-    const handleDelete = () => {
-
+    const handleDelete = (category: Category) => {
+        setActiveCategoryModal({ mode: 'delete', id: category.id })
     }
 
 
@@ -70,7 +68,7 @@ const CategoriesTable = ({
                             <td>{numberOfProducts}</td>
                             <td>
                                 <button onClick={() => handleEdit(category)}>Edit</button>
-                                <button onClick={handleDelete}>Delete</button>
+                                <button onClick={() => handleDelete(category)}>Delete</button>
                             </td>
                         </tr>
                     )

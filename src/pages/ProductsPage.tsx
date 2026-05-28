@@ -6,11 +6,13 @@ import { ProductsTable } from '../components/features/products/ProductsTable.tsx
 import { ProductForm } from '../components/features/products/ProductForm.tsx'
 import { ModalLayout } from '../components/layout/ModalLayout.tsx'
 import { PageLayout } from '../components/layout/PageLayout.tsx'
+import { DeleteProductOrCategory } from '../components/layout/DeleteProductOrCategory.tsx'
 import type { StockOption } from '../types/stockTypes.ts'
 import type { SortOption } from '../types/sortTypes.ts'
 import type { Products } from '../types/productTypes.ts'
 import type { FormProduct } from '../types/formTypes.ts'
 import type { Categories } from '../types/categoriesTypes.ts'
+import type { ActiveModal } from '../types/modalTypes.ts'
 import { getStockInfo } from '../helpers/getStockInfo.ts'
 import { getSortedProducts } from '../helpers/getSortedProducts.ts'
 
@@ -32,6 +34,7 @@ const emptyProductFormValues: FormProduct = {
 }
 
 
+
 const ProductsPage = ({ title, subtitle, products, categories, setProducts }: ProductsPageProps) => {
 
     const [searchInputValue, setSearchInputValue] = useState('')
@@ -39,9 +42,8 @@ const ProductsPage = ({ title, subtitle, products, categories, setProducts }: Pr
     const [stockFilterValue, setStockFilterValue] = useState<StockOption>('all')
     const [sortFilterValue, setSortFilterValue] = useState<SortOption>('default')
     const [productFormValues, setProductFormValues] = useState<FormProduct>(emptyProductFormValues)
-    const [editingProductId, setEditingProductId] = useState<string | null>(null)
     const [validationMessage, setValidationMessage] = useState<string | null>(null)
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [activeProductModal, setActiveProductModal] = useState<ActiveModal>(null)
 
 
     const filteredProducts = products
@@ -55,10 +57,30 @@ const ProductsPage = ({ title, subtitle, products, categories, setProducts }: Pr
 
     const handleCloseIconButton = () => {
         setProductFormValues(emptyProductFormValues)
-        setEditingProductId(null)
         setValidationMessage(null)
-        setIsModalOpen(false)
+        setActiveProductModal(null)
     }
+
+
+    let productTitle = ''
+    if (activeProductModal?.mode === 'add') {
+        productTitle = 'Add product'
+    }
+    if (activeProductModal?.mode === 'edit') {
+        productTitle = 'Edit product'
+    }
+    if (activeProductModal?.mode === 'delete') {
+        productTitle = 'Delete product'
+    }
+
+
+    const handleDeleteProduct = () => {
+        setProducts(prev => prev.filter(product => product.id !== activeProductModal?.id))
+        setActiveProductModal(null)
+    }
+
+
+    const activeProduct = products.find(product => product.id === activeProductModal?.id)
 
 
     return (
@@ -69,7 +91,7 @@ const ProductsPage = ({ title, subtitle, products, categories, setProducts }: Pr
             pageHeaderButton={{
                 type: 'button',
                 label: '+ Add Product',
-                handleClick: () => setIsModalOpen(true)
+                handleClick: () => setActiveProductModal({ mode: 'add', id: null })
             }}
         >
 
@@ -89,23 +111,30 @@ const ProductsPage = ({ title, subtitle, products, categories, setProducts }: Pr
                 ? <p>No results.</p>
                 : <ProductsTable
                     products={sortedProducts}
-                    setProducts={setProducts}
                     setProductFormValues={setProductFormValues}
                     emptyProductFormValues={emptyProductFormValues}
-                    editingProductId={editingProductId}
-                    setEditingProductId={setEditingProductId}
                     setValidationMessage={setValidationMessage}
-                    setIsModalOpen={setIsModalOpen}
+                    setActiveProductModal={setActiveProductModal}
                 />
             }
 
-            {isModalOpen &&
+            {activeProductModal?.mode === 'delete' && activeProduct &&
                 <ModalLayout
-                    title={
-                        editingProductId
-                            ? <h3>Edit product</h3>
-                            : <h3>Add product</h3>
-                    }
+                    title={productTitle}
+                    handleCloseIconButton={handleCloseIconButton}
+                >
+                    <DeleteProductOrCategory 
+                        name={activeProduct.name}
+                        message='Are you sure you want to delete this product?'
+                        setActiveProductModal={setActiveProductModal}
+                        handleDelete={handleDeleteProduct}
+                    />
+                </ModalLayout>
+            }
+
+            {(activeProductModal?.mode === 'add' || activeProductModal?.mode === 'edit') &&
+                <ModalLayout
+                    title={productTitle}
                     handleCloseIconButton={handleCloseIconButton}
                 >
 
@@ -115,17 +144,16 @@ const ProductsPage = ({ title, subtitle, products, categories, setProducts }: Pr
                         setProductFormValues={setProductFormValues}
                         emptyProductFormValues={emptyProductFormValues}
                         setProducts={setProducts}
-                        editingProductId={editingProductId}
-                        setEditingProductId={setEditingProductId}
                         validationMessage={validationMessage}
                         setValidationMessage={setValidationMessage}
-                        setIsModalOpen={setIsModalOpen}
+                        activeProductModal={activeProductModal}
+                        setActiveProductModal={setActiveProductModal}
                     />
 
                 </ModalLayout>
             }
 
-        </PageLayout>
+        </PageLayout >
 
     )
 

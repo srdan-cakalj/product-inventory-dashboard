@@ -5,9 +5,11 @@ import { CategoriesTable } from '../components/features/categories/CategoriesTab
 import type { Categories } from '../types/categoriesTypes.ts'
 import type { FormCategory } from '../types/formTypes.ts'
 import type { Products } from '../types/productTypes.ts'
+import type { ActiveModal } from '../types/modalTypes.ts'
 import { PageLayout } from '../components/layout/PageLayout.tsx'
 import { ModalLayout } from '../components/layout/ModalLayout.tsx'
 import { CategoryForm } from '../components/features/categories/CategoryForm.tsx'
+import { DeleteProductOrCategory } from '../components/layout/DeleteProductOrCategory.tsx'
 
 
 type CategoriesPageProps = {
@@ -29,18 +31,37 @@ const CategoriesPage = ({ title, subtitle, categories, setCategories, products }
 
 
     const [categoryFormValues, setCategoryFormValues] = useState<FormCategory>(emptyCategoryFormValues)
-    const [editingCategoryId, setEditingCategoryId] = useState<string | null>(null)
     const [validationMessage, setValidationMessage] = useState<string | null>(null)
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [activeCategoryModal, setActiveCategoryModal] = useState<ActiveModal>(null)
 
 
     const handleCloseIconButton = () => {
         setCategoryFormValues(emptyCategoryFormValues)
-        setEditingCategoryId(null)
         setValidationMessage(null)
-        setIsModalOpen(false)
+        setActiveCategoryModal(null)
     }
 
+
+    let categoryTitle = ''
+    if (activeCategoryModal?.mode === 'add') {
+        categoryTitle = 'Add category'
+    }
+    if (activeCategoryModal?.mode === 'edit') {
+        categoryTitle = 'Edit category'
+    }
+    if (activeCategoryModal?.mode === 'delete') {
+        categoryTitle = 'Delete category'
+    }
+
+
+    const handleDeleteCategory = () => {
+        setCategories(prev => prev.filter(category => category.id !== activeCategoryModal?.id))
+        setActiveCategoryModal(null)
+    }
+
+
+
+    const activeCategory = categories.find(category => category.id === activeCategoryModal?.id)
 
 
     return (
@@ -50,26 +71,35 @@ const CategoriesPage = ({ title, subtitle, categories, setCategories, products }
             pageHeaderButton={{
                 type: 'button',
                 label: '+ Add category',
-                handleClick: () => setIsModalOpen(true)
+                handleClick: () => setActiveCategoryModal({ mode: 'add', id: null })
             }}
         >
 
             <CategoriesTable
                 categories={categories}
                 products={products}
-                setEditingCategoryId={setEditingCategoryId}
                 setCategoryFormValues={setCategoryFormValues}
                 setValidationMessage={setValidationMessage}
-                setIsModalOpen={setIsModalOpen}
+                setActiveCategoryModal={setActiveCategoryModal}
             />
 
-            {isModalOpen &&
+            {activeCategoryModal?.mode === 'delete' && activeCategory &&
                 <ModalLayout
-                    title={
-                        editingCategoryId
-                            ? <h3>Edit category</h3>
-                            : <h3>Add category</h3>
-                    }
+                    title={categoryTitle}
+                    handleCloseIconButton={handleCloseIconButton}
+                >
+                    <DeleteProductOrCategory
+                        name={activeCategory.name}
+                        message='Are you sure you want to delete this category?'
+                        setActiveCategoryModal={setActiveCategoryModal}
+                        handleDelete={handleDeleteCategory}
+                    />
+                </ModalLayout>
+            }
+
+            {(activeCategoryModal?.mode === 'add' || activeCategoryModal?.mode === 'edit') &&
+                <ModalLayout
+                    title={categoryTitle}
                     handleCloseIconButton={handleCloseIconButton}
                 >
 
@@ -78,11 +108,10 @@ const CategoriesPage = ({ title, subtitle, categories, setCategories, products }
                         categoryFormValues={categoryFormValues}
                         setCategoryFormValues={setCategoryFormValues}
                         emptyCategoryFormValues={emptyCategoryFormValues}
-                        editingCategoryId={editingCategoryId}
-                        setEditingCategoryId={setEditingCategoryId}
                         validationMessage={validationMessage}
                         setValidationMessage={setValidationMessage}
-                        setIsModalOpen={setIsModalOpen}
+                        activeCategoryModal={activeCategoryModal}
+                        setActiveCategoryModal={setActiveCategoryModal}
                     />
 
                 </ModalLayout>

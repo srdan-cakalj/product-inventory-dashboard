@@ -7,6 +7,7 @@ import { ModalFormLayout } from '../../layout/ModalFormLayout.tsx'
 import type { Products } from '../../../types/productTypes.ts'
 import type { FormProduct } from '../../../types/formTypes.ts'
 import type { Categories } from '../../../types/categoriesTypes.ts'
+import type { ActiveModal } from '../../../types/modalTypes.ts'
 
 
 type ProductFormProps = {
@@ -15,11 +16,10 @@ type ProductFormProps = {
     setProductFormValues: (value: React.SetStateAction<FormProduct>) => void
     emptyProductFormValues: FormProduct
     setProducts: (value: React.SetStateAction<Products>) => void
-    editingProductId: string | null
-    setEditingProductId: (value: string | null) => void
     validationMessage: string | null
     setValidationMessage: (value: string | null) => void
-    setIsModalOpen: (value: boolean) => void
+    activeProductModal: ActiveModal
+    setActiveProductModal: (value: ActiveModal) => void
 }
 
 
@@ -29,11 +29,10 @@ const ProductForm = ({
     setProductFormValues,
     emptyProductFormValues,
     setProducts,
-    editingProductId,
-    setEditingProductId,
     validationMessage,
     setValidationMessage,
-    setIsModalOpen
+    activeProductModal,
+    setActiveProductModal
 }: ProductFormProps) => {
 
 
@@ -52,36 +51,44 @@ const ProductForm = ({
 
             const data = validationResult.productData
 
-            setProducts(prev => (
-                editingProductId === null
-                    ? [
-                        ...prev,
-                        {
-                            id: crypto.randomUUID(),
-                            name: data.name,
-                            category: data.category,
-                            price: data.price,
-                            stock: data.stock
-                        }
-                    ]
-                    : prev.map(product => (
-                        product.id !== editingProductId
-                            ? product
-                            : {
-                                id: editingProductId,
+            setProducts(prev => {
+                if (activeProductModal?.mode === 'add') {
+                    return (
+                        [
+                            ...prev,
+                            {
+                                id: crypto.randomUUID(),
                                 name: data.name,
                                 category: data.category,
                                 price: data.price,
                                 stock: data.stock
                             }
-                    ))
-            ))
+                        ]
+                    )
+                }
 
+                if (activeProductModal?.mode === 'edit') {
+                    return (
+                        prev.map(product => (
+                            product.id !== activeProductModal.id
+                                ? product
+                                : {
+                                    id: product.id,
+                                    name: data.name,
+                                    category: data.category,
+                                    price: data.price,
+                                    stock: data.stock
+                                }
+                        ))
+                    )
+                }
+
+                return prev
+            })
         }
 
         setProductFormValues(emptyProductFormValues)
-        setEditingProductId(null)
-        setIsModalOpen(false)
+        setActiveProductModal(null)
     }
 
 
@@ -93,13 +100,12 @@ const ProductForm = ({
 
             <ModalFormLayout
                 handleSubmit={handleSubmit}
-                editingId={editingProductId}
                 validationMessage={validationMessage}
                 setValidationMessage={setValidationMessage}
                 setProductFormValues={setProductFormValues}
                 emptyProductFormValues={emptyProductFormValues}
-                setEditingId={setEditingProductId}
-                setIsModalOpen={setIsModalOpen}
+                activeProductModal={activeProductModal}
+                setActiveProductModal={setActiveProductModal}
             >
 
                 <label htmlFor='category'>Category</label>

@@ -3,6 +3,7 @@
 import styles from './ProductsTable.module.css'
 import type { Product } from '../../../types/productTypes.ts'
 import type { FormProduct } from '../../../types/formTypes.ts'
+import type { ActiveModal } from '../../../types/modalTypes.ts'
 import { getStockInfo } from '../../../helpers/getStockInfo.ts'
 import { formatCategoryLabel } from '../../../helpers/formatCategoryLabel.ts'
 
@@ -10,64 +11,39 @@ import { formatCategoryLabel } from '../../../helpers/formatCategoryLabel.ts'
 
 type ProductsTableProps = {
     products: Product[]
-    setProducts: (value: React.SetStateAction<Product[]>) => void
     setProductFormValues: (value: React.SetStateAction<FormProduct>) => void
     emptyProductFormValues: FormProduct
-    editingProductId: string | null
-    setEditingProductId: (value: string | null) => void
     setValidationMessage: (value: string | null) => void
-    setIsModalOpen: (value: boolean) => void
+    setActiveProductModal: (value: ActiveModal) => void
 }
 
 
 
 const ProductsTable = ({
     products,
-    setProducts,
     setProductFormValues,
-    emptyProductFormValues,
-    editingProductId,
-    setEditingProductId,
     setValidationMessage,
-    setIsModalOpen
+    setActiveProductModal
 }: ProductsTableProps) => {
 
 
-    const handleEdit = (product: Product) => {
+    const handleEdit = (editedProduct: Product) => {
 
         setProductFormValues({
-            name: product.name,
-            category: product.category,
-            price: String(product.price),
-            stock: String(product.stock)
+            name: editedProduct.name,
+            category: editedProduct.category,
+            price: String(editedProduct.price),
+            stock: String(editedProduct.stock)
         })
 
-        setEditingProductId(product.id)
         setValidationMessage(null)
-        setIsModalOpen(true)
+        setActiveProductModal({ mode: 'edit', id: editedProduct.id })
     }
 
 
 
-    const handleDelete = (deletedProductId: string) => {
-
-        const shouldDelete = confirm('Are you sure you want to delete this product?')
-
-        if (!shouldDelete) {
-            return
-        }
-
-        setProducts(prev => (
-            prev.filter(product => (
-                product.id !== deletedProductId
-            ))
-        ))
-
-        if (deletedProductId === editingProductId) {
-            setEditingProductId(null)
-            setValidationMessage(null)
-            setProductFormValues(emptyProductFormValues)
-        }
+    const handleDelete = (deletedProduct: Product) => {
+        setActiveProductModal({ mode: 'delete', id: deletedProduct.id })
     }
 
 
@@ -99,7 +75,7 @@ const ProductsTable = ({
                             <td>{getStockInfo(product.stock).status}</td>
                             <td>
                                 <button onClick={() => handleEdit(product)}>Edit</button>
-                                <button onClick={() => handleDelete(product.id)}>Delete</button>
+                                <button onClick={() => handleDelete(product)}>Delete</button>
                             </td>
                         </tr>
                     )
