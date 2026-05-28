@@ -1,6 +1,9 @@
 
 
 .list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
     padding: 0;
     margin: 0;
     list-style: none;
@@ -9,11 +12,13 @@
 .listItem {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 10px 25px;
-    color: var(--color-text-muted);
-    font-weight: 500;
+    gap: 14px;
+    min-height: 42px;
+    padding: 0 18px;
     border-radius: var(--border-radius);
+    color: var(--color-text-muted);
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
 }
 
@@ -21,4 +26,3 @@
     background-color: var(--color-primary-light);
     color: var(--color-primary);
 }
-
