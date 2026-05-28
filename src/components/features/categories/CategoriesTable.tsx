@@ -2,7 +2,7 @@
 
 
 
-import styles from '../products/ProductsTable.module.css'
+import styles from './CategoriesTable.module.css'
 import type { Categories, Category } from '../../../types/categoriesTypes.ts'
 import type { Products } from '../../../types/productTypes.ts'
 import type { FormCategory } from '../../../types/formTypes.ts'
@@ -63,12 +63,28 @@ const CategoriesTable = ({
 
                     return (
                         <tr key={category.id}>
-                            <td>{category.name}</td>
-                            <td>{category.description}</td>
-                            <td>{numberOfProducts}</td>
+                            <td className={styles.nameCell}>{category.name}</td>
+                            <td className={styles.descriptionCell}>{category.description}</td>
                             <td>
-                                <button onClick={() => handleEdit(category)}>Edit</button>
-                                <button onClick={() => handleDelete(category)}>Delete</button>
+                                <span className={styles.countBadge}>
+                                    {numberOfProducts}
+                                </span>
+                            </td>
+                            <td>
+                                <div className={styles.actions}>
+                                    <button
+                                        className={styles.editButton}
+                                        onClick={() => handleEdit(category)}
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        className={styles.deleteButton}
+                                        onClick={() => handleDelete(category)}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     )
