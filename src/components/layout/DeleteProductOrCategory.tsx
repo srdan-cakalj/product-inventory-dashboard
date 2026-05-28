@@ -1,6 +1,7 @@
 
 
 import { Button } from '../ui/Button.tsx'
+import styles from './DeleteProductOrCategory.module.css'
 import type { ActiveModal } from '../../types/modalTypes.ts'
 
 
@@ -29,23 +30,28 @@ const DeleteProductOrCategory = ({ name, message, setActiveProductModal, setActi
 
 
     return (
-        <>
-            <p>{name}</p>
-            <p>{message}</p>
+        <div className={styles.deleteContent}>
+            <div>
+                <p className={styles.name}>{name}</p>
+                <p className={styles.message}>{message}</p>
+            </div>
 
-            <Button
-                variant='danger'
-                label='Delete'
-                type='button'
-                handleClick={handleDelete}
-            />
-            <Button
-                variant='secondary'
-                label='Cancel'
-                type='button'
-                handleClick={handleCancel}
-            />
-        </>
+            <div className={styles.actions}>
+                <Button
+                    label='Cancel'
+                    type='button'
+                    variant='secondary'
+                    handleClick={handleCancel}
+                />
+
+                <Button
+                    label='Delete'
+                    type='button'
+                    variant='danger'
+                    handleClick={handleDelete}
+                />
+            </div>
+        </div>
     )
 }
 

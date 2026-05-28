@@ -87,15 +87,15 @@ const ModalFormLayout = ({
                 {(activeProductModal?.mode === 'edit' || activeCategoryModal?.mode === 'edit') && (
                     <div className={styles.actions}>
                         <Button
-                            variant='primary'
-                            label='Save changes'
-                            type='submit'
-                        />
-                        <Button
                             variant='secondary'
                             label='Cancel'
                             type='button'
                             handleClick={handleCancel}
+                        />
+                        <Button
+                            variant='primary'
+                            label='Save changes'
+                            type='submit'
                         />
                     </div>
                 )}
