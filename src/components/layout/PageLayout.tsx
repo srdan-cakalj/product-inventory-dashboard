@@ -34,6 +34,7 @@ const PageLayout = ({ title, subtitle, children, pageHeaderButton }: PageLayoutP
                     <Button
                         type={pageHeaderButton.type}
                         label={pageHeaderButton.label}
+                        variant='primary'
                         handleClick={pageHeaderButton.handleClick}
                     />
                 }

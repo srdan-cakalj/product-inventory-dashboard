@@ -90,7 +90,7 @@ const ProductsPage = ({ title, subtitle, products, categories, setProducts }: Pr
             subtitle={subtitle}
             pageHeaderButton={{
                 type: 'button',
-                label: '+ Add Product',
+                label: '+ Add product',
                 handleClick: () => setActiveProductModal({ mode: 'add', id: null })
             }}
         >

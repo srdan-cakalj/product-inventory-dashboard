@@ -1,12 +1,51 @@
 
 
 .toolbar {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 15px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 12px;
+    padding: 16px;
     background-color: var(--color-card-bg);
-    border-radius: var(--border-radius);
     border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
     box-shadow: var(--shadow-card);
+}
+
+.toolbar input,
+.toolbar select {
+    width: 100%;
+    min-height: 40px;
+    padding: 0 12px;
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    color: var(--color-text-main);
+    font: inherit;
+}
+
+.toolbar input::placeholder {
+    color: var(--color-text-light);
+}
+
+.toolbar input:focus,
+.toolbar select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.toolbar select {
+    cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+    .toolbar {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 500px) {
+    .toolbar {
+        grid-template-columns: 1fr;
+    }
 }

@@ -68,18 +68,33 @@ const ProductsTable = ({
 
                     return (
                         <tr key={product.id}>
-                            <td>{product.name}</td>
+                            <td className={styles.nameCell}>{product.name}</td>
                             <td>{formatedCategory}</td>
                             <td>{product.price} €</td>
                             <td>{product.stock}</td>
-                            <td>{getStockInfo(product.stock).status}</td>
                             <td>
-                                <button onClick={() => handleEdit(product)}>Edit</button>
-                                <button onClick={() => handleDelete(product)}>Delete</button>
+                                <span className={`${styles.statusBadge} ${styles[getStockInfo(product.stock).option]}`}>
+                                    {getStockInfo(product.stock).status}
+                                </span>
+                            </td>
+                            <td>
+                                <div className={styles.actions}>
+                                    <button
+                                        className={styles.editButton}
+                                        onClick={() => handleEdit(product)}
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        className={styles.deleteButton}
+                                        onClick={() => handleDelete(product)}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     )
-
                 })}
             </tbody>
         </table>
