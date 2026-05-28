@@ -1,5 +1,5 @@
 
-
+import styles from './FormInputAndSelect.module.css'
 import type { FormProduct } from '../../types/formTypes.ts'
 import { formatCategoryLabel } from '../../helpers/formatCategoryLabel.ts'
 import type { Categories } from '../../types/categoriesTypes.ts'
@@ -31,6 +31,7 @@ const FormSelect = ({ categories, productFormValues, setProductFormValues, setVa
 
     return (
         <select
+            className={styles.select}
             id={id}
             value={productFormValues.category}
             onChange={handleChange}

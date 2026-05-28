@@ -1,0 +1,21 @@
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 4px;
+}
+
+.validationMessage {
+    margin: 12px 0 0;
+    color: var(--color-danger-text);
+    font-size: 14px;
+    font-weight: 500;
+}

@@ -117,8 +117,6 @@ const ProductForm = ({
                     id='category'
                 />
 
-                <br />
-
                 <label htmlFor='name'>Product name</label>
                 <ProductFormInput
                     inputName='name'
@@ -127,8 +125,6 @@ const ProductForm = ({
                     setValidationMessage={setValidationMessage}
                     id='name'
                 />
-
-                <br />
 
                 <label htmlFor='price'>Price (€) </label>
                 <ProductFormInput
@@ -139,8 +135,6 @@ const ProductForm = ({
                     id='price'
                 />
 
-                <br />
-
                 <label htmlFor='stock'>Stock quantity</label>
                 <ProductFormInput
                     inputName='stock'
@@ -149,8 +143,6 @@ const ProductForm = ({
                     setValidationMessage={setValidationMessage}
                     id='stock'
                 />
-
-                <br />
 
             </ModalFormLayout>
 

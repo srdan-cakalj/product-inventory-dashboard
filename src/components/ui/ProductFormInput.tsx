@@ -1,5 +1,6 @@
 
 
+import styles from './FormInputAndSelect.module.css'
 import type { FormProduct } from '../../types/formTypes.ts'
 
 
@@ -25,6 +26,7 @@ const ProductFormInput = ({ inputName, productFormValues, setProductFormValues, 
 
     return (
         <input
+            className={styles.input}
             id={id}
             name={inputName}
             type='text'

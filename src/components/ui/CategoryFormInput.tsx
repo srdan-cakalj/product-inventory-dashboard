@@ -1,7 +1,7 @@
 
 
 
-
+import styles from './FormInputAndSelect.module.css'
 import type { FormCategory } from '../../types/formTypes.ts'
 
 
@@ -27,6 +27,7 @@ const CategoryFormInput = ({ inputName, categoryFormValues, setCategoryFormValue
 
     return (
         <input
+            className={styles.input}
             id={id}
             name={inputName}
             type='text'

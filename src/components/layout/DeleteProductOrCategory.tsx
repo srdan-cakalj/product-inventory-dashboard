@@ -34,11 +34,13 @@ const DeleteProductOrCategory = ({ name, message, setActiveProductModal, setActi
             <p>{message}</p>
 
             <Button
+                variant='danger'
                 label='Delete'
                 type='button'
                 handleClick={handleDelete}
             />
             <Button
+                variant='secondary'
                 label='Cancel'
                 type='button'
                 handleClick={handleCancel}

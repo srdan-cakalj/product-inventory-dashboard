@@ -1,5 +1,6 @@
 
 
+import styles from './IconButton.module.css'
 import type { LucideIcon } from 'lucide-react'
 
 
@@ -12,6 +13,7 @@ type IconButtonProps = {
 const IconButton = ({ Icon, handleClick }: IconButtonProps) => {
     return (
         <button
+            className={styles.button}
             type='button'
             onClick={handleClick}>
             <Icon />

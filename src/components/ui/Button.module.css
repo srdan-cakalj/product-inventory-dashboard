@@ -27,17 +27,19 @@
 }
 
 .secondary:hover {
-    background-color: var(--color-page-bg);
+    background-color: var(--color-border-light);
+    border-color: var(--color-border);
 }
 
 .danger {
-    background-color: var(--color-danger-bg);
-    color: var(--color-danger-text);
-    border-color: var(--color-danger-border);
+    background-color: var(--color-danger-text);
+    color: #ffffff;
+    border-color: var(--color-danger-text);
 }
 
 .danger:hover {
-    background-color: var(--color-danger-border);
+    background-color: #b91c1c;
+    border-color: #b91c1c;
 }
 
 .button:active {

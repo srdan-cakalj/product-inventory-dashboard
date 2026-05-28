@@ -113,8 +113,6 @@ const CategoryForm = ({
                     id='name'
                 />
 
-                <br />
-
                 <label htmlFor='description'>Description</label>
                 <CategoryFormInput
                     inputName='description'
@@ -123,8 +121,6 @@ const CategoryForm = ({
                     setValidationMessage={setValidationMessage}
                     id='description'
                 />
-
-                <br />
 
             </ModalFormLayout>
 

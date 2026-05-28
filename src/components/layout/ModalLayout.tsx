@@ -20,7 +20,7 @@ const ModalLayout = ({ children, title, handleCloseIconButton }: ModalLayoutProp
         <div className={styles.overlay}>
             <div className={styles.modal}>
 
-                <header className={styles.modalHeader}>
+                <header className={styles.header}>
                     <h3>{title}</h3>
 
                     <IconButton
@@ -29,7 +29,9 @@ const ModalLayout = ({ children, title, handleCloseIconButton }: ModalLayoutProp
                     />
                 </header>
 
-                {children}
+                <div className={styles.content}>
+                    {children}
+                </div>
 
             </div>
         </div>

@@ -1,5 +1,5 @@
 
-
+import styles from './ModalFormLayout.module.css'
 import { Button } from '../ui/Button.tsx'
 import type { FormCategory, FormProduct } from '../../types/formTypes.ts'
 import type { ReactNode } from 'react'
@@ -60,42 +60,54 @@ const ModalFormLayout = ({
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form className={styles.form} onSubmit={handleSubmit}>
 
                 {children}
 
                 {activeProductModal?.mode === 'add' && (
-                    <Button
-                        label='Add product'
-                        type='submit'
-                    />
+                    <div className={styles.actions}>
+                        <Button
+                            variant='primary'
+                            label='Add product'
+                            type='submit'
+                        />
+                    </div>
                 )}
 
                 {activeCategoryModal?.mode === 'add' && (
-                    <Button
-                        label='Add category'
-                        type='submit'
-                    />
+                    <div className={styles.actions}>
+                        <Button
+                            variant='primary'
+                            label='Add category'
+                            type='submit'
+                        />
+                    </div>
                 )}
 
                 {(activeProductModal?.mode === 'edit' || activeCategoryModal?.mode === 'edit') && (
-                    <>
+                    <div className={styles.actions}>
                         <Button
+                            variant='primary'
                             label='Save changes'
                             type='submit'
                         />
                         <Button
+                            variant='secondary'
                             label='Cancel'
                             type='button'
                             handleClick={handleCancel}
                         />
-                    </>
+                    </div>
                 )}
             </form>
 
 
 
-            {validationMessage && <p>{validationMessage}</p>}
+            {validationMessage &&
+                <p className={styles.validationMessage}>
+                    {validationMessage}
+                </p>
+            }
         </>
     )
 }
