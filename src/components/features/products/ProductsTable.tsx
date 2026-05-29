@@ -4,6 +4,7 @@ import styles from './ProductsTable.module.css'
 import type { Product } from '../../../types/productTypes.ts'
 import type { FormProduct } from '../../../types/formTypes.ts'
 import type { ActiveModal } from '../../../types/modalTypes.ts'
+import type { CurrencyOptions } from '../../../types/settingsTypes.ts'
 import { getStockInfo } from '../../../helpers/getStockInfo.ts'
 import { formatCategoryLabel } from '../../../helpers/formatCategoryLabel.ts'
 
@@ -15,16 +16,25 @@ type ProductsTableProps = {
     emptyProductFormValues: FormProduct
     setValidationMessage: (value: string | null) => void
     setActiveProductModal: (value: ActiveModal) => void
+    lowStockThreshold: number
+    currency: CurrencyOptions
 }
 
+
+const currencySymbols: Record<CurrencyOptions, string> = {
+    EUR: '€',
+    USD: '$',
+    GBP: '£'
+}
 
 
 const ProductsTable = ({
     products,
     setProductFormValues,
     setValidationMessage,
-    setActiveProductModal
-}: ProductsTableProps) => {
+    setActiveProductModal,
+    lowStockThreshold,
+    currency }: ProductsTableProps) => {
 
 
     const handleEdit = (editedProduct: Product) => {
@@ -70,11 +80,11 @@ const ProductsTable = ({
                         <tr key={product.id}>
                             <td className={styles.nameCell}>{product.name}</td>
                             <td>{formatedCategory}</td>
-                            <td>{product.price} €</td>
+                            <td>{product.price} {currencySymbols[currency]}</td>
                             <td>{product.stock}</td>
                             <td>
-                                <span className={`${styles.statusBadge} ${styles[getStockInfo(product.stock).option]}`}>
-                                    {getStockInfo(product.stock).status}
+                                <span className={`${styles.statusBadge} ${styles[getStockInfo(product.stock, lowStockThreshold).option]}`}>
+                                    {getStockInfo(product.stock, lowStockThreshold).status}
                                 </span>
                             </td>
                             <td>

@@ -1,10 +1,10 @@
 
 
 import type { Product } from '../types/productTypes.ts'
-import type { SortOption } from '../types/sortTypes.ts'
+import type { SortOptions } from '../types/settingsTypes.ts'
 
 
-const getSortedProducts = (productsToSort: Product[], sortFilterValue: SortOption): Product[] => {
+const getSortedProducts = (productsToSort: Product[], sortFilterValue: SortOptions): Product[] => {
     if (sortFilterValue === 'name-a-z') {
         return productsToSort.sort((a: Product, b: Product) => a.name.localeCompare(b.name))
     }

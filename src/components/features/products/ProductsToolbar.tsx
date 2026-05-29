@@ -1,8 +1,8 @@
 
 
 import type { StockOption } from '../../../types/stockTypes.ts'
-import type { SortOption } from '../../../types/sortTypes.ts'
 import type { Categories } from '../../../types/categoriesTypes.ts'
+import type { SortOptionsMap, SortOptions } from '../../../types/settingsTypes.ts'
 import { SearchInput } from './SearchInput.tsx'
 import { CategoryFilter } from './CategoryFilter.tsx'
 import { StockFilter } from './StockFilter.tsx'
@@ -18,8 +18,10 @@ type ProductsToolbarProps = {
     setCategoryFilterValue: (value: string) => void
     stockFilterValue: StockOption
     setStockFilterValue: (value: StockOption) => void
-    sortFilterValue: SortOption
-    setSortFilterValue: (value: SortOption) => void
+    sortFilterValue: SortOptions
+    setSortFilterValue: (value: SortOptions) => void
+    sortOptionsMap: SortOptionsMap
+    defaultSortOption: SortOptions
 }
 
 
@@ -32,8 +34,9 @@ const ProductsToolbar = ({
     stockFilterValue,
     setStockFilterValue,
     sortFilterValue,
-    setSortFilterValue
-}: ProductsToolbarProps) => {
+    setSortFilterValue,
+    sortOptionsMap,
+    defaultSortOption }: ProductsToolbarProps) => {
 
     return (
         <div className={styles.toolbar}>
@@ -57,6 +60,8 @@ const ProductsToolbar = ({
             <SortFilter
                 sortFilterValue={sortFilterValue}
                 setSortFilterValue={setSortFilterValue}
+                sortOptionsMap={sortOptionsMap}
+                defaultSortOption={defaultSortOption}
             />
 
         </div>

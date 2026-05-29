@@ -8,11 +8,11 @@ import { ModalLayout } from '../components/layout/ModalLayout.tsx'
 import { PageLayout } from '../components/layout/PageLayout.tsx'
 import { DeleteProductOrCategory } from '../components/layout/DeleteProductOrCategory.tsx'
 import type { StockOption } from '../types/stockTypes.ts'
-import type { SortOption } from '../types/sortTypes.ts'
 import type { Products } from '../types/productTypes.ts'
 import type { FormProduct } from '../types/formTypes.ts'
 import type { Categories } from '../types/categoriesTypes.ts'
 import type { ActiveModal } from '../types/modalTypes.ts'
+import type { CurrencyOptions, SortOptionsMap, SortOptions } from '../types/settingsTypes.ts'
 import { getStockInfo } from '../helpers/getStockInfo.ts'
 import { getSortedProducts } from '../helpers/getSortedProducts.ts'
 
@@ -23,6 +23,10 @@ type ProductsPageProps = {
     products: Products
     categories: Categories
     setProducts: (value: React.SetStateAction<Products>) => void
+    lowStockThreshold: number
+    currency: CurrencyOptions
+    sortOptionsMap: SortOptionsMap
+    defaultSortOption: SortOptions
 }
 
 
@@ -35,12 +39,21 @@ const emptyProductFormValues: FormProduct = {
 
 
 
-const ProductsPage = ({ title, subtitle, products, categories, setProducts }: ProductsPageProps) => {
+const ProductsPage = ({
+    title,
+    subtitle,
+    products,
+    categories,
+    setProducts,
+    lowStockThreshold,
+    currency,
+    sortOptionsMap,
+    defaultSortOption }: ProductsPageProps) => {
 
     const [searchInputValue, setSearchInputValue] = useState('')
     const [categoryFilterValue, setCategoryFilterValue] = useState('all')
     const [stockFilterValue, setStockFilterValue] = useState<StockOption>('all')
-    const [sortFilterValue, setSortFilterValue] = useState<SortOption>('default')
+    const [sortFilterValue, setSortFilterValue] = useState<SortOptions>('default')
     const [productFormValues, setProductFormValues] = useState<FormProduct>(emptyProductFormValues)
     const [validationMessage, setValidationMessage] = useState<string | null>(null)
     const [activeProductModal, setActiveProductModal] = useState<ActiveModal>(null)
@@ -49,7 +62,7 @@ const ProductsPage = ({ title, subtitle, products, categories, setProducts }: Pr
     const filteredProducts = products
         .filter(product => product.name.toLowerCase().includes(searchInputValue.toLowerCase()))
         .filter(product => product.category === categoryFilterValue || categoryFilterValue === 'all')
-        .filter(product => getStockInfo(product.stock).option === stockFilterValue || stockFilterValue === 'all')
+        .filter(product => getStockInfo(product.stock, lowStockThreshold).option === stockFilterValue || stockFilterValue === 'all')
 
     const productsToSort = [...filteredProducts]
     const sortedProducts = getSortedProducts(productsToSort, sortFilterValue)
@@ -105,6 +118,8 @@ const ProductsPage = ({ title, subtitle, products, categories, setProducts }: Pr
                 setStockFilterValue={setStockFilterValue}
                 sortFilterValue={sortFilterValue}
                 setSortFilterValue={setSortFilterValue}
+                sortOptionsMap={sortOptionsMap}
+                defaultSortOption={defaultSortOption}
             />
 
             {sortedProducts.length === 0
@@ -115,6 +130,8 @@ const ProductsPage = ({ title, subtitle, products, categories, setProducts }: Pr
                     emptyProductFormValues={emptyProductFormValues}
                     setValidationMessage={setValidationMessage}
                     setActiveProductModal={setActiveProductModal}
+                    lowStockThreshold={lowStockThreshold}
+                    currency={currency}
                 />
             }
 
@@ -123,7 +140,7 @@ const ProductsPage = ({ title, subtitle, products, categories, setProducts }: Pr
                     title={productTitle}
                     handleCloseIconButton={handleCloseIconButton}
                 >
-                    <DeleteProductOrCategory 
+                    <DeleteProductOrCategory
                         name={activeProduct.name}
                         message='Are you sure you want to delete this product?'
                         setActiveProductModal={setActiveProductModal}
