@@ -1,5 +1,6 @@
 
 
+import { Package } from 'lucide-react'
 import styles from './ProductsTable.module.css'
 import type { Product } from '../../../types/productTypes.ts'
 import type { FormProduct } from '../../../types/formTypes.ts'
@@ -13,7 +14,6 @@ import { formatCategoryLabel } from '../../../helpers/formatCategoryLabel.ts'
 type ProductsTableProps = {
     products: Product[]
     setProductFormValues: (value: React.SetStateAction<FormProduct>) => void
-    emptyProductFormValues: FormProduct
     setValidationMessage: (value: string | null) => void
     setActiveProductModal: (value: ActiveModal) => void
     lowStockThreshold: number
@@ -63,14 +63,14 @@ const ProductsTable = ({
             <thead>
                 <tr>
                     {showProductImages &&
-                        <th>Image</th>
+                        <th className={styles.positionCenter}>Image</th>
                     }
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                    <th>Stock</th>
-                    <th>Status</th>
-                    <th>Actions</th>
+                    <th className={styles.positionLeft}>Name</th>
+                    <th className={styles.positionLeft}>Category</th>
+                    <th className={styles.positionCenter}>Price</th>
+                    <th className={styles.positionCenter}>Stock</th>
+                    <th className={styles.positionCenter}>Status</th>
+                    <th className={styles.positionCenter}>Actions</th>
                 </tr>
             </thead>
 
@@ -81,19 +81,52 @@ const ProductsTable = ({
 
                     return (
                         <tr key={product.id}>
+
                             {showProductImages &&
-                                <td>image</td>
+                                <td className={`${styles.image} ${styles.positionCenter}`} >
+                                    {product.image
+                                        ? (
+                                            <img
+                                                src={product.image}
+                                                className={styles.productImage}
+                                                alt={product.name}
+                                            />
+                                        )
+                                        : (
+                                            <span className={styles.placeholderIcon}>
+                                                <Package />
+                                            </span>
+                                        )
+
+                                    }
+
+
+                                </td>
                             }
-                            <td className={styles.nameCell}>{product.name}</td>
-                            <td>{formatedCategory}</td>
-                            <td>{product.price} {currencySymbols[currency]}</td>
-                            <td>{product.stock}</td>
-                            <td>
+
+                            <td className={`${styles.name} ${styles.positionLeft}`}>
+                                {product.name}
+                            </td>
+
+                            <td className={styles.positionLeft}>
+                                {formatedCategory}
+                            </td>
+
+                            <td className={styles.positionCenter}>
+                                {product.price} {currencySymbols[currency]}
+                            </td>
+
+                            <td className={styles.positionCenter}>
+                                {product.stock}
+                            </td>
+
+                            <td className={styles.positionCenter}>
                                 <span className={`${styles.statusBadge} ${styles[getStockInfo(product.stock, lowStockThreshold).option]}`}>
                                     {getStockInfo(product.stock, lowStockThreshold).status}
                                 </span>
                             </td>
-                            <td>
+
+                            <td className={styles.positionCenter}>
                                 <div className={styles.actions}>
                                     <button
                                         className={styles.editButton}
@@ -109,6 +142,7 @@ const ProductsTable = ({
                                     </button>
                                 </div>
                             </td>
+
                         </tr>
                     )
                 })}

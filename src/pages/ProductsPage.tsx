@@ -136,7 +136,6 @@ const ProductsPage = ({
                 : <ProductsTable
                     products={sortedProducts}
                     setProductFormValues={setProductFormValues}
-                    emptyProductFormValues={emptyProductFormValues}
                     setValidationMessage={setValidationMessage}
                     setActiveProductModal={setActiveProductModal}
                     lowStockThreshold={lowStockThreshold}

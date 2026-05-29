@@ -2,6 +2,7 @@
 
 type ApiProduct = {
     id: number
+    images: string[]
     title: string
     category: string
     price: number
@@ -11,6 +12,7 @@ type ApiProduct = {
 
 type Product = {
     id: string
+    image: string 
     name: string
     category: string
     price: number

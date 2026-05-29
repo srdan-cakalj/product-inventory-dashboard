@@ -6,7 +6,7 @@ import type { FormProduct } from "../types/formTypes.ts"
 
 type ValidationResult = {
     message: string | null
-    productData: Omit<Product, 'id'> | null
+    productData: Pick<Product, 'name' | 'category' | 'price' | 'stock'> | null
 }
 
 

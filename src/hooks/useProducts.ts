@@ -40,6 +40,7 @@ const useProducts = () => {
                 const transformedProducts: Product[] = data.products.map(product => (
                     {
                         id: String(product.id),
+                        image: product.images[0],
                         name: product.title,
                         category: product.category,
                         price: product.price,

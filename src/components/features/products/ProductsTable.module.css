@@ -17,7 +17,6 @@
     color: var(--color-text-muted);
     font-size: 13px;
     font-weight: 600;
-    text-align: left;
     white-space: nowrap;
 }
 
@@ -29,25 +28,35 @@
     font-size: 14px;
     font-weight: 500;
     white-space: nowrap;
+    vertical-align: middle;
 }
 
 .table tbody tr:hover td {
     background-color: var(--color-page-bg);
 }
 
-.nameCell {
+.positionLeft {
+    text-align: left;
+}
+
+.positionCenter {
+    text-align: center;
+}
+
+.name {
     font-weight: 600;
 }
 
-.table th:nth-child(3),
-.table th:nth-child(4),
-.table th:nth-child(5),
-.table th:last-child,
-.table td:nth-child(3),
-.table td:nth-child(4),
-.table td:nth-child(5),
-.table td:last-child {
-    text-align: center;
+.image {
+    width: 80px;
+}
+
+.productImage {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
 }
 
 .statusBadge {
@@ -110,4 +119,11 @@
 
 .deleteButton:hover {
     background-color: var(--color-danger-bg);
+}
+
+.placeholderIcon {
+    width: 48px;
+    height: 48px;
+    padding: 10px;
+    color: var(--color-text-light);
 }

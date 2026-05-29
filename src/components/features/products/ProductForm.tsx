@@ -58,6 +58,7 @@ const ProductForm = ({
                             ...prev,
                             {
                                 id: crypto.randomUUID(),
+                                image: '',
                                 name: data.name,
                                 category: data.category,
                                 price: data.price,
@@ -74,6 +75,7 @@ const ProductForm = ({
                                 ? product
                                 : {
                                     id: product.id,
+                                    image: product.image,
                                     name: data.name,
                                     category: data.category,
                                     price: data.price,
