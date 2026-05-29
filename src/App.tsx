@@ -5,12 +5,13 @@ import { useProducts } from './hooks/useProducts.ts'
 import { AppSidebar } from './components/layout/AppSidebar.tsx'
 import { AppMain } from './components/layout/AppMain.tsx'
 import type { Page } from './types/pageTypes.ts'
+import type { ThemeOptions } from './types/settingsTypes.ts'
 
 
 const App = () => {
 
   const [activePage, setActivePage] = useState<Page>('products')
-
+  const [theme, setTheme] = useState<ThemeOptions>('light')
 
   const { setProducts, products, error, isLoading } = useProducts()
 
@@ -25,7 +26,7 @@ const App = () => {
 
 
   return (
-    <div className='app'>
+    <div className={`app ${theme}`}>
 
       <AppSidebar
         setActivePage={setActivePage}
@@ -35,6 +36,8 @@ const App = () => {
         products={products}
         setProducts={setProducts}
         activePage={activePage}
+        theme={theme}
+        setTheme={setTheme}
       />
 
     </div>

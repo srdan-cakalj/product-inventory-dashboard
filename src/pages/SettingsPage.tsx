@@ -6,8 +6,7 @@ import { SettingsSectionLayout } from '../components/features/settings/SettingsS
 import { SettingsToggle } from '../components/features/settings/SettingsToggle.tsx'
 import { SettingsInput } from '../components/features/settings/SettingsInput.tsx'
 import { SettingsSelect } from '../components/features/settings/SettingsSelect.tsx'
-import type { CurrencyOptionsMap, ThemeOptionsMap, SortOptionsMap } from '../types/settingsTypes.ts'
-import type { CurrencyOptions, ThemeOptions, SortOptions } from '../types/settingsTypes.ts'
+import type { CurrencyOptionsMap, ThemeOptionsMap, SortOptionsMap, CurrencyOptions, ThemeOptions, SortOptions } from '../types/settingsTypes.ts'
 
 
 type SettingsPageProps = {
@@ -20,8 +19,12 @@ type SettingsPageProps = {
     theme: ThemeOptions
     setTheme: (value: ThemeOptions) => void
     defaultSortOption: SortOptions
-    setDefaultSortOption: (valud: SortOptions) => void
+    setDefaultSortOption: (value: SortOptions) => void
     sortOptionsMap: SortOptionsMap
+    showProductImages: boolean
+    setShowProductImages: (value: boolean) => void
+    showOutOfStockProducts: boolean
+    setShowOutOfStockProducts: (value: boolean) => void
 }
 
 
@@ -52,7 +55,11 @@ const SettingsPage = ({
     setTheme,
     defaultSortOption,
     setDefaultSortOption,
-    sortOptionsMap }: SettingsPageProps) => {
+    sortOptionsMap,
+    showProductImages,
+    setShowProductImages,
+    showOutOfStockProducts,
+    setShowOutOfStockProducts }: SettingsPageProps) => {
 
 
     const [isInputValueValid, setIsInputValueValid] = useState(true)
@@ -91,6 +98,8 @@ const SettingsPage = ({
                 <SettingsToggle
                     toggleTitle='Show Out-of-Stock Products'
                     toggleSubtitle='Display products that currently have 0 items in stock.'
+                    state={showOutOfStockProducts}
+                    setter={setShowOutOfStockProducts}
                 />
 
             </SettingsSectionLayout>
@@ -121,6 +130,8 @@ const SettingsPage = ({
                 <SettingsToggle
                     toggleTitle='Show Product Images'
                     toggleSubtitle='Display product images in the product table.'
+                    state={showProductImages}
+                    setter={setShowProductImages}
                 />
 
             </SettingsSectionLayout>

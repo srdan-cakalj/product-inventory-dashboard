@@ -18,6 +18,7 @@ type ProductsTableProps = {
     setActiveProductModal: (value: ActiveModal) => void
     lowStockThreshold: number
     currency: CurrencyOptions
+    showProductImages: boolean
 }
 
 
@@ -34,7 +35,8 @@ const ProductsTable = ({
     setValidationMessage,
     setActiveProductModal,
     lowStockThreshold,
-    currency }: ProductsTableProps) => {
+    currency,
+    showProductImages }: ProductsTableProps) => {
 
 
     const handleEdit = (editedProduct: Product) => {
@@ -56,12 +58,13 @@ const ProductsTable = ({
         setActiveProductModal({ mode: 'delete', id: deletedProduct.id })
     }
 
-
-
     return (
         <table className={styles.table}>
             <thead>
                 <tr>
+                    {showProductImages &&
+                        <th>Image</th>
+                    }
                     <th>Name</th>
                     <th>Category</th>
                     <th>Price</th>
@@ -78,6 +81,9 @@ const ProductsTable = ({
 
                     return (
                         <tr key={product.id}>
+                            {showProductImages &&
+                                <td>image</td>
+                            }
                             <td className={styles.nameCell}>{product.name}</td>
                             <td>{formatedCategory}</td>
                             <td>{product.price} {currencySymbols[currency]}</td>

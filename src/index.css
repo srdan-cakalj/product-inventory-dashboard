@@ -1,6 +1,6 @@
 
 
-:root {
+.light {
     /* Backgrounds */
     --color-page-bg: #f8fafc;
     --color-card-bg: #ffffff;
@@ -42,8 +42,53 @@
 
     /* Modal */
     --color-overlay-bg: rgba(0, 0, 0, 0.5);
-
 }
+
+
+.dark {
+    /* Backgrounds */
+    --color-page-bg: #0f172a;
+    --color-card-bg: #1e293b;
+    --color-sidebar-bg: #111827;
+
+    /* Borders */
+    --color-border: #334155;
+    --color-border-light: #475569;
+
+    /* Text */
+    --color-text-main: #f8fafc;
+    --color-text-muted: #cbd5e1;
+    --color-text-light: #94a3b8;
+
+    /* Primary / blue */
+    --color-primary: #3b82f6;
+    --color-primary-hover: #2563eb;
+    --color-primary-light: #1e3a8a;
+    --color-primary-border: #3b82f6;
+
+    /* Success / in stock */
+    --color-success-bg: #14532d;
+    --color-success-text: #bbf7d0;
+
+    /* Warning / low stock */
+    --color-warning-bg: #713f12;
+    --color-warning-text: #fde68a;
+
+    /* Danger / delete / out of stock */
+    --color-danger-bg: #7f1d1d;
+    --color-danger-text: #fecaca;
+    --color-danger-border: #991b1b;
+
+    /* Shadow */
+    --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.35);
+
+    /* Border-radius */
+    --border-radius: 7px;
+
+    /* Modal */
+    --color-overlay-bg: rgba(0, 0, 0, 0.7);
+}
+
 
 
 * {

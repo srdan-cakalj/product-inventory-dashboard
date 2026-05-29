@@ -8,8 +8,7 @@ import { SettingsPage } from '../../pages/SettingsPage.tsx'
 import { getCategoriesFromProducts } from '../../helpers/getCategoriesFromProducts.ts'
 import type { Page, PageHeaderContent } from '../../types/pageTypes.ts'
 import type { Product } from '../../types/productTypes.ts'
-import type { CurrencyOptions, ThemeOptions, SortOptions } from '../../types/settingsTypes.ts'
-import type { SortOptionsMap } from '../../types/settingsTypes.ts'
+import type { SortOptionsMap, CurrencyOptions, SortOptions, ThemeOptions } from '../../types/settingsTypes.ts'
 
 
 type PageHeaderContentMap = Record<Page, PageHeaderContent>
@@ -39,6 +38,8 @@ type AppMainProps = {
     products: Product[]
     setProducts: (value: React.SetStateAction<Product[]>) => void
     activePage: Page
+    theme: ThemeOptions
+    setTheme: (value: ThemeOptions) => void
 }
 
 type PagesMap = Record<Page, React.JSX.Element>
@@ -55,16 +56,19 @@ const sortOptionsMap: SortOptionsMap = [
 ]
 
 
-const AppMain = ({ products, setProducts, activePage }: AppMainProps) => {
+const AppMain = ({
+    products,
+    setProducts,
+    activePage,
+    theme,
+    setTheme }: AppMainProps) => {
 
     const [categories, setCategories] = useState(getCategoriesFromProducts(products))
     const [lowStockThreshold, setLowStockThreshold] = useState(10)
     const [currency, setCurrency] = useState<CurrencyOptions>('EUR')
-    const [theme, setTheme] = useState<ThemeOptions>('light')
     const [defaultSortOption, setDefaultSortOption] = useState<SortOptions>('default')
-
-
-
+    const [showProductImages, setShowProductImages] = useState(true)
+    const [showOutOfStockProducts, setShowOutOfStockProducts] = useState(true)
 
 
     const pagesMap: PagesMap = {
@@ -79,6 +83,8 @@ const AppMain = ({ products, setProducts, activePage }: AppMainProps) => {
                 currency={currency}
                 sortOptionsMap={sortOptionsMap}
                 defaultSortOption={defaultSortOption}
+                showOutOfStockProducts={showOutOfStockProducts}
+                showProductImages={showProductImages}
             />
         ),
         categories: (
@@ -110,6 +116,10 @@ const AppMain = ({ products, setProducts, activePage }: AppMainProps) => {
                 defaultSortOption={defaultSortOption}
                 setDefaultSortOption={setDefaultSortOption}
                 sortOptionsMap={sortOptionsMap}
+                showProductImages={showProductImages}
+                setShowProductImages={setShowProductImages}
+                showOutOfStockProducts={showOutOfStockProducts}
+                setShowOutOfStockProducts={setShowOutOfStockProducts}
             />
         )
     }

@@ -27,6 +27,8 @@ type ProductsPageProps = {
     currency: CurrencyOptions
     sortOptionsMap: SortOptionsMap
     defaultSortOption: SortOptions
+    showOutOfStockProducts: boolean
+    showProductImages: boolean
 }
 
 
@@ -48,7 +50,9 @@ const ProductsPage = ({
     lowStockThreshold,
     currency,
     sortOptionsMap,
-    defaultSortOption }: ProductsPageProps) => {
+    defaultSortOption,
+    showOutOfStockProducts,
+    showProductImages }: ProductsPageProps) => {
 
     const [searchInputValue, setSearchInputValue] = useState('')
     const [categoryFilterValue, setCategoryFilterValue] = useState('all')
@@ -59,10 +63,15 @@ const ProductsPage = ({
     const [activeProductModal, setActiveProductModal] = useState<ActiveModal>(null)
 
 
-    const filteredProducts = products
+    let filteredProducts = products
         .filter(product => product.name.toLowerCase().includes(searchInputValue.toLowerCase()))
         .filter(product => product.category === categoryFilterValue || categoryFilterValue === 'all')
         .filter(product => getStockInfo(product.stock, lowStockThreshold).option === stockFilterValue || stockFilterValue === 'all')
+  
+    if (!showOutOfStockProducts) {
+        filteredProducts = filteredProducts.filter(product => product.stock > 0)
+    }
+
 
     const productsToSort = [...filteredProducts]
     const sortedProducts = getSortedProducts(productsToSort, sortFilterValue)
@@ -132,6 +141,7 @@ const ProductsPage = ({
                     setActiveProductModal={setActiveProductModal}
                     lowStockThreshold={lowStockThreshold}
                     currency={currency}
+                    showProductImages={showProductImages}
                 />
             }
 
