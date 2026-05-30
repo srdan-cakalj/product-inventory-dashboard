@@ -1,7 +1,7 @@
 
 
 import type { SidebarOption } from '../../types/sidebarTypes.ts'
-import { Package, Tag, SquareKanban, Settings } from 'lucide-react'
+import { Package, Tag, Settings } from 'lucide-react'
 import styles from './SidebarNav.module.css'
 import type { Page } from '../../types/pageTypes.ts'
 
@@ -21,14 +21,6 @@ const sidebarOptions: SidebarOption[] = [
         size: 24,
         strokeWidth: 1.8,
         transform: 'scaleX(-1)'
-    },
-    {
-        name: 'reports',
-        title: 'Reports',
-        icon: SquareKanban,
-        size: 24,
-        strokeWidth: 1.8,
-        transform: 'rotate(180deg)'
     },
     {
         name: 'settings',

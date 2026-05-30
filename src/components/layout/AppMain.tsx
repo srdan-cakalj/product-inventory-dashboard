@@ -3,7 +3,6 @@ import { useState } from 'react'
 import styles from './AppMain.module.css'
 import { ProductsPage } from '../../pages/ProductsPage.tsx'
 import { CategoriesPage } from '../../pages/CategoriesPage.tsx'
-import { ReportsPage } from '../../pages/ReportsPage.tsx'
 import { SettingsPage } from '../../pages/SettingsPage.tsx'
 import { getCategoriesFromProducts } from '../../helpers/getCategoriesFromProducts.ts'
 import type { Page, PageHeaderContent } from '../../types/pageTypes.ts'
@@ -22,10 +21,6 @@ const pageHeaderContentMap: PageHeaderContentMap = {
     categories: {
         title: 'Categories',
         subtitle: 'Organize your product categories'
-    },
-    reports: {
-        title: 'Reports',
-        subtitle: 'Overview of your inventory performance'
     },
     settings: {
         title: 'Settings',
@@ -96,14 +91,7 @@ const AppMain = ({
                 setCategories={setCategories}
             />
         ),
-        reports: (
-            <ReportsPage
-                title={pageHeaderContentMap.reports.title}
-                subtitle={pageHeaderContentMap.reports.subtitle}
-            />
-        ),
         settings: (
-
             <SettingsPage
                 title={pageHeaderContentMap.settings.title}
                 subtitle={pageHeaderContentMap.settings.subtitle}

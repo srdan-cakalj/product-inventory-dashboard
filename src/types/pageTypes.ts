@@ -1,6 +1,6 @@
 
 
-type Page = 'products' | 'categories' | 'reports' | 'settings'
+type Page = 'products' | 'categories' | 'settings'
 
 type PageHeaderContent = {
     title: string
