@@ -1,5 +1,5 @@
 
-
+import { Package2, Monitor } from 'lucide-react'
 import { useState } from 'react'
 import { PageLayout } from '../components/layout/PageLayout.tsx'
 import { SettingsSectionLayout } from '../components/features/settings/SettingsSectionLayout.tsx'
@@ -74,6 +74,7 @@ const SettingsPage = ({
             <SettingsSectionLayout
                 headerTitle='Inventory Preferences'
                 headerSubtitle='Manage how products are displayed and tracked in your inventory.'
+                IconComponent={Package2}
             >
                 <>
                     <SettingsInput
@@ -108,6 +109,7 @@ const SettingsPage = ({
             <SettingsSectionLayout
                 headerTitle='Display Preferences'
                 headerSubtitle='Customize how product information is shown.'
+                IconComponent={Monitor}
             >
                 <>
                     <SettingsSelect

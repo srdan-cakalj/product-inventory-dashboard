@@ -1,0 +1,71 @@
+
+
+.toggleRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    min-height: 70px;
+    padding: 16px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    background-color: var(--color-card-bg);
+}
+
+.title {
+    margin: 0;
+    color: var(--color-text-main);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.subtitle {
+    display: block;
+    margin-top: 4px;
+    color: var(--color-text-muted);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.switch {
+    position: relative;
+    flex-shrink: 0;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.switch input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.slider {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background-color: var(--color-border);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.slider::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    transition: transform 0.2s ease;
+}
+
+.switch input:checked + .slider {
+    background-color: var(--color-primary);
+}
+
+.switch input:checked + .slider::before {
+    transform: translateX(20px);
+}

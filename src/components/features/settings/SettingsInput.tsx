@@ -1,5 +1,6 @@
 
 
+import styles from './SettingsInput.module.css'
 import { validateSettingsInput } from '../../../helpers/validateSettingsInput'
 
 
@@ -38,15 +39,19 @@ const SettingsInput = ({
 
 
     return (
-        <div>
-            <label>{label}</label>
+        <div className={styles.field}>
+            <label className={styles.label}>{label}</label>
+
             <input
+                className={styles.input}
                 value={lowStockThreshold}
                 onChange={handleChange}
                 type='number'
                 min='0'
             />
-            <span>{isInputValueValid ? helperText : errorMessage}</span>
+            <span className={isInputValueValid ? styles.helperText : styles.errorText}>
+                {isInputValueValid ? helperText : errorMessage}
+            </span>
         </div>
     )
 }

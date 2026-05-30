@@ -1,5 +1,6 @@
 
 
+import styles from './SettingsSelect.module.css'
 import type { CurrencyOptionsMap, ThemeOptionsMap, SortOptionsMap } from '../../../types/settingsTypes.ts'
 
 
@@ -21,10 +22,11 @@ const SettingsSelect = <T extends string>({
 
 
     return (
-        <div>
-            <label>{label}</label>
+        <div className={styles.field}>
+            <label className={styles.label}>{label}</label>
 
             <select
+                className={styles.select}
                 value={state}
                 onChange={e => setter(e.target.value as T)}
             >
@@ -38,7 +40,9 @@ const SettingsSelect = <T extends string>({
                 ))}
             </select>
 
-            <span>{helperText}</span>
+            <span className={styles.helperText}>
+                {helperText}
+            </span>
         </div>
     )
 }

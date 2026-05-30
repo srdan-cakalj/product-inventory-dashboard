@@ -1,0 +1,50 @@
+
+
+.section {
+    padding: 24px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    background-color: var(--color-card-bg);
+    box-shadow: var(--shadow-card);
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 32px;
+}
+
+.header h2 {
+    margin: 0;
+    color: var(--color-text-main);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.header p {
+    margin-top: 6px;
+    color: var(--color-text-muted);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 40px;
+}
+
+.content>div:last-child {
+    grid-column: 1 / -1;
+}
+
+.icon {
+    margin-top: 3px;
+    color: var(--color-text-main);
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+}
