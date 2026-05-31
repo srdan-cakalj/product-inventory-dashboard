@@ -75,7 +75,7 @@ const ProductForm = ({
                                 ? product
                                 : {
                                     id: product.id,
-                                    image: product.image,
+                                    image:  product.image,
                                     name: data.name,
                                     category: data.category,
                                     price: data.price,
@@ -110,40 +110,41 @@ const ProductForm = ({
                 setActiveProductModal={setActiveProductModal}
             >
 
-                <label htmlFor='category'>Category</label>
                 <FormSelect
                     categories={categories}
                     productFormValues={productFormValues}
                     setProductFormValues={setProductFormValues}
                     setValidationMessage={setValidationMessage}
                     id='category'
+                    label='Category'
                 />
 
-                <label htmlFor='name'>Product name</label>
+
                 <ProductFormInput
                     inputName='name'
                     productFormValues={productFormValues}
                     setProductFormValues={setProductFormValues}
                     setValidationMessage={setValidationMessage}
                     id='name'
+                    label='Product name'
                 />
 
-                <label htmlFor='price'>Price (€) </label>
                 <ProductFormInput
                     inputName='price'
                     productFormValues={productFormValues}
                     setProductFormValues={setProductFormValues}
                     setValidationMessage={setValidationMessage}
                     id='price'
+                    label='Price (€)'
                 />
 
-                <label htmlFor='stock'>Stock quantity</label>
                 <ProductFormInput
                     inputName='stock'
                     productFormValues={productFormValues}
                     setProductFormValues={setProductFormValues}
                     setValidationMessage={setValidationMessage}
                     id='stock'
+                    label='Stock quantity'
                 />
 
             </ModalFormLayout>

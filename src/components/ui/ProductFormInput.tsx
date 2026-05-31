@@ -10,10 +10,11 @@ type ProductFormInputProps = {
     setProductFormValues: (value: React.SetStateAction<FormProduct>) => void
     setValidationMessage: (value: string | null) => void
     id: string
+    label: string
 }
 
 
-const ProductFormInput = ({ inputName, productFormValues, setProductFormValues, setValidationMessage, id }: ProductFormInputProps) => {
+const ProductFormInput = ({ inputName, productFormValues, setProductFormValues, setValidationMessage, id, label }: ProductFormInputProps) => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setProductFormValues(prev => ({
@@ -25,14 +26,19 @@ const ProductFormInput = ({ inputName, productFormValues, setProductFormValues, 
 
 
     return (
-        <input
-            className={styles.input}
-            id={id}
-            name={inputName}
-            type='text'
-            value={productFormValues[inputName]}
-            onChange={handleChange}
-        />
+        <>
+            <label htmlFor={id}>{label}</label>
+            
+            <input
+                className={styles.input}
+                id={id}
+                name={inputName}
+                type='text'
+                value={productFormValues[inputName]}
+                onChange={handleChange}
+            />
+        </>
+
     )
 }
 

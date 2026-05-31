@@ -104,22 +104,22 @@ const CategoryForm = ({
                 setActiveCategoryModal={setActiveCategoryModal}
             >
 
-                <label htmlFor='name'>Name</label>
                 <CategoryFormInput
                     inputName='name'
                     categoryFormValues={categoryFormValues}
                     setCategoryFormValues={setCategoryFormValues}
                     setValidationMessage={setValidationMessage}
                     id='name'
+                    label='Name'
                 />
 
-                <label htmlFor='description'>Description</label>
                 <CategoryFormInput
                     inputName='description'
                     categoryFormValues={categoryFormValues}
                     setCategoryFormValues={setCategoryFormValues}
                     setValidationMessage={setValidationMessage}
                     id='description'
+                    label='Description'
                 />
 
             </ModalFormLayout>

@@ -11,10 +11,11 @@ type FormSelectProps = {
     setProductFormValues: (value: React.SetStateAction<FormProduct>) => void
     setValidationMessage: (value: string | null) => void
     id: string
+    label: string
 }
 
 
-const FormSelect = ({ categories, productFormValues, setProductFormValues, setValidationMessage, id }: FormSelectProps) => {
+const FormSelect = ({ categories, productFormValues, setProductFormValues, setValidationMessage, id, label }: FormSelectProps) => {
 
     const categoryOptions = categories.map(category => category.value)
     const categoryFormOptions = ['', ...categoryOptions]
@@ -30,21 +31,25 @@ const FormSelect = ({ categories, productFormValues, setProductFormValues, setVa
 
 
     return (
-        <select
-            className={styles.select}
-            id={id}
-            value={productFormValues.category}
-            onChange={handleChange}
-        >
-            {categoryFormOptions.map(option => (
-                <option
-                    key={option}
-                    value={option}
-                >
-                    {formatCategoryLabel(option)}
-                </option>
-            ))}
-        </select>
+        <>
+            <label htmlFor={id}>{label}</label>
+
+            <select
+                className={styles.select}
+                id={id}
+                value={productFormValues.category}
+                onChange={handleChange}
+            >
+                {categoryFormOptions.map(option => (
+                    <option
+                        key={option}
+                        value={option}
+                    >
+                        {formatCategoryLabel(option)}
+                    </option>
+                ))}
+            </select>
+        </>
     )
 }
 
