@@ -64,6 +64,13 @@ const ModalFormLayout = ({
 
                 {children}
 
+                <p className={styles.validationMessage}>
+                    {validationMessage
+                        ? validationMessage
+                        : ''
+                    }
+                </p>
+
                 {activeProductModal?.mode === 'add' && (
                     <div className={styles.actions}>
                         <Button
@@ -101,13 +108,6 @@ const ModalFormLayout = ({
                 )}
             </form>
 
-
-
-            {validationMessage &&
-                <p className={styles.validationMessage}>
-                    {validationMessage}
-                </p>
-            }
         </>
     )
 }
