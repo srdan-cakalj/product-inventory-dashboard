@@ -2,31 +2,19 @@
 
 import { Button } from '../ui/Button.tsx'
 import styles from './DeleteProductOrCategory.module.css'
-import type { ActiveModal } from '../../types/modalTypes.ts'
 
 
 type DeleteProductOrCategoryProps = {
     name: string
     message: string
-    setActiveProductModal?: (value: ActiveModal) => void
-    setActiveCategoryModal?: (value: ActiveModal) => void
-    handleDelete: () => void
+    handleDelete?: () => void
+    handleClose: () => void
+    buttonLabels: string[]
 }
 
 
-const DeleteProductOrCategory = ({ name, message, setActiveProductModal, setActiveCategoryModal, handleDelete }: DeleteProductOrCategoryProps) => {
+const DeleteProductOrCategory = ({ name, message, handleDelete, handleClose, buttonLabels }: DeleteProductOrCategoryProps) => {
 
-
-    const handleCancel = () => {
-
-        if (setActiveProductModal) {
-            setActiveProductModal(null)
-        }
-
-        if (setActiveCategoryModal) {
-            setActiveCategoryModal(null)
-        }
-    }
 
 
     return (
@@ -38,18 +26,21 @@ const DeleteProductOrCategory = ({ name, message, setActiveProductModal, setActi
 
             <div className={styles.actions}>
                 <Button
-                    label='Cancel'
+                    label={buttonLabels[0]}
                     type='button'
                     variant='secondary'
-                    handleClick={handleCancel}
+                    handleClick={handleClose}
                 />
 
-                <Button
-                    label='Delete'
-                    type='button'
-                    variant='danger'
-                    handleClick={handleDelete}
-                />
+                {handleDelete &&
+                    <Button
+                        label={buttonLabels[1]}
+                        type='button'
+                        variant='danger'
+                        handleClick={handleDelete}
+                    />
+                }
+
             </div>
         </div>
     )

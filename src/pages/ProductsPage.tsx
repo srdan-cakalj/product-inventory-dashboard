@@ -67,7 +67,7 @@ const ProductsPage = ({
         .filter(product => product.name.toLowerCase().includes(searchInputValue.toLowerCase()))
         .filter(product => product.category === categoryFilterValue || categoryFilterValue === 'all')
         .filter(product => getStockInfo(product.stock, lowStockThreshold).option === stockFilterValue || stockFilterValue === 'all')
-  
+
     if (!showOutOfStockProducts) {
         filteredProducts = filteredProducts.filter(product => product.stock > 0)
     }
@@ -76,12 +76,6 @@ const ProductsPage = ({
     const productsToSort = [...filteredProducts]
     const sortedProducts = getSortedProducts(productsToSort, sortFilterValue)
 
-
-    const handleCloseIconButton = () => {
-        setProductFormValues(emptyProductFormValues)
-        setValidationMessage(null)
-        setActiveProductModal(null)
-    }
 
 
     let productTitle = ''
@@ -96,8 +90,15 @@ const ProductsPage = ({
     }
 
 
-    const handleDeleteProduct = () => {
+    const handleDelete = () => {
         setProducts(prev => prev.filter(product => product.id !== activeProductModal?.id))
+        setActiveProductModal(null)
+    }
+
+
+    const handleClose = () => {
+        setProductFormValues(emptyProductFormValues)
+        setValidationMessage(null)
         setActiveProductModal(null)
     }
 
@@ -147,13 +148,14 @@ const ProductsPage = ({
             {activeProductModal?.mode === 'delete' && activeProduct &&
                 <ModalLayout
                     title={productTitle}
-                    handleCloseIconButton={handleCloseIconButton}
+                    handleClose={handleClose}
                 >
                     <DeleteProductOrCategory
                         name={activeProduct.name}
                         message='Are you sure you want to delete this product?'
-                        setActiveProductModal={setActiveProductModal}
-                        handleDelete={handleDeleteProduct}
+                        handleDelete={handleDelete}
+                        handleClose={handleClose}
+                        buttonLabels={['Cancel', 'Delete']}
                     />
                 </ModalLayout>
             }
@@ -161,7 +163,7 @@ const ProductsPage = ({
             {(activeProductModal?.mode === 'add' || activeProductModal?.mode === 'edit') &&
                 <ModalLayout
                     title={productTitle}
-                    handleCloseIconButton={handleCloseIconButton}
+                    handleClose={handleClose}
                 >
 
                     <ProductForm

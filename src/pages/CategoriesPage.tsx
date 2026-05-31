@@ -35,13 +35,6 @@ const CategoriesPage = ({ title, subtitle, categories, setCategories, products }
     const [activeCategoryModal, setActiveCategoryModal] = useState<ActiveModal>(null)
 
 
-    const handleCloseIconButton = () => {
-        setCategoryFormValues(emptyCategoryFormValues)
-        setValidationMessage(null)
-        setActiveCategoryModal(null)
-    }
-
-
     let categoryTitle = ''
     if (activeCategoryModal?.mode === 'add') {
         categoryTitle = 'Add category'
@@ -54,6 +47,14 @@ const CategoriesPage = ({ title, subtitle, categories, setCategories, products }
     }
 
 
+
+    const handleClose = () => {
+        setCategoryFormValues(emptyCategoryFormValues)
+        setValidationMessage(null)
+        setActiveCategoryModal(null)
+    }
+
+
     const handleDeleteCategory = () => {
         setCategories(prev => prev.filter(category => category.id !== activeCategoryModal?.id))
         setActiveCategoryModal(null)
@@ -62,6 +63,11 @@ const CategoriesPage = ({ title, subtitle, categories, setCategories, products }
 
 
     const activeCategory = categories.find(category => category.id === activeCategoryModal?.id)
+
+    let activeCategoryHasProducts = false
+    if (activeCategory) {
+        activeCategoryHasProducts = products.some(product => product.category === activeCategory.value)
+    }
 
 
     return (
@@ -86,21 +92,36 @@ const CategoriesPage = ({ title, subtitle, categories, setCategories, products }
             {activeCategoryModal?.mode === 'delete' && activeCategory &&
                 <ModalLayout
                     title={categoryTitle}
-                    handleCloseIconButton={handleCloseIconButton}
+                    handleClose={handleClose}
                 >
-                    <DeleteProductOrCategory
-                        name={activeCategory.name}
-                        message='Are you sure you want to delete this category?'
-                        setActiveCategoryModal={setActiveCategoryModal}
-                        handleDelete={handleDeleteCategory}
-                    />
+
+                    {activeCategoryHasProducts
+                        ? (
+                            <DeleteProductOrCategory
+                                name={activeCategory.name}
+                                message='This category contains products. Move or delete them before deleting the category.'
+                                handleClose={handleClose}
+                                buttonLabels={['OK']}
+                            />
+                        )
+                        : (
+                            <DeleteProductOrCategory
+                                name={activeCategory.name}
+                                message='Are you sure you want to delete this category?'
+                                handleClose={handleClose}
+                                handleDelete={handleDeleteCategory}
+                                buttonLabels={['Cancel', 'Delete']}
+                            />
+                        )
+                    }
+
                 </ModalLayout>
             }
 
             {(activeCategoryModal?.mode === 'add' || activeCategoryModal?.mode === 'edit') &&
                 <ModalLayout
                     title={categoryTitle}
-                    handleCloseIconButton={handleCloseIconButton}
+                    handleClose={handleClose}
                 >
 
                     <CategoryForm

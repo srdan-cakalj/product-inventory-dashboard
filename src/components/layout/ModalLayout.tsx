@@ -9,11 +9,11 @@ import { X } from 'lucide-react'
 type ModalLayoutProps = {
     children: ReactNode
     title: ReactNode
-    handleCloseIconButton: () => void
+    handleClose: () => void
 }
 
 
-const ModalLayout = ({ children, title, handleCloseIconButton }: ModalLayoutProps) => {
+const ModalLayout = ({ children, title, handleClose }: ModalLayoutProps) => {
 
 
     return (
@@ -25,7 +25,7 @@ const ModalLayout = ({ children, title, handleCloseIconButton }: ModalLayoutProp
 
                     <IconButton
                         Icon={X}
-                        handleClick={handleCloseIconButton}
+                        handleClick={handleClose}
                     />
                 </header>
 
