@@ -7,6 +7,7 @@ import { SearchInput } from './SearchInput.tsx'
 import { CategoryFilter } from './CategoryFilter.tsx'
 import { StockFilter } from './StockFilter.tsx'
 import { SortFilter } from './SortFilter.tsx'
+import { Button } from '../../ui/Button.tsx'
 import styles from './ProductsToolbar.module.css'
 
 
@@ -38,6 +39,16 @@ const ProductsToolbar = ({
     sortOptionsMap,
     defaultSortOption }: ProductsToolbarProps) => {
 
+    
+    const handleReset = () => {
+        setSearchInputValue('')
+        setCategoryFilterValue('all')
+        setStockFilterValue('all')
+        setSortFilterValue(defaultSortOption)
+
+    }
+
+
     return (
         <div className={styles.toolbar}>
 
@@ -62,6 +73,13 @@ const ProductsToolbar = ({
                 setSortFilterValue={setSortFilterValue}
                 sortOptionsMap={sortOptionsMap}
                 defaultSortOption={defaultSortOption}
+            />
+
+            <Button
+                label='Reset filters'
+                type='button'
+                variant='secondary'
+                handleClick={handleReset}
             />
 
         </div>

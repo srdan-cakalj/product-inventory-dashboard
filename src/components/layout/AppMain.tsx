@@ -41,7 +41,7 @@ type PagesMap = Record<Page, React.JSX.Element>
 
 
 const sortOptionsMap: SortOptionsMap = [
-    { value: 'default', label: 'Default' },
+    { value: 'default', label: 'Default sorting' },
     { value: 'name-a-z', label: 'Name A-Z' },
     { value: 'name-z-a', label: 'Name Z-A' },
     { value: 'price-low-high', label: 'Price low-high' },

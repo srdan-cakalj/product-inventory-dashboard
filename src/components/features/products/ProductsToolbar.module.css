@@ -2,7 +2,8 @@
 
 .toolbar {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 30px auto;
+    align-items: end;
     gap: 12px;
     padding: 16px;
     background-color: var(--color-card-bg);
@@ -23,6 +24,12 @@
     font-family: inherit;
     font-size: 14px;
     font-weight: 500;
+}
+
+.toolbar button {
+    grid-column: 6;
+    font-size: 14px;
+    white-space: nowrap;
 }
 
 .toolbar input::placeholder {
