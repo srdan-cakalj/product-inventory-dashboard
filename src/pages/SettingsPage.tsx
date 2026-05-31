@@ -80,7 +80,7 @@ const SettingsPage = ({
                     <SettingsInput
                         label='Low Stock Threshold'
                         helperText='Products with stock at or below this number will be marked as low stock.'
-                        errorMessage='Please enter a whole number greater than or equal to 0.'
+                        feedbackMessage='Only whole numbers are allowed.'
                         lowStockThreshold={lowStockThreshold}
                         setLowStockThreshold={setLowStockThreshold}
                         isInputValueValid={isInputValueValid}

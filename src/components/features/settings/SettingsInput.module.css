@@ -36,7 +36,7 @@
 }
 
 .helperText,
-.errorText {
+.feedbackText {
     margin-top: 8px;
     font-size: 13px;
     font-weight: 500;
@@ -47,6 +47,6 @@
     color: var(--color-text-muted);
 }
 
-.errorText {
-    color: var(--color-danger-text);
+.feedbackText {
+    color: #b45309;
 }

@@ -7,7 +7,7 @@ import { validateSettingsInput } from '../../../helpers/validateSettingsInput'
 type SettingsInputProps = {
     label: string
     helperText: string
-    errorMessage: string
+    feedbackMessage: string
     lowStockThreshold: number
     setLowStockThreshold: (value: number) => void
     isInputValueValid: boolean
@@ -19,7 +19,7 @@ type SettingsInputProps = {
 const SettingsInput = ({
     label,
     helperText,
-    errorMessage,
+    feedbackMessage,
     lowStockThreshold,
     setLowStockThreshold,
     isInputValueValid,
@@ -34,6 +34,9 @@ const SettingsInput = ({
             setIsInputValueValid(true)
         } else {
             setIsInputValueValid(false)
+            setTimeout(() => {
+                setIsInputValueValid(true)
+            }, 1500)
         }
     }
 
@@ -49,8 +52,8 @@ const SettingsInput = ({
                 type='number'
                 min='0'
             />
-            <span className={isInputValueValid ? styles.helperText : styles.errorText}>
-                {isInputValueValid ? helperText : errorMessage}
+            <span className={isInputValueValid ? styles.helperText : styles.feedbackText}>
+                {isInputValueValid ? helperText : feedbackMessage}
             </span>
         </div>
     )
