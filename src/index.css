@@ -30,7 +30,11 @@
     /* Danger / delete / out of stock */
     --color-danger-bg: #fee2e2;
     --color-danger-text: #dc2626;
-    --color-danger-border: #fecaca;
+    --color-danger-strong: #dc2626;
+    --color-danger-border: #fca5a5;
+    --color-danger-hover: #b91c1c;
+    --color-danger-button-bg: #dc2626;
+    --color-danger-button-hover: #b91c1c;
 
     /* Shadow */
     --shadow-card: 0 8px 24px rgba(15, 23, 42, 0.06);
@@ -42,29 +46,33 @@
     --color-overlay-bg: rgba(0, 0, 0, 0.5);
 
     /* Sidebar */
-    --color-sidebar-text: #475569;
+    --color-sidebar-text: #41494f;
+    --color-sidebar-active-text: var(--color-primary);
+
+    /* Feedback */
+    --color-feedback-text: #b45309;
 }
 
 
 .dark {
     /* Backgrounds */
     --color-page-bg: #0f172a;
-    --color-card-bg: #1e293b;
+    --color-card-bg: #1b2638;
     --color-sidebar-bg: #111827;
 
     /* Borders */
     --color-border: #334155;
-    --color-border-light: #475569;
+    --color-border-light: #2b3648;
 
     /* Text */
-    --color-text-main: #f8fafc;
-    --color-text-muted: #cbd5e1;
-    --color-text-light: #94a3b8;
+    --color-text-main: #e5e7eb;
+    --color-text-muted: #94a3b8;
+    --color-text-light: #64748b;
 
     /* Primary / blue */
     --color-primary: #3b82f6;
     --color-primary-hover: #2563eb;
-    --color-primary-light: #1e3a8a;
+    --color-primary-light: rgba(59, 130, 246, 0.16);
     --color-primary-border: #3b82f6;
 
     /* Success / in stock */
@@ -78,7 +86,12 @@
     /* Danger / delete / out of stock */
     --color-danger-bg: #7f1d1d;
     --color-danger-text: #fecaca;
-    --color-danger-border: #991b1b;
+    --color-danger-strong: #ef4444;
+    --color-danger-border: #ef4444;
+    --color-danger-hover: #dc2626;
+    --color-danger-button-bg: #ef4444;
+    --color-danger-button-hover: #dc2626;
+
 
     /* Shadow */
     --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.35);
@@ -91,6 +104,10 @@
 
     /* Sidebar */
     --color-sidebar-text: #bebebe;
+    --color-sidebar-active-text: #60a5fa;
+
+    /* Feedback */
+    --color-feedback-text: #fbbf24;
 }
 
 
@@ -109,4 +126,16 @@ body {
 
 .app {
     display: flex;
+}
+
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+}
+
+input[type='number'] {
+    appearance: textfield;
+    -moz-appearance: textfield;
 }

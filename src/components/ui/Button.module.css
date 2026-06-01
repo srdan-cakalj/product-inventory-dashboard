@@ -32,14 +32,14 @@
 }
 
 .danger {
-    background-color: var(--color-danger-text);
+    background-color: var(--color-danger-button-bg);
     color: #ffffff;
-    border-color: var(--color-danger-text);
+    border-color: var(--color-danger-button-bg);
 }
 
 .danger:hover {
-    background-color: #b91c1c;
-    border-color: #b91c1c;
+    background-color: var(--color-danger-button-hover);
+    border-color: var(--color-danger-button-hover);
 }
 
 .button:active {

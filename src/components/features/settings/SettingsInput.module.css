@@ -19,7 +19,7 @@
     border: 1px solid var(--color-border);
     border-radius: var(--border-radius);
     background-color: var(--color-card-bg);
-    color: var(--color-text-muted);
+    color: var(--color-text-main);
     font: inherit;
     font-size: 14px;
     font-weight: 500;
@@ -48,5 +48,5 @@
 }
 
 .feedbackText {
-    color: #b45309;
+    color: var(--color-feedback-text);
 }
