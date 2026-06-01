@@ -33,11 +33,12 @@ const sidebarOptions: SidebarOption[] = [
 
 
 type SidebarNavProps = {
+    activePage: Page
     setActivePage: (value: Page) => void
 }
 
 
-const SidebarNav = ({ setActivePage }: SidebarNavProps) => {
+const SidebarNav = ({ activePage, setActivePage }: SidebarNavProps) => {
 
     return (
         <ul className={styles.list}>
@@ -48,7 +49,7 @@ const SidebarNav = ({ setActivePage }: SidebarNavProps) => {
                 return (
                     <li
                         key={option.name}
-                        className={styles.listItem}
+                        className={`${styles.listItem} ${option.name === activePage ? styles.activeNavItem : ''}`}
                         onClick={() => setActivePage(option.name)}
                     >
 

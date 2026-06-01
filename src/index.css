@@ -1,5 +1,3 @@
-
-
 .light {
     /* Backgrounds */
     --color-page-bg: #f8fafc;
@@ -42,6 +40,9 @@
 
     /* Modal */
     --color-overlay-bg: rgba(0, 0, 0, 0.5);
+
+    /* Sidebar */
+    --color-sidebar-text: #475569;
 }
 
 
@@ -87,6 +88,9 @@
 
     /* Modal */
     --color-overlay-bg: rgba(0, 0, 0, 0.7);
+
+    /* Sidebar */
+    --color-sidebar-text: #bebebe;
 }
 
 

@@ -32,6 +32,7 @@ const App = () => {
     <div className={`app ${theme}`}>
 
       <AppSidebar
+        activePage={activePage}
         setActivePage={setActivePage}
       />
 

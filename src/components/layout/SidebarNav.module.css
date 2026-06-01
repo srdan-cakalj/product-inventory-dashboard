@@ -16,7 +16,7 @@
     min-height: 42px;
     padding: 0 18px;
     border-radius: var(--border-radius);
-    color: var(--color-text-muted);
+    color: var(--color-sidebar-text);
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -25,4 +25,20 @@
 .listItem:hover {
     background-color: var(--color-primary-light);
     color: var(--color-primary);
+}
+
+.activeNavItem {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+    position: relative;
+}
+
+.activeNavItem:before {
+    position: absolute;
+    content: '';
+    left: 0;
+    height: 100%;
+    width: 5px;
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
 }
