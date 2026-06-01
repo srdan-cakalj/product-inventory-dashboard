@@ -8,6 +8,7 @@ import type { Products } from '../../../types/productTypes.ts'
 import type { FormProduct } from '../../../types/formTypes.ts'
 import type { Categories } from '../../../types/categoriesTypes.ts'
 import type { ActiveModal } from '../../../types/modalTypes.ts'
+import type { CurrencySymbols, CurrencyOptions } from '../../../types/settingsTypes.ts'
 
 
 type ProductFormProps = {
@@ -21,6 +22,8 @@ type ProductFormProps = {
     activeProductModal: ActiveModal
     setActiveProductModal: (value: ActiveModal) => void
     setAddedOrEditedProductId: (value: string | null) => void
+    currency: CurrencyOptions
+    currencySymbols: CurrencySymbols
 }
 
 
@@ -34,7 +37,9 @@ const ProductForm = ({
     setValidationMessage,
     activeProductModal,
     setActiveProductModal,
-    setAddedOrEditedProductId }: ProductFormProps) => {
+    setAddedOrEditedProductId,
+    currency,
+    currencySymbols }: ProductFormProps) => {
 
 
     const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
@@ -147,7 +152,7 @@ const ProductForm = ({
                     setProductFormValues={setProductFormValues}
                     setValidationMessage={setValidationMessage}
                     id='price'
-                    label='Price (€)'
+                    label={`Price (${currencySymbols[currency]})`}
                 />
 
                 <ProductFormInput

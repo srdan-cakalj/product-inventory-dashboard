@@ -34,6 +34,16 @@ type SortOptionsMap = OneSortOption[]
 
 
 
-export type { CurrencyOptions, ThemeOptions, SortOptions }
+type CurrencySymbols = Record<CurrencyOptions, string>
 
-export type { CurrencyOptionsMap, ThemeOptionsMap, SortOptionsMap }
+
+
+export type {
+    CurrencyOptions,
+    ThemeOptions,
+    SortOptions,
+    CurrencyOptionsMap,
+    ThemeOptionsMap,
+    SortOptionsMap,
+    CurrencySymbols
+}

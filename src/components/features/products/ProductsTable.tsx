@@ -5,7 +5,7 @@ import styles from './ProductsTable.module.css'
 import type { Product } from '../../../types/productTypes.ts'
 import type { FormProduct } from '../../../types/formTypes.ts'
 import type { ActiveModal } from '../../../types/modalTypes.ts'
-import type { CurrencyOptions } from '../../../types/settingsTypes.ts'
+import type { CurrencySymbols, CurrencyOptions } from '../../../types/settingsTypes.ts'
 import { getStockInfo } from '../../../helpers/getStockInfo.ts'
 import { formatCategoryLabel } from '../../../helpers/formatCategoryLabel.ts'
 
@@ -18,17 +18,12 @@ type ProductsTableProps = {
     setActiveProductModal: (value: ActiveModal) => void
     lowStockThreshold: number
     currency: CurrencyOptions
+    currencySymbols: CurrencySymbols
     showProductImages: boolean
     addedOrEditedProductId: string | null
     deletedProductId: string | null
 }
 
-
-const currencySymbols: Record<CurrencyOptions, string> = {
-    EUR: '€',
-    USD: '$',
-    GBP: '£'
-}
 
 
 const ProductsTable = ({
@@ -38,6 +33,7 @@ const ProductsTable = ({
     setActiveProductModal,
     lowStockThreshold,
     currency,
+    currencySymbols,
     showProductImages,
     addedOrEditedProductId,
     deletedProductId }: ProductsTableProps) => {

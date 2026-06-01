@@ -12,7 +12,7 @@ import type { Products } from '../types/productTypes.ts'
 import type { FormProduct } from '../types/formTypes.ts'
 import type { Categories } from '../types/categoriesTypes.ts'
 import type { ActiveModal } from '../types/modalTypes.ts'
-import type { CurrencyOptions, SortOptionsMap, SortOptions } from '../types/settingsTypes.ts'
+import type { CurrencyOptions, CurrencySymbols, SortOptionsMap, SortOptions } from '../types/settingsTypes.ts'
 import { getStockInfo } from '../helpers/getStockInfo.ts'
 import { getSortedProducts } from '../helpers/getSortedProducts.ts'
 
@@ -39,6 +39,12 @@ const emptyProductFormValues: FormProduct = {
     stock: ''
 }
 
+
+const currencySymbols: CurrencySymbols = {
+    EUR: '€',
+    USD: '$',
+    GBP: '£'
+}
 
 
 const ProductsPage = ({
@@ -174,6 +180,7 @@ const ProductsPage = ({
                     showProductImages={showProductImages}
                     addedOrEditedProductId={addedOrEditedProductId}
                     deletedProductId={deletedProductId}
+                    currencySymbols={currencySymbols}
                 />
             }
 
@@ -209,6 +216,8 @@ const ProductsPage = ({
                         activeProductModal={activeProductModal}
                         setActiveProductModal={setActiveProductModal}
                         setAddedOrEditedProductId={setAddedOrEditedProductId}
+                        currency={currency}
+                        currencySymbols={currencySymbols}
                     />
 
                 </ModalLayout>
