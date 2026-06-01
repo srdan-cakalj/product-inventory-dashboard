@@ -131,3 +131,12 @@
     padding: 10px;
     color: var(--color-text-light);
 }
+
+.table td {
+    transition: background-color 1s ease;
+}
+
+.table tr.highlightedRow td {
+    background-color: var(--color-row-highlight);
+    transition: none;
+}

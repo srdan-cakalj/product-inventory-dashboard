@@ -1,6 +1,6 @@
 
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ProductsToolbar } from '../components/features/products/ProductsToolbar.tsx'
 import { ProductsTable } from '../components/features/products/ProductsTable.tsx'
 import { ProductForm } from '../components/features/products/ProductForm.tsx'
@@ -61,6 +61,7 @@ const ProductsPage = ({
     const [productFormValues, setProductFormValues] = useState<FormProduct>(emptyProductFormValues)
     const [validationMessage, setValidationMessage] = useState<string | null>(null)
     const [activeProductModal, setActiveProductModal] = useState<ActiveModal>(null)
+    const [addedOrEditedProductId, setAddedOrEditedProductId] = useState<string | null>(null)
 
 
     let filteredProducts = products
@@ -106,6 +107,18 @@ const ProductsPage = ({
     const activeProduct = products.find(product => product.id === activeProductModal?.id)
 
 
+    useEffect(() => {
+        if (addedOrEditedProductId) {
+            const timeout = setTimeout(() => {
+                setAddedOrEditedProductId(null)
+            }, 300)
+
+            return () => clearTimeout(timeout)
+        }
+    }, [addedOrEditedProductId])
+
+
+
     return (
 
         <PageLayout
@@ -142,6 +155,7 @@ const ProductsPage = ({
                     lowStockThreshold={lowStockThreshold}
                     currency={currency}
                     showProductImages={showProductImages}
+                    addedOrEditedProductId={addedOrEditedProductId}
                 />
             }
 
@@ -176,6 +190,7 @@ const ProductsPage = ({
                         setValidationMessage={setValidationMessage}
                         activeProductModal={activeProductModal}
                         setActiveProductModal={setActiveProductModal}
+                        setAddedOrEditedProductId={setAddedOrEditedProductId}
                     />
 
                 </ModalLayout>

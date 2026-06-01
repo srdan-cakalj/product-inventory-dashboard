@@ -18,6 +18,7 @@ type CategoryFormProps = {
     setCategories: (value: React.SetStateAction<Categories>) => void
     activeCategoryModal: ActiveModal
     setActiveCategoryModal: (value: ActiveModal) => void
+    setAddedOrEditedCategoryId: (value: string | null) => void
 }
 
 
@@ -29,8 +30,8 @@ const CategoryForm = ({
     validationMessage,
     setValidationMessage,
     activeCategoryModal,
-    setActiveCategoryModal
-}: CategoryFormProps) => {
+    setActiveCategoryModal,
+    setAddedOrEditedCategoryId }: CategoryFormProps) => {
 
 
     const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
@@ -48,17 +49,29 @@ const CategoryForm = ({
 
             const data = validationResult.categoryData
 
+            const addedCategoryId = crypto.randomUUID()
+            const editedCategoryId = activeCategoryModal?.id
+
+            if (activeCategoryModal?.mode === 'add') {
+                setAddedOrEditedCategoryId(addedCategoryId)
+            }
+
+            if (activeCategoryModal?.mode === 'edit' && editedCategoryId) {
+                setAddedOrEditedCategoryId(editedCategoryId)
+            }
+
+
             setCategories(prev => {
                 if (activeCategoryModal?.mode === 'add') {
                     return (
                         [
-                            ...prev,
                             {
-                                id: crypto.randomUUID(),
+                                id: addedCategoryId,
                                 value: formatCategoryValue(data.name),
                                 name: data.name,
                                 description: data.description,
-                            }
+                            },
+                            ...prev
                         ]
                     )
                 }

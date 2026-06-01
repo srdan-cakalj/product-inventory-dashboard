@@ -20,6 +20,7 @@ type ProductFormProps = {
     setValidationMessage: (value: string | null) => void
     activeProductModal: ActiveModal
     setActiveProductModal: (value: ActiveModal) => void
+    setAddedOrEditedProductId: (value: string | null) => void
 }
 
 
@@ -32,8 +33,8 @@ const ProductForm = ({
     validationMessage,
     setValidationMessage,
     activeProductModal,
-    setActiveProductModal
-}: ProductFormProps) => {
+    setActiveProductModal,
+    setAddedOrEditedProductId }: ProductFormProps) => {
 
 
     const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
@@ -51,19 +52,30 @@ const ProductForm = ({
 
             const data = validationResult.productData
 
+            const addedProductId = crypto.randomUUID()
+            const editedProductId = activeProductModal?.id
+
+            if (activeProductModal?.mode === 'add') {
+                setAddedOrEditedProductId(addedProductId)
+            }
+
+            if (activeProductModal?.mode === 'edit' && editedProductId) {
+                setAddedOrEditedProductId(editedProductId)
+            }
+
             setProducts(prev => {
                 if (activeProductModal?.mode === 'add') {
                     return (
                         [
-                            ...prev,
                             {
-                                id: crypto.randomUUID(),
+                                id: addedProductId,
                                 image: '',
                                 name: data.name,
                                 category: data.category,
                                 price: data.price,
                                 stock: data.stock
-                            }
+                            },
+                            ...prev
                         ]
                     )
                 }
@@ -75,7 +87,7 @@ const ProductForm = ({
                                 ? product
                                 : {
                                     id: product.id,
-                                    image:  product.image,
+                                    image: product.image,
                                     name: data.name,
                                     category: data.category,
                                     price: data.price,

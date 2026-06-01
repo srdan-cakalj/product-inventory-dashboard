@@ -1,6 +1,6 @@
 
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { CategoriesTable } from '../components/features/categories/CategoriesTable.tsx'
 import type { Categories } from '../types/categoriesTypes.ts'
 import type { FormCategory } from '../types/formTypes.ts'
@@ -33,6 +33,7 @@ const CategoriesPage = ({ title, subtitle, categories, setCategories, products }
     const [categoryFormValues, setCategoryFormValues] = useState<FormCategory>(emptyCategoryFormValues)
     const [validationMessage, setValidationMessage] = useState<string | null>(null)
     const [activeCategoryModal, setActiveCategoryModal] = useState<ActiveModal>(null)
+    const [addedOrEditedCategoryId, setAddedOrEditedCategoryId] = useState<string | null>(null)
 
 
     let categoryTitle = ''
@@ -70,6 +71,18 @@ const CategoriesPage = ({ title, subtitle, categories, setCategories, products }
     }
 
 
+    useEffect(() => {
+        if (addedOrEditedCategoryId) {
+            const timeout = setTimeout(() => {
+                setAddedOrEditedCategoryId(null)
+            }, 300)
+
+            return () => clearTimeout(timeout)
+        }
+    }, [addedOrEditedCategoryId])
+
+
+    
     return (
         <PageLayout
             title={title}
@@ -87,6 +100,7 @@ const CategoriesPage = ({ title, subtitle, categories, setCategories, products }
                 setCategoryFormValues={setCategoryFormValues}
                 setValidationMessage={setValidationMessage}
                 setActiveCategoryModal={setActiveCategoryModal}
+                addedOrEditedCategoryId={addedOrEditedCategoryId}
             />
 
             {activeCategoryModal?.mode === 'delete' && activeCategory &&
@@ -133,6 +147,7 @@ const CategoriesPage = ({ title, subtitle, categories, setCategories, products }
                         setValidationMessage={setValidationMessage}
                         activeCategoryModal={activeCategoryModal}
                         setActiveCategoryModal={setActiveCategoryModal}
+                        setAddedOrEditedCategoryId={setAddedOrEditedCategoryId}
                     />
 
                 </ModalLayout>

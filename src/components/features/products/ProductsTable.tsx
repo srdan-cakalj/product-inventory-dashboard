@@ -19,6 +19,7 @@ type ProductsTableProps = {
     lowStockThreshold: number
     currency: CurrencyOptions
     showProductImages: boolean
+    addedOrEditedProductId: string | null
 }
 
 
@@ -36,7 +37,8 @@ const ProductsTable = ({
     setActiveProductModal,
     lowStockThreshold,
     currency,
-    showProductImages }: ProductsTableProps) => {
+    showProductImages,
+    addedOrEditedProductId }: ProductsTableProps) => {
 
 
     const handleEdit = (editedProduct: Product) => {
@@ -80,7 +82,7 @@ const ProductsTable = ({
                     const formatedCategory = formatCategoryLabel(product.category)
 
                     return (
-                        <tr key={product.id}>
+                        <tr key={product.id} className={addedOrEditedProductId === product.id ? styles.highlightedRow : ''}>
 
                             {showProductImages &&
                                 <td className={`${styles.image} ${styles.positionCenter}`} >

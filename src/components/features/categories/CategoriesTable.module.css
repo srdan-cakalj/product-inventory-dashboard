@@ -1,5 +1,3 @@
-
-
 .table {
     width: 100%;
     overflow: hidden;
@@ -97,4 +95,13 @@
 
 .deleteButton:hover {
     background-color: var(--color-danger-bg);
+}
+
+.table td {
+    transition: background-color 1s ease;
+}
+
+.table tr.highlightedRow td {
+    background-color: var(--color-row-highlight);
+    transition: none;
 }

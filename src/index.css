@@ -1,3 +1,6 @@
+
+
+
 .light {
     /* Backgrounds */
     --color-page-bg: #f8fafc;
@@ -51,6 +54,10 @@
 
     /* Feedback */
     --color-feedback-text: #b45309;
+
+    /* Row */
+    --color-row-highlight: #cfe4ff;
+    --color-row-delete-bg: #fee2e2;
 }
 
 
@@ -92,7 +99,6 @@
     --color-danger-button-bg: #ef4444;
     --color-danger-button-hover: #dc2626;
 
-
     /* Shadow */
     --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.35);
 
@@ -108,6 +114,10 @@
 
     /* Feedback */
     --color-feedback-text: #fbbf24;
+
+    /* Row */
+    --color-row-highlight: rgba(59, 130, 246, 0.18);
+    --color-row-delete-bg: rgba(239, 68, 68, 0.18);
 }
 
 
@@ -128,6 +138,9 @@ body {
     display: flex;
 }
 
+
+
+/* Removes the default up/down arrow spinners from number inputs across all browsers */
 
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
