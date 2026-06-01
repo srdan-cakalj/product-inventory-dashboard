@@ -80,28 +80,41 @@
 }
 
 .editButton {
-    border: 1px solid var(--color-primary-border);
+    background-color: transparent;
     color: var(--color-primary);
+    border: 1px solid var(--color-primary-border);
 }
 
 .editButton:hover {
-    background-color: var(--color-primary-light);
+    background-color: var(--color-primary);
+    color: #ffffff;
+    border-color: var(--color-primary);
 }
 
 .deleteButton {
+    background-color: transparent;
+    color: var(--color-danger-strong);
     border: 1px solid var(--color-danger-border);
-    color: var(--color-danger-text);
 }
 
 .deleteButton:hover {
-    background-color: var(--color-danger-bg);
+    background-color: var(--color-danger-strong);
+    color: #ffffff;
+    border-color: var(--color-danger-strong);
 }
 
 .table td {
-    transition: background-color 1s ease;
+    transition: background-color 0.2s ease;
 }
 
-.table tr.highlightedRow td {
+.table tr.highlightedRow td,
+.table tbody tr.highlightedRow:hover td {
     background-color: var(--color-row-highlight);
+    transition: none;
+}
+
+.table tr.deletedRow td,
+.table tbody tr.deletedRow:hover td {
+    background-color: var(--color-row-delete-bg);
     transition: none;
 }

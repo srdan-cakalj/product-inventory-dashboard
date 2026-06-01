@@ -62,6 +62,7 @@ const ProductsPage = ({
     const [validationMessage, setValidationMessage] = useState<string | null>(null)
     const [activeProductModal, setActiveProductModal] = useState<ActiveModal>(null)
     const [addedOrEditedProductId, setAddedOrEditedProductId] = useState<string | null>(null)
+    const [deletedProductId, setDeletedProductId] = useState<string | null>(null)
 
 
     let filteredProducts = products
@@ -91,16 +92,18 @@ const ProductsPage = ({
     }
 
 
-    const handleDelete = () => {
-        setProducts(prev => prev.filter(product => product.id !== activeProductModal?.id))
-        setActiveProductModal(null)
-    }
-
-
     const handleClose = () => {
         setProductFormValues(emptyProductFormValues)
         setValidationMessage(null)
         setActiveProductModal(null)
+    }
+
+
+    const handleDelete = () => {
+        if (activeProductModal?.id) {
+            setDeletedProductId(activeProductModal.id)
+            setActiveProductModal(null)
+        }
     }
 
 
@@ -116,6 +119,20 @@ const ProductsPage = ({
             return () => clearTimeout(timeout)
         }
     }, [addedOrEditedProductId])
+
+
+    useEffect(() => {
+        if (deletedProductId) {
+            const timeout = setTimeout(() => {
+                setProducts(prev => prev.filter(product => product.id !== deletedProductId))
+                setDeletedProductId(null)
+            }, 500)
+
+            return () => clearTimeout(timeout)
+        }
+    }, [deletedProductId])
+
+
 
 
 
@@ -156,6 +173,7 @@ const ProductsPage = ({
                     currency={currency}
                     showProductImages={showProductImages}
                     addedOrEditedProductId={addedOrEditedProductId}
+                    deletedProductId={deletedProductId}
                 />
             }
 

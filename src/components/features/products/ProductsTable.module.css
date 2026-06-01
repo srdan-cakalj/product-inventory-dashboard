@@ -132,11 +132,19 @@
     color: var(--color-text-light);
 }
 
+
 .table td {
-    transition: background-color 1s ease;
+    transition: background-color 0.2s ease;
 }
 
-.table tr.highlightedRow td {
+.table tr.highlightedRow td,
+.table tbody tr.highlightedRow:hover td {
     background-color: var(--color-row-highlight);
+    transition: none;
+}
+
+.table tr.deletedRow td,
+.table tbody tr.deletedRow:hover td {
+    background-color: var(--color-row-delete-bg);
     transition: none;
 }

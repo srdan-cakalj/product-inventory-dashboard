@@ -20,6 +20,7 @@ type ProductsTableProps = {
     currency: CurrencyOptions
     showProductImages: boolean
     addedOrEditedProductId: string | null
+    deletedProductId: string | null
 }
 
 
@@ -38,7 +39,8 @@ const ProductsTable = ({
     lowStockThreshold,
     currency,
     showProductImages,
-    addedOrEditedProductId }: ProductsTableProps) => {
+    addedOrEditedProductId,
+    deletedProductId }: ProductsTableProps) => {
 
 
     const handleEdit = (editedProduct: Product) => {
@@ -82,7 +84,13 @@ const ProductsTable = ({
                     const formatedCategory = formatCategoryLabel(product.category)
 
                     return (
-                        <tr key={product.id} className={addedOrEditedProductId === product.id ? styles.highlightedRow : ''}>
+                        <tr
+                            key={product.id}
+                            className={`
+                            ${addedOrEditedProductId === product.id ? styles.highlightedRow : ''}
+                            ${deletedProductId === product.id ? styles.deletedRow : ''}
+                         `}
+                        >
 
                             {showProductImages &&
                                 <td className={`${styles.image} ${styles.positionCenter}`} >

@@ -16,6 +16,7 @@ type CategoriesTableProps = {
     setValidationMessage: (value: string | null) => void
     setActiveCategoryModal: (value: ActiveModal) => void
     addedOrEditedCategoryId: string | null
+    deletedCategoryId: string | null
 }
 
 
@@ -25,7 +26,8 @@ const CategoriesTable = ({
     setCategoryFormValues,
     setValidationMessage,
     setActiveCategoryModal,
-    addedOrEditedCategoryId }: CategoriesTableProps) => {
+    addedOrEditedCategoryId,
+    deletedCategoryId }: CategoriesTableProps) => {
 
 
     const handleEdit = (category: Category) => {
@@ -61,9 +63,15 @@ const CategoriesTable = ({
 
                     const numberOfProducts = products.filter(product => product.category === category.value).length
 
-    
+
                     return (
-                        <tr key={category.id} className={addedOrEditedCategoryId === category.id ? styles.highlightedRow : ''}>
+                        <tr
+                            key={category.id}
+                            className={`
+                            ${addedOrEditedCategoryId === category.id ? styles.highlightedRow : ''} 
+                            ${deletedCategoryId === category.id ? styles.deletedRow : ''}
+                            `}
+                        >
                             <td className={styles.nameCell}>{category.name}</td>
                             <td className={styles.descriptionCell}>{category.description}</td>
                             <td>

@@ -34,6 +34,7 @@ const CategoriesPage = ({ title, subtitle, categories, setCategories, products }
     const [validationMessage, setValidationMessage] = useState<string | null>(null)
     const [activeCategoryModal, setActiveCategoryModal] = useState<ActiveModal>(null)
     const [addedOrEditedCategoryId, setAddedOrEditedCategoryId] = useState<string | null>(null)
+    const [deletedCategoryId, setDeletedCategoryId] = useState<string | null>(null)
 
 
     let categoryTitle = ''
@@ -57,10 +58,11 @@ const CategoriesPage = ({ title, subtitle, categories, setCategories, products }
 
 
     const handleDeleteCategory = () => {
-        setCategories(prev => prev.filter(category => category.id !== activeCategoryModal?.id))
-        setActiveCategoryModal(null)
+        if (activeCategoryModal?.id) {
+            setDeletedCategoryId(activeCategoryModal.id)
+            setActiveCategoryModal(null)
+        }
     }
-
 
 
     const activeCategory = categories.find(category => category.id === activeCategoryModal?.id)
@@ -82,7 +84,19 @@ const CategoriesPage = ({ title, subtitle, categories, setCategories, products }
     }, [addedOrEditedCategoryId])
 
 
-    
+    useEffect(() => {
+        if (deletedCategoryId) {
+            const timeout = setTimeout(() => {
+                setCategories(prev => prev.filter(category => category.id !== deletedCategoryId))
+                setDeletedCategoryId(null)
+            }, 500)
+
+            return () => clearTimeout(timeout)
+        }
+    }, [deletedCategoryId])
+
+
+
     return (
         <PageLayout
             title={title}
@@ -101,6 +115,7 @@ const CategoriesPage = ({ title, subtitle, categories, setCategories, products }
                 setValidationMessage={setValidationMessage}
                 setActiveCategoryModal={setActiveCategoryModal}
                 addedOrEditedCategoryId={addedOrEditedCategoryId}
+                deletedCategoryId={deletedCategoryId}
             />
 
             {activeCategoryModal?.mode === 'delete' && activeCategory &&
