@@ -48,58 +48,62 @@ const CategoriesTable = ({
 
 
     return (
-        <table className={styles.table}>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Products</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
+        <div className={styles.tableWrapper}>
 
-            <tbody>
-                {categories.map(category => {
+            <table className={styles.table}>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Products</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
 
-                    const numberOfProducts = products.filter(product => product.category === category.value).length
+                <tbody>
+                    {categories.map(category => {
+
+                        const numberOfProducts = products.filter(product => product.category === category.value).length
 
 
-                    return (
-                        <tr
-                            key={category.id}
-                            className={`
+                        return (
+                            <tr
+                                key={category.id}
+                                className={`
                             ${addedOrEditedCategoryId === category.id ? styles.highlightedRow : ''} 
                             ${deletedCategoryId === category.id ? styles.deletedRow : ''}
                             `}
-                        >
-                            <td className={styles.nameCell}>{category.name}</td>
-                            <td className={styles.descriptionCell}>{category.description}</td>
-                            <td>
-                                <span className={styles.countBadge}>
-                                    {numberOfProducts}
-                                </span>
-                            </td>
-                            <td>
-                                <div className={styles.actions}>
-                                    <button
-                                        className={styles.editButton}
-                                        onClick={() => handleEdit(category)}
-                                    >
-                                        Edit
-                                    </button>
-                                    <button
-                                        className={styles.deleteButton}
-                                        onClick={() => handleDelete(category)}
-                                    >
-                                        Delete
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    )
-                })}
-            </tbody>
-        </table >
+                            >
+                                <td className={styles.nameCell}>{category.name}</td>
+                                <td className={styles.descriptionCell}>{category.description}</td>
+                                <td>
+                                    <span className={styles.countBadge}>
+                                        {numberOfProducts}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div className={styles.actions}>
+                                        <button
+                                            className={styles.editButton}
+                                            onClick={() => handleEdit(category)}
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            className={styles.deleteButton}
+                                            onClick={() => handleDelete(category)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
+
+        </div>
     )
 }
 

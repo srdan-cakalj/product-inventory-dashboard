@@ -59,101 +59,105 @@ const ProductsTable = ({
     }
 
     return (
-        <table className={styles.table}>
-            <thead>
-                <tr>
-                    {showProductImages &&
-                        <th className={styles.positionCenter}>Image</th>
-                    }
-                    <th className={styles.positionLeft}>Name</th>
-                    <th className={styles.positionLeft}>Category</th>
-                    <th className={styles.positionCenter}>Price</th>
-                    <th className={styles.positionCenter}>Stock</th>
-                    <th className={styles.positionCenter}>Status</th>
-                    <th className={styles.positionCenter}>Actions</th>
-                </tr>
-            </thead>
+        <div className={styles.tableWrapper}>
 
-            <tbody>
-                {products.map(product => {
+            <table className={styles.table}>
+                <thead>
+                    <tr>
+                        {showProductImages &&
+                            <th className={styles.positionCenter}>Image</th>
+                        }
+                        <th className={styles.positionLeft}>Name</th>
+                        <th className={styles.positionLeft}>Category</th>
+                        <th className={styles.positionCenter}>Price</th>
+                        <th className={styles.positionCenter}>Stock</th>
+                        <th className={styles.positionCenter}>Status</th>
+                        <th className={styles.positionCenter}>Actions</th>
+                    </tr>
+                </thead>
 
-                    const formatedCategory = formatCategoryLabel(product.category)
+                <tbody>
+                    {products.map(product => {
 
-                    return (
-                        <tr
-                            key={product.id}
-                            className={`
+                        const formatedCategory = formatCategoryLabel(product.category)
+
+                        return (
+                            <tr
+                                key={product.id}
+                                className={`
                             ${addedOrEditedProductId === product.id ? styles.highlightedRow : ''}
                             ${deletedProductId === product.id ? styles.deletedRow : ''}
                          `}
-                        >
+                            >
 
-                            {showProductImages &&
-                                <td className={`${styles.image} ${styles.positionCenter}`} >
-                                    {product.image
-                                        ? (
-                                            <img
-                                                src={product.image}
-                                                className={styles.productImage}
-                                                alt={product.name}
-                                            />
-                                        )
-                                        : (
-                                            <span className={styles.placeholderIcon}>
-                                                <Package />
-                                            </span>
-                                        )
+                                {showProductImages &&
+                                    <td className={`${styles.image} ${styles.positionCenter}`} >
+                                        {product.image
+                                            ? (
+                                                <img
+                                                    src={product.image}
+                                                    className={styles.productImage}
+                                                    alt={product.name}
+                                                />
+                                            )
+                                            : (
+                                                <span className={styles.placeholderIcon}>
+                                                    <Package />
+                                                </span>
+                                            )
 
-                                    }
+                                        }
 
 
+                                    </td>
+                                }
+
+                                <td className={`${styles.name} ${styles.positionLeft}`}>
+                                    {product.name}
                                 </td>
-                            }
 
-                            <td className={`${styles.name} ${styles.positionLeft}`}>
-                                {product.name}
-                            </td>
+                                <td className={styles.positionLeft}>
+                                    {formatedCategory}
+                                </td>
 
-                            <td className={styles.positionLeft}>
-                                {formatedCategory}
-                            </td>
+                                <td className={styles.positionCenter}>
+                                    {product.price} {currencySymbols[currency]}
+                                </td>
 
-                            <td className={styles.positionCenter}>
-                                {product.price} {currencySymbols[currency]}
-                            </td>
+                                <td className={styles.positionCenter}>
+                                    {product.stock}
+                                </td>
 
-                            <td className={styles.positionCenter}>
-                                {product.stock}
-                            </td>
+                                <td className={styles.positionCenter}>
+                                    <span className={`${styles.statusBadge} ${styles[getStockInfo(product.stock, lowStockThreshold).option]}`}>
+                                        {getStockInfo(product.stock, lowStockThreshold).status}
+                                    </span>
+                                </td>
 
-                            <td className={styles.positionCenter}>
-                                <span className={`${styles.statusBadge} ${styles[getStockInfo(product.stock, lowStockThreshold).option]}`}>
-                                    {getStockInfo(product.stock, lowStockThreshold).status}
-                                </span>
-                            </td>
+                                <td className={styles.positionCenter}>
+                                    <div className={styles.actions}>
+                                        <button
+                                            className={styles.editButton}
+                                            onClick={() => handleEdit(product)}
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            className={styles.deleteButton}
+                                            onClick={() => handleDelete(product)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </td>
 
-                            <td className={styles.positionCenter}>
-                                <div className={styles.actions}>
-                                    <button
-                                        className={styles.editButton}
-                                        onClick={() => handleEdit(product)}
-                                    >
-                                        Edit
-                                    </button>
-                                    <button
-                                        className={styles.deleteButton}
-                                        onClick={() => handleDelete(product)}
-                                    >
-                                        Delete
-                                    </button>
-                                </div>
-                            </td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
+            </table>
 
-                        </tr>
-                    )
-                })}
-            </tbody>
-        </table>
+        </div>
     )
 }
 
