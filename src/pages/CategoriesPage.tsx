@@ -154,6 +154,7 @@ const CategoriesPage = ({ title, subtitle, categories, setCategories, products }
                 >
 
                     <CategoryForm
+                        categories={categories}
                         setCategories={setCategories}
                         categoryFormValues={categoryFormValues}
                         setCategoryFormValues={setCategoryFormValues}

@@ -2,8 +2,8 @@
 
 import { CategoryFormInput } from '../../ui/CategoryFormInput.tsx'
 import { validateCategoryForm } from '../../../helpers/validateCategoryForm.ts'
-import { formatCategoryValue } from '../../../helpers/formatCategoryValue.ts'
 import { ModalFormLayout } from '../../layout/ModalFormLayout.tsx'
+import { formatCategoryValue } from '../../../helpers/formatCategoryValue.ts'
 import type { FormCategory } from '../../../types/formTypes.ts'
 import type { Categories } from '../../../types/categoriesTypes.ts'
 import type { ActiveModal } from '../../../types/modalTypes.ts'
@@ -15,6 +15,7 @@ type CategoryFormProps = {
     emptyCategoryFormValues: FormCategory
     validationMessage: string | null
     setValidationMessage: (value: string | null) => void
+    categories: Categories
     setCategories: (value: React.SetStateAction<Categories>) => void
     activeCategoryModal: ActiveModal
     setActiveCategoryModal: (value: ActiveModal) => void
@@ -23,6 +24,7 @@ type CategoryFormProps = {
 
 
 const CategoryForm = ({
+    categories,
     setCategories,
     categoryFormValues,
     setCategoryFormValues,
@@ -38,8 +40,9 @@ const CategoryForm = ({
 
         e.preventDefault()
 
-        const validationResult = validateCategoryForm(categoryFormValues)
+        const validationResult = validateCategoryForm(categoryFormValues, categories)
         setValidationMessage(validationResult.message)
+
         if (validationResult.message) {
             return
         }

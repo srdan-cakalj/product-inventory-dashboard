@@ -1,22 +1,24 @@
 
 
-import type { FormCategory } from "../types/formTypes.ts"
+import type { Categories } from '../types/categoriesTypes.ts'
+import type { FormCategory } from '../types/formTypes.ts'
+import { formatCategoryValue } from '../helpers/formatCategoryValue.ts'
 
 
 type ValidationResult = {
     message: string | null
-    categoryData: Pick<FormCategory, 'name' | 'description'> | null
+    categoryData: FormCategory | null
 }
 
 
-const validateCategoryForm = (newProductValues: FormCategory): ValidationResult => {
+const validateCategoryForm = (categoryFormValues: FormCategory, categories: Categories): ValidationResult => {
 
 
     // is empty string
 
     const trimmedValues = {
-        name: newProductValues.name.trim(),
-        description: newProductValues.description.trim(),
+        name: categoryFormValues.name.trim(),
+        description: categoryFormValues.description.trim(),
     }
 
     const isValueEmptyString =
@@ -56,6 +58,22 @@ const validateCategoryForm = (newProductValues: FormCategory): ValidationResult 
             categoryData: null
         }
     }
+
+
+    // double category
+
+    const formattedValue = formatCategoryValue(trimmedValues.name)
+    const categoryAlreadyExists  = categories.some(category => category.value === formattedValue)
+
+    if (categoryAlreadyExists ) {
+        return {
+            message: 'A category with this name already exists.',
+            categoryData: null
+        }
+    }
+
+
+
 
 
     return {
