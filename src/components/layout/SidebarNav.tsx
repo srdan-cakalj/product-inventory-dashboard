@@ -11,14 +11,14 @@ const sidebarOptions: SidebarOption[] = [
         name: 'products',
         title: 'Products',
         icon: Package,
-        size: 26,
+        size: 24,
         strokeWidth: 1.6
     },
     {
         name: 'categories',
         title: 'Categories',
         icon: Tag,
-        size: 24,
+        size: 22,
         strokeWidth: 1.8,
         transform: 'scaleX(-1)'
     },
@@ -26,7 +26,7 @@ const sidebarOptions: SidebarOption[] = [
         name: 'settings',
         title: 'Settings',
         icon: Settings,
-        size: 26,
+        size: 24,
         strokeWidth: 1.6
     },
 ]

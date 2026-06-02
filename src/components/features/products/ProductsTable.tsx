@@ -1,6 +1,6 @@
 
 
-import { Package } from 'lucide-react'
+import { Package, Pencil, Trash2 } from 'lucide-react'
 import styles from './ProductsTable.module.css'
 import type { Product } from '../../../types/productTypes.ts'
 import type { FormProduct } from '../../../types/formTypes.ts'
@@ -140,12 +140,16 @@ const ProductsTable = ({
                                             className={styles.editButton}
                                             onClick={() => handleEdit(product)}
                                         >
+                                            <Pencil size={16} />
                                             Edit
                                         </button>
+
                                         <button
                                             className={styles.deleteButton}
                                             onClick={() => handleDelete(product)}
                                         >
+
+                                            <Trash2  size={16} />
                                             Delete
                                         </button>
                                     </div>

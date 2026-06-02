@@ -1,7 +1,7 @@
 
 
 
-
+import { Pencil, Trash2 } from 'lucide-react'
 import styles from './CategoriesTable.module.css'
 import type { Categories, Category } from '../../../types/categoriesTypes.ts'
 import type { Products } from '../../../types/productTypes.ts'
@@ -87,12 +87,15 @@ const CategoriesTable = ({
                                             className={styles.editButton}
                                             onClick={() => handleEdit(category)}
                                         >
+                                            <Pencil size={16} />
                                             Edit
                                         </button>
+                                        
                                         <button
                                             className={styles.deleteButton}
                                             onClick={() => handleDelete(category)}
                                         >
+                                            <Trash2 size={16} />
                                             Delete
                                         </button>
                                     </div>

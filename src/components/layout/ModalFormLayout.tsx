@@ -1,4 +1,6 @@
 
+
+import { Plus, Save } from 'lucide-react'
 import styles from './ModalFormLayout.module.css'
 import { Button } from '../ui/Button.tsx'
 import type { FormCategory, FormProduct } from '../../types/formTypes.ts'
@@ -77,6 +79,7 @@ const ModalFormLayout = ({
                             variant='primary'
                             label='Add product'
                             type='submit'
+                            IconComponent={Plus}
                         />
                     </div>
                 )}
@@ -87,6 +90,7 @@ const ModalFormLayout = ({
                             variant='primary'
                             label='Add category'
                             type='submit'
+                            IconComponent={Plus}
                         />
                     </div>
                 )}
@@ -103,6 +107,7 @@ const ModalFormLayout = ({
                             variant='primary'
                             label='Save changes'
                             type='submit'
+                            IconComponent={Save}
                         />
                     </div>
                 )}

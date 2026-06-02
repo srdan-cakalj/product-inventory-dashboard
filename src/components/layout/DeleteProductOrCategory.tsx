@@ -2,6 +2,7 @@
 
 import { Button } from '../ui/Button.tsx'
 import styles from './DeleteProductOrCategory.module.css'
+import { Trash2 } from 'lucide-react'
 
 
 type DeleteProductOrCategoryProps = {
@@ -38,6 +39,7 @@ const DeleteProductOrCategory = ({ name, message, handleDelete, handleClose, but
                         type='button'
                         variant='danger'
                         handleClick={handleDelete}
+                        IconComponent={Trash2}
                     />
                 }
 

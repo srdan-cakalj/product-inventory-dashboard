@@ -149,7 +149,7 @@ const ProductsPage = ({
             subtitle={subtitle}
             pageHeaderButton={{
                 type: 'button',
-                label: '+ Add product',
+                label: 'Add product',
                 handleClick: () => setActiveProductModal({ mode: 'add', id: null })
             }}
         >

@@ -1,5 +1,6 @@
 
 
+import { RotateCcw } from 'lucide-react'
 import type { StockOption } from '../../../types/stockTypes.ts'
 import type { Categories } from '../../../types/categoriesTypes.ts'
 import type { SortOptionsMap, SortOptions } from '../../../types/settingsTypes.ts'
@@ -80,6 +81,7 @@ const ProductsToolbar = ({
                 type='button'
                 variant='secondary'
                 handleClick={handleReset}
+                IconComponent={RotateCcw}
             />
 
         </div>

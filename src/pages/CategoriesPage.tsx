@@ -103,7 +103,7 @@ const CategoriesPage = ({ title, subtitle, categories, setCategories, products }
             subtitle={subtitle}
             pageHeaderButton={{
                 type: 'button',
-                label: '+ Add category',
+                label: 'Add category',
                 handleClick: () => setActiveCategoryModal({ mode: 'add', id: null })
             }}
         >

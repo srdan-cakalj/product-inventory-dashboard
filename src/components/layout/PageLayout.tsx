@@ -1,5 +1,6 @@
 
 
+import { Plus } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { PageHeaderTitle } from './PageHeaderTitle.tsx'
 import styles from './PageLayout.module.css'
@@ -36,6 +37,7 @@ const PageLayout = ({ title, subtitle, children, pageHeaderButton }: PageLayoutP
                         label={pageHeaderButton.label}
                         variant='primary'
                         handleClick={pageHeaderButton.handleClick}
+                        IconComponent={Plus}
                     />
                 }
             </header>
