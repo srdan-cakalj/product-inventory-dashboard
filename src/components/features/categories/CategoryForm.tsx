@@ -40,7 +40,7 @@ const CategoryForm = ({
 
         e.preventDefault()
 
-        const validationResult = validateCategoryForm(categoryFormValues, categories)
+        const validationResult = validateCategoryForm(categoryFormValues, categories, activeCategoryModal)
         setValidationMessage(validationResult.message)
 
         if (validationResult.message) {

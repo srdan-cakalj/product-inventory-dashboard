@@ -2,6 +2,7 @@
 
 import type { Categories } from '../types/categoriesTypes.ts'
 import type { FormCategory } from '../types/formTypes.ts'
+import type { ActiveModal } from '../types/modalTypes.ts'
 import { formatCategoryValue } from '../helpers/formatCategoryValue.ts'
 
 
@@ -11,7 +12,11 @@ type ValidationResult = {
 }
 
 
-const validateCategoryForm = (categoryFormValues: FormCategory, categories: Categories): ValidationResult => {
+const validateCategoryForm = (
+    categoryFormValues: FormCategory,
+    categories: Categories,
+    activeCategoryModal: ActiveModal)
+    : ValidationResult => {
 
 
     // is empty string
@@ -60,12 +65,12 @@ const validateCategoryForm = (categoryFormValues: FormCategory, categories: Cate
     }
 
 
-    // double category
+    // duplicate category
 
     const formattedValue = formatCategoryValue(trimmedValues.name)
-    const categoryAlreadyExists  = categories.some(category => category.value === formattedValue)
+    const sameCategory = categories.find(category => category.value === formattedValue)
 
-    if (categoryAlreadyExists ) {
+    if (sameCategory && (sameCategory.id !== activeCategoryModal?.id)) {
         return {
             message: 'A category with this name already exists.',
             categoryData: null
