@@ -10,11 +10,11 @@ type DeleteProductOrCategoryProps = {
     message: string
     handleDelete?: () => void
     handleClose: () => void
-    buttonLabels: string[]
+    mode: 'info' | 'delete'
 }
 
 
-const DeleteProductOrCategory = ({ name, message, handleDelete, handleClose, buttonLabels }: DeleteProductOrCategoryProps) => {
+const DeleteProductOrCategory = ({ name, message, handleDelete, handleClose, mode }: DeleteProductOrCategoryProps) => {
 
 
 
@@ -25,25 +25,36 @@ const DeleteProductOrCategory = ({ name, message, handleDelete, handleClose, but
                 <p className={styles.message}>{message}</p>
             </div>
 
-            <div className={styles.actions}>
-                <Button
-                    label={buttonLabels[0]}
-                    type='button'
-                    variant='secondary'
-                    handleClick={handleClose}
-                />
-
-                {handleDelete &&
+            {mode === 'info' && (
+                <div className={styles.actions}>
                     <Button
-                        label={buttonLabels[1]}
+                        label='OK'
+                        type='button'
+                        variant='primary'
+                        handleClick={handleClose}
+                    />
+                </div>
+            )}
+
+            {mode === 'delete' && (
+                <div className={styles.actions}>
+                    <Button
+                        label='Cancel'
+                        type='button'
+                        variant='secondary'
+                        handleClick={handleClose}
+                    />
+                    <Button
+                        label='Delete'
                         type='button'
                         variant='danger'
                         handleClick={handleDelete}
                         IconComponent={Trash2}
                     />
-                }
+                </div>
+            )}
 
-            </div>
+
         </div>
     )
 }

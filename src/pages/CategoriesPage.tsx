@@ -130,7 +130,7 @@ const CategoriesPage = ({ title, subtitle, categories, setCategories, products }
                                 name={activeCategory.name}
                                 message='This category contains products. Move or delete them before deleting the category.'
                                 handleClose={handleClose}
-                                buttonLabels={['OK']}
+                                mode='info'
                             />
                         )
                         : (
@@ -139,7 +139,7 @@ const CategoriesPage = ({ title, subtitle, categories, setCategories, products }
                                 message='Are you sure you want to delete this category?'
                                 handleClose={handleClose}
                                 handleDelete={handleDeleteCategory}
-                                buttonLabels={['Cancel', 'Delete']}
+                                mode='delete'
                             />
                         )
                     }

@@ -194,7 +194,7 @@ const ProductsPage = ({
                         message='Are you sure you want to delete this product?'
                         handleDelete={handleDelete}
                         handleClose={handleClose}
-                        buttonLabels={['Cancel', 'Delete']}
+                        mode='delete'
                     />
                 </ModalLayout>
             }
