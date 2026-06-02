@@ -56,13 +56,10 @@
     --color-row-highlight: #cfe4ff;
     --color-row-delete-bg: #f3cdcd;
 
-    /* Table header */
-    --color-table-header-bg: #f1f5f9;
-
     /* Scroll */
     --color-scrollbar-thumb: #cbd5e1;
     --color-scrollbar-thumb-hover: #94a3b8;
-    --color-scrollbar-track: var(--color-table-header-bg);
+    --color-scrollbar-track: transparent
 }
 
 
@@ -124,13 +121,10 @@
     --color-row-highlight: rgba(59, 130, 246, 0.18);
     --color-row-delete-bg: rgba(239, 68, 68, 0.18);
 
-    /* Table header */
-    --color-table-header-bg: #111827;
-
     /* Scroll */
     --color-scrollbar-thumb: #475569;
     --color-scrollbar-thumb-hover: #64748b;
-    --color-scrollbar-track: var(--color-table-header-bg);
+    --color-scrollbar-track: transparent;
 }
 
 

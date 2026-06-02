@@ -48,64 +48,66 @@ const CategoriesTable = ({
 
 
     return (
-        <div className={styles.tableWrapper}>
+        <div className={styles.tableCard}>
+            <div className={styles.tableWrapper}>
 
-            <table className={styles.table}>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Products</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
+                <table className={styles.table}>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Products</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
 
-                <tbody>
-                    {categories.map(category => {
+                    <tbody>
+                        {categories.map(category => {
 
-                        const numberOfProducts = products.filter(product => product.category === category.value).length
+                            const numberOfProducts = products.filter(product => product.category === category.value).length
 
 
-                        return (
-                            <tr
-                                key={category.id}
-                                className={`
+                            return (
+                                <tr
+                                    key={category.id}
+                                    className={`
                             ${addedOrEditedCategoryId === category.id ? styles.highlightedRow : ''} 
                             ${deletedCategoryId === category.id ? styles.deletedRow : ''}
                             `}
-                            >
-                                <td className={styles.nameCell}>{category.name}</td>
-                                <td className={styles.descriptionCell}>{category.description}</td>
-                                <td>
-                                    <span className={styles.countBadge}>
-                                        {numberOfProducts}
-                                    </span>
-                                </td>
-                                <td>
-                                    <div className={styles.actions}>
-                                        <button
-                                            className={styles.editButton}
-                                            onClick={() => handleEdit(category)}
-                                        >
-                                            <Pencil size={16} />
-                                            Edit
-                                        </button>
-                                        
-                                        <button
-                                            className={styles.deleteButton}
-                                            onClick={() => handleDelete(category)}
-                                        >
-                                            <Trash2 size={16} />
-                                            Delete
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
+                                >
+                                    <td className={styles.nameCell}>{category.name}</td>
+                                    <td className={styles.descriptionCell}>{category.description}</td>
+                                    <td>
+                                        <span className={styles.countBadge}>
+                                            {numberOfProducts}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div className={styles.actions}>
+                                            <button
+                                                className={styles.editButton}
+                                                onClick={() => handleEdit(category)}
+                                            >
+                                                <Pencil size={16} />
+                                                Edit
+                                            </button>
 
+                                            <button
+                                                className={styles.deleteButton}
+                                                onClick={() => handleDelete(category)}
+                                            >
+                                                <Trash2 size={16} />
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+
+            </div>
         </div>
     )
 }

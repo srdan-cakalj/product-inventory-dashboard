@@ -42,8 +42,8 @@ const PageLayout = ({ title, subtitle, children, pageHeaderButton }: PageLayoutP
                 }
             </header>
 
-            {children}
 
+            {children}
         </div>
     )
 }
