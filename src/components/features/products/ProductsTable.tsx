@@ -1,5 +1,5 @@
 
-
+import { useRef, useEffect } from 'react'
 import { Package, Pencil, Trash2 } from 'lucide-react'
 import styles from './ProductsTable.module.css'
 import type { Product } from '../../../types/productTypes.ts'
@@ -39,6 +39,9 @@ const ProductsTable = ({
     deletedProductId }: ProductsTableProps) => {
 
 
+    const addedRowRef = useRef<HTMLTableRowElement | null>(null)
+
+
     const handleEdit = (editedProduct: Product) => {
 
         setProductFormValues({
@@ -53,10 +56,19 @@ const ProductsTable = ({
     }
 
 
-
     const handleDelete = (deletedProduct: Product) => {
         setActiveProductModal({ mode: 'delete', id: deletedProduct.id })
     }
+
+
+    useEffect(() => {
+        if (!addedRowRef.current) {
+            return
+        }
+
+        addedRowRef.current.scrollIntoView({ behavior: 'auto', block: 'center' })
+    }, [products])
+
 
     return (
         <div className={styles.tableCard}>
@@ -86,9 +98,10 @@ const ProductsTable = ({
                                 <tr
                                     key={product.id}
                                     className={`
-                            ${addedOrEditedProductId === product.id ? styles.highlightedRow : ''}
-                            ${deletedProductId === product.id ? styles.deletedRow : ''}
-                         `}
+                                        ${addedOrEditedProductId === product.id ? styles.highlightedRow : ''}
+                                        ${deletedProductId === product.id ? styles.deletedRow : ''}
+                                    `}
+                                    ref={addedOrEditedProductId === product.id ? addedRowRef : null}
                                 >
 
                                     {showProductImages &&
