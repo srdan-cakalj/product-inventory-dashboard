@@ -1,5 +1,5 @@
 
-
+import { useState } from 'react'
 import styles from './SettingsInput.module.css'
 import { validateSettingsInput } from '../../../helpers/validateSettingsInput'
 
@@ -10,8 +10,6 @@ type SettingsInputProps = {
     feedbackMessage: string
     lowStockThreshold: number
     setLowStockThreshold: (value: number) => void
-    isInputValueValid: boolean
-    setIsInputValueValid: (value: boolean) => void
 }
 
 
@@ -21,16 +19,36 @@ const SettingsInput = ({
     helperText,
     feedbackMessage,
     lowStockThreshold,
-    setLowStockThreshold,
-    isInputValueValid,
-    setIsInputValueValid }: SettingsInputProps) => {
+    setLowStockThreshold }: SettingsInputProps) => {
+
+
+    const [isInputValueValid, setIsInputValueValid] = useState(true)
+    const [inputValue, setInputValue] = useState<string>(String(lowStockThreshold))
+
+
+    const handleBlur = () => {
+
+        if (inputValue === '') {
+            setInputValue(String(lowStockThreshold))
+            return
+        }
+
+        setLowStockThreshold(Number(inputValue))
+    }
 
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const validateValue = validateSettingsInput(e.target.value)
 
-        if (validateValue !== null) {
-            setLowStockThreshold(validateValue)
+        if (e.target.value === '') {
+            setIsInputValueValid(true)
+            setInputValue('')
+            return
+        }
+
+        const validationResult = validateSettingsInput(e.target.value)
+
+        if (validationResult !== null) {
+            setInputValue(validationResult)
             setIsInputValueValid(true)
         } else {
             setIsInputValueValid(false)
@@ -47,8 +65,9 @@ const SettingsInput = ({
 
             <input
                 className={styles.input}
-                value={lowStockThreshold}
+                value={inputValue}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 type='number'
                 min='0'
             />

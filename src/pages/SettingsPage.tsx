@@ -1,6 +1,5 @@
 
 import { Package2, Monitor } from 'lucide-react'
-import { useState } from 'react'
 import { PageLayout } from '../components/layout/PageLayout.tsx'
 import { SettingsSectionLayout } from '../components/features/settings/SettingsSectionLayout.tsx'
 import { SettingsToggle } from '../components/features/settings/SettingsToggle.tsx'
@@ -42,8 +41,6 @@ const themeOptionsMap: ThemeOptionsMap = [
 
 
 
-
-
 const SettingsPage = ({
     title,
     subtitle,
@@ -62,9 +59,6 @@ const SettingsPage = ({
     setShowOutOfStockProducts }: SettingsPageProps) => {
 
 
-    const [isInputValueValid, setIsInputValueValid] = useState(true)
-
-
     return (
         <PageLayout
             title={title}
@@ -80,11 +74,9 @@ const SettingsPage = ({
                     <SettingsInput
                         label='Low Stock Threshold'
                         helperText='Products with stock at or below this number will be marked as low stock.'
-                        feedbackMessage='Only whole numbers are allowed.'
+                        feedbackMessage='Only whole and positive numbers are allowed.'
                         lowStockThreshold={lowStockThreshold}
                         setLowStockThreshold={setLowStockThreshold}
-                        isInputValueValid={isInputValueValid}
-                        setIsInputValueValid={setIsInputValueValid}
                     />
 
                     <SettingsSelect

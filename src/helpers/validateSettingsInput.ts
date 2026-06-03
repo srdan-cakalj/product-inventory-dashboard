@@ -13,7 +13,7 @@ const validateSettingsInput = (value: string) => {
         return null;
     }
 
-    return valueAsNumber;
+    return value;
 }
 
 export { validateSettingsInput }
