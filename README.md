@@ -6,11 +6,11 @@ The application fetches product data from an external API, transforms it into an
 
 ## Live Demo
 
-Live demo: [InventoryPro](https://srdanbtm.github.io/product-inventory-dashboard/)
+Live demo: [InventoryPro](https://srdan-cakalj.github.io/product-inventory-dashboard/)
 
 ## Repository
 
-GitHub repository: [product-inventory-dashboard](https://github.com/SrdanBTM/product-inventory-dashboard)
+GitHub repository: [product-inventory-dashboard](https://github.com/srdan-cakalj/product-inventory-dashboard)
 
 ## Features
 
@@ -174,7 +174,7 @@ It includes sidebar navigation, constrained content width for larger screens, sc
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/SrdanBTM/product-inventory-dashboard.git
+git clone https://github.com/srdan-cakalj/product-inventory-dashboard.git
 ```
 
 ### 2. Open the project folder
